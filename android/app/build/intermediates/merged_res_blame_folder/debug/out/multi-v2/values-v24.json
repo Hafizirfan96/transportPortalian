@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.makesol.tpp.app-mergeDebugResources-35:/values-v24/values-v24.xml",
+            "map": [
+                {
+                    "source": "/Users/administrator/.gradle/caches/transforms-3/01bb09eb46b36dabe162331cbb4fcb74/transformed/appcompat-1.4.1/res/values-v24/values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    }
+                }
+            ]
+        }
+    ]
+}

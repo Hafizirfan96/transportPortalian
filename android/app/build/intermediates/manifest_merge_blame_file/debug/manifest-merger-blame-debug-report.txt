@@ -1,0 +1,248 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.makesol.tpp"
+4    android:versionCode="105"
+5    android:versionName="1.0.5" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="33" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/debug/AndroidManifest.xml:5:5-77
+11-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/debug/AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" /> <!-- Always include this permission -->
+12-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:3:5-67
+12-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:3:22-64
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
+13-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:5:5-81
+13-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:5:22-78
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:7:5-79
+14-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:7:22-76
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:3:5-67
+15-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:3:22-64
+16    <uses-permission android:name="android.permission.CAMERA" />
+16-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:9:5-65
+16-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:9:22-62
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:10:5-11:65
+17-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:11:6-62
+18    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+18-->[com.facebook.flipper:flipper:0.125.0] /Users/administrator/.gradle/caches/transforms-3/7f3c4736da4ff1e391475aca555d1572/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:16:5-76
+18-->[com.facebook.flipper:flipper:0.125.0] /Users/administrator/.gradle/caches/transforms-3/7f3c4736da4ff1e391475aca555d1572/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:16:22-73
+19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+19-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:22:5-79
+19-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:22:22-76
+20    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+20-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:24:5-68
+20-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:24:22-65
+21    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+21-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:26:5-82
+21-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:26:22-79
+22
+23    <queries>
+23-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:24:5-28:15
+24        <intent>
+24-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:25:9-27:18
+25            <action android:name="androidx.camera.extensions.action.VENDOR_ACTION" />
+25-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:26:13-86
+25-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:26:21-83
+26        </intent>
+27    </queries>
+28
+29    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+29-->[com.android.installreferrer:installreferrer:1.1.2] /Users/administrator/.gradle/caches/transforms-3/b5077ae63a7fed8d07597930e7c4ba05/transformed/jetified-installreferrer-1.1.2/AndroidManifest.xml:9:5-110
+29-->[com.android.installreferrer:installreferrer:1.1.2] /Users/administrator/.gradle/caches/transforms-3/b5077ae63a7fed8d07597930e7c4ba05/transformed/jetified-installreferrer-1.1.2/AndroidManifest.xml:9:22-107
+30
+31    <application
+31-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:13:5-48:19
+32        android:name="com.makesol.tpp.MainApplication"
+32-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:14:7-38
+33        android:allowBackup="false"
+33-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:17:7-34
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.7.0] /Users/administrator/.gradle/caches/transforms-3/9625628c0ecd6a8b83d19a871b3fe6c9/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
+35        android:debuggable="true"
+36        android:icon="@mipmap/ic_launcher"
+36-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:16:7-41
+37        android:label="@string/app_name"
+37-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:15:7-39
+38        android:supportsRtl="false"
+38-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:19:7-34
+39        android:theme="@style/AppTheme"
+39-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:18:7-38
+40        android:usesCleartextTraffic="true" >
+40-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:20:1-36
+41        <activity
+41-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/debug/AndroidManifest.xml:11:9-111
+42            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+42-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/debug/AndroidManifest.xml:11:19-83
+43            android:exported="false" />
+43-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/debug/AndroidManifest.xml:11:84-108
+44        <activity
+44-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:22:7-32:18
+45            android:name="com.makesol.tpp.SplashActivity"
+45-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:23:9-39
+46            android:exported="true"
+46-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:26:9-32
+47            android:label="@string/app_name"
+47-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:25:9-41
+48            android:theme="@style/SplashTheme" >
+48-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:24:9-43
+49            <intent-filter>
+49-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:28:9-31:25
+50                <action android:name="android.intent.action.MAIN" />
+50-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:29:11-63
+50-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:29:19-60
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:30:11-71
+52-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:30:21-68
+53            </intent-filter>
+54        </activity>
+55        <activity
+55-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:34:7-44:18
+56            android:name="com.makesol.tpp.MainActivity"
+56-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:35:9-37
+57            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+57-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:37:9-118
+58            android:exported="true"
+58-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:40:9-32
+59            android:label="@string/app_name"
+59-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:36:9-41
+60            android:launchMode="singleTask"
+60-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:38:9-40
+61            android:windowSoftInputMode="adjustResize" >
+61-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:39:9-51
+62            <intent-filter>
+62-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:41:9-43:25
+63                <action android:name="android.intent.action.MAIN" />
+63-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:29:11-63
+63-->/Users/administrator/Pojects/react-native/tmsApp/android/app/src/main/AndroidManifest.xml:29:19-60
+64            </intent-filter>
+65        </activity>
+66
+67        <provider
+67-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+68            android:name="com.imagepicker.ImagePickerProvider"
+68-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-63
+69            android:authorities="com.makesol.tpp.imagepickerprovider"
+69-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
+70            android:exported="false"
+70-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+71            android:grantUriPermissions="true" >
+71-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+72            <meta-data
+72-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:70
+73                android:name="android.support.FILE_PROVIDER_PATHS"
+73-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+74                android:resource="@xml/imagepicker_provider_paths" />
+74-->[:react-native-image-picker] /Users/administrator/Pojects/react-native/tmsApp/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-67
+75        </provider>
+76
+77        <service
+77-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:29:9-35:19
+78            android:name="com.google.firebase.components.ComponentDiscoveryService"
+78-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:30:13-84
+79            android:exported="false" >
+79-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:31:13-37
+80            <meta-data
+80-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:32:13-34:85
+81                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+81-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:33:17-96
+82                android:value="com.google.firebase.components.ComponentRegistrar" />
+82-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:34:17-82
+83        </service>
+84
+85        <receiver
+85-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:37:9-44:20
+86            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+86-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:38:13-78
+87            android:exported="true"
+87-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:39:13-36
+88            android:permission="com.google.android.c2dm.permission.SEND" >
+88-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:40:13-73
+89            <intent-filter>
+89-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:41:13-43:29
+90                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+90-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:42:17-81
+90-->[com.google.firebase:firebase-iid:19.0.1] /Users/administrator/.gradle/caches/transforms-3/7a84d8ea3fd00292cc9f359faaa8ef20/transformed/jetified-firebase-iid-19.0.1/AndroidManifest.xml:42:25-78
+91            </intent-filter>
+92        </receiver>
+93
+94        <provider
+94-->[com.google.firebase:firebase-common:18.0.0] /Users/administrator/.gradle/caches/transforms-3/c07f811b05110b0a23ac911349b4b51b/transformed/jetified-firebase-common-18.0.0/AndroidManifest.xml:12:9-16:39
+95            android:name="com.google.firebase.provider.FirebaseInitProvider"
+95-->[com.google.firebase:firebase-common:18.0.0] /Users/administrator/.gradle/caches/transforms-3/c07f811b05110b0a23ac911349b4b51b/transformed/jetified-firebase-common-18.0.0/AndroidManifest.xml:13:13-77
+96            android:authorities="com.makesol.tpp.firebaseinitprovider"
+96-->[com.google.firebase:firebase-common:18.0.0] /Users/administrator/.gradle/caches/transforms-3/c07f811b05110b0a23ac911349b4b51b/transformed/jetified-firebase-common-18.0.0/AndroidManifest.xml:14:13-72
+97            android:exported="false"
+97-->[com.google.firebase:firebase-common:18.0.0] /Users/administrator/.gradle/caches/transforms-3/c07f811b05110b0a23ac911349b4b51b/transformed/jetified-firebase-common-18.0.0/AndroidManifest.xml:15:13-37
+98            android:initOrder="100" />
+98-->[com.google.firebase:firebase-common:18.0.0] /Users/administrator/.gradle/caches/transforms-3/c07f811b05110b0a23ac911349b4b51b/transformed/jetified-firebase-common-18.0.0/AndroidManifest.xml:16:13-36
+99
+100        <activity
+100-->[com.google.android.gms:play-services-base:17.5.0] /Users/administrator/.gradle/caches/transforms-3/17f87caf23b5e88f2cb9c534fd115c6d/transformed/jetified-play-services-base-17.5.0/AndroidManifest.xml:23:9-26:75
+101            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+101-->[com.google.android.gms:play-services-base:17.5.0] /Users/administrator/.gradle/caches/transforms-3/17f87caf23b5e88f2cb9c534fd115c6d/transformed/jetified-play-services-base-17.5.0/AndroidManifest.xml:24:13-79
+102            android:exported="false"
+102-->[com.google.android.gms:play-services-base:17.5.0] /Users/administrator/.gradle/caches/transforms-3/17f87caf23b5e88f2cb9c534fd115c6d/transformed/jetified-play-services-base-17.5.0/AndroidManifest.xml:25:13-37
+103            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+103-->[com.google.android.gms:play-services-base:17.5.0] /Users/administrator/.gradle/caches/transforms-3/17f87caf23b5e88f2cb9c534fd115c6d/transformed/jetified-play-services-base-17.5.0/AndroidManifest.xml:26:13-72
+104
+105        <meta-data
+105-->[com.google.android.gms:play-services-basement:17.5.0] /Users/administrator/.gradle/caches/transforms-3/a12f60da9458236a1a54df84a878d67f/transformed/jetified-play-services-basement-17.5.0/AndroidManifest.xml:23:9-25:69
+106            android:name="com.google.android.gms.version"
+106-->[com.google.android.gms:play-services-basement:17.5.0] /Users/administrator/.gradle/caches/transforms-3/a12f60da9458236a1a54df84a878d67f/transformed/jetified-play-services-basement-17.5.0/AndroidManifest.xml:24:13-58
+107            android:value="@integer/google_play_services_version" />
+107-->[com.google.android.gms:play-services-basement:17.5.0] /Users/administrator/.gradle/caches/transforms-3/a12f60da9458236a1a54df84a878d67f/transformed/jetified-play-services-basement-17.5.0/AndroidManifest.xml:25:13-66
+108
+109        <provider
+109-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+110            android:name="androidx.startup.InitializationProvider"
+110-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
+111            android:authorities="com.makesol.tpp.androidx-startup"
+111-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
+112            android:exported="false" >
+112-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
+113            <meta-data
+113-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+114                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+114-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+115                android:value="androidx.startup" />
+115-->[androidx.emoji2:emoji2:1.0.0] /Users/administrator/.gradle/caches/transforms-3/f294ac27b472afb1b36c93623bf00cf4/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+116            <meta-data
+116-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/administrator/.gradle/caches/transforms-3/4008edd3b3cb0c7b1f86ff324ca47375/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+117                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+117-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/administrator/.gradle/caches/transforms-3/4008edd3b3cb0c7b1f86ff324ca47375/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+118                android:value="androidx.startup" />
+118-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/administrator/.gradle/caches/transforms-3/4008edd3b3cb0c7b1f86ff324ca47375/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+119        </provider>
+120
+121        <uses-library
+121-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:31:9-33:40
+122            android:name="androidx.camera.extensions.impl"
+122-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:32:13-59
+123            android:required="false" />
+123-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/de3b5355861361f8893174557641e359/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:33:13-37
+124
+125        <service
+125-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:26:9-35:19
+126            android:name="androidx.camera.core.impl.MetadataHolderService"
+126-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:27:13-75
+127            android:enabled="false"
+127-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:28:13-36
+128            android:exported="false" >
+128-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:29:13-37
+129            <meta-data
+129-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:32:13-34:89
+130                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+130-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:33:17-103
+131                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+131-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/administrator/.gradle/caches/transforms-3/0a58bc50324270fb14fde214a9f52bfa/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:34:17-86
+132        </service>
+133    </application>
+134
+135</manifest>

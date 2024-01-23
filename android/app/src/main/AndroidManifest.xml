@@ -1,0 +1,50 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Always include this permission -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+     android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+      android:name=".MainApplication"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:allowBackup="false"
+      android:theme="@style/AppTheme"
+      android:supportsRtl="false"
+android:usesCleartextTraffic="true"
+    >
+      <activity
+        android:name=".SplashActivity"
+        android:theme="@style/SplashTheme"
+        android:label="@string/app_name"
+        android:exported="true"
+      >
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+
+      <activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+        android:launchMode="singleTask"
+        android:windowSoftInputMode="adjustResize"
+        android:exported="true">
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+        </intent-filter>
+      </activity>
+<!--
+      <meta-data android:name="MAPBOX_DOWNLOADS_TOKEN" android:value="pk.eyJ1IjoieWFzaXJiIiwiYSI6ImNsZGx1ZnA1ZTAzNGM0MG1mb2J4Nzc2MnIifQ.Vm9KR5F44R9oHdjuMj-87Q" />
+      -->
+    </application>
+
+</manifest>
