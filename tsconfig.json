@@ -1,11 +1,13 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
+   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "strictNullChecks": false,
+    "jsx": "react",
     "types": ["react-native", "jest", "node"],
     "typeRoots": ["@types", "./node_modules/@types"],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
     //"baseUrl": "..",
     /*"paths": {
