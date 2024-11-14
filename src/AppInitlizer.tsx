@@ -1,18 +1,27 @@
 import 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import usePushNotification from './utils/usePushNotification';
 import { AppState, View, BackHandler, Keyboard } from 'react-native';
+import { navigate, navigationRef } from './navigators/Root';
+import { setnotificationMessage } from '@/store/appState';
+import moment from 'moment';
+import notifee, {
+  AndroidImportance,
+  AndroidVisibility,
+  EventType,
+} from '@notifee/react-native';
 
-export default function AppInilizer(props: any) {
-  let appState = useSelector((state: any) => {
-    return state.appState;
-  });
+export default function AppInitializer(props: any) {
+  const dispatch = useDispatch();
+  const appState = useSelector((state: any) => state.appState);
 
   const [notificationState, setNotificationState] = useState({
     readyForClearBadge: false,
     appNativeState: 'background',
   });
+
+  const [isAppActive, setIsAppActive] = useState(false);
 
   useEffect(() => {
     const backAction = () => {
@@ -24,18 +33,16 @@ export default function AppInilizer(props: any) {
       'hardwareBackPress',
       backAction,
     );
-
     return () => backHandler.remove();
   }, []);
+  const [pendingNotification, setPendingNotification] = useState(null);
 
   useEffect(() => {
     const appStateSubscriber = AppState.addEventListener(
       'change',
       onAppStateChange,
     );
-    return () => {
-      appStateSubscriber.remove();
-    };
+    return () => appStateSubscriber.remove();
   }, [appState]);
 
   const {
@@ -55,7 +62,6 @@ export default function AppInilizer(props: any) {
 
         await listenToBackgroundNotifications(_handleNotification);
         await listenToForegroundNotifications(_handleNotification);
-        getFCMToken();
       } catch (error) {
         console.log('forground error', error);
       }
@@ -78,22 +84,35 @@ export default function AppInilizer(props: any) {
       }
     };
     listenToNotifications();
+    getFCMToken();
   }, []);
+
   const _handleNotification = async (notification: any) => {
     try {
-      console.log('try----', notification);
+      let data = notification.notification;
+      dispatch(setnotificationMessage(data));
     } catch (ex) {
       console.debug(ex);
     }
   };
+
   const _handleNotificationFromTray = async (notification: any) => {
     try {
-      console.log('try--', notification);
-
       if (!notification) {
         return;
       }
-      console.log('try--', notification);
+      notifee.onBackgroundEvent(async ({ type, detail }) => {
+        if (type === EventType.PRESS) {
+          console.log(
+            'Notification pressed in background:',
+            detail.notification,
+          );
+          // Handle navigation or any other logic you want to trigger
+          navigate('Notification', detail.notification);
+        }
+      });
+      console.log('notification----', notification);
+      navigate('Notification', notification);
     } catch (ex) {
       console.debug(ex);
     }
@@ -102,17 +121,15 @@ export default function AppInilizer(props: any) {
   const onAppStateChange = async (nextAppState: any) => {
     try {
       if (nextAppState === 'active') {
-        // themeChangeListener()
         console.log('active----');
       }
       if (nextAppState === 'background') {
-        // document why this block is empty
         console.log('background----');
       } else if (
         nextAppState === 'active' &&
         notificationState.appNativeState === 'background'
       ) {
-        console.log('else----');
+        console.log('else if----');
       }
       if (!appState) {
         return;
@@ -125,7 +142,8 @@ export default function AppInilizer(props: any) {
         ) {
           if (nextAppState === 'active') {
             if (appState.openingModal) {
-              console.log('active----');
+              console.log('setOpeningModal----');
+
               return;
             }
             appForeground();
@@ -133,17 +151,37 @@ export default function AppInilizer(props: any) {
         }
 
         if (nextAppState == 'background') {
-          console.log('background----');
+          console.log('set inactive----');
         }
-        console.log('background----');
+        console.log('set native----');
       }
     } catch (ex) {
       console.debug(ex);
     }
   };
-  const appForeground = async () => {
-    console.log('appForeground');
-  };
 
+  const appForeground = async () => {
+    const isAppTimeout = _isAppTimeout();
+    if (isAppTimeout) {
+      setTimeout(() => {
+        console.log('setTime----');
+      }, 1000);
+    }
+  };
+  const _isAppTimeout = () => {
+    if (appState.Authorized) {
+      let { inactiveTime } = appState;
+      if (inactiveTime) {
+        let now = moment();
+        let lastInactiveTime = moment(new Date(inactiveTime));
+        let durationPassed = moment.duration(now.diff(lastInactiveTime));
+        if (durationPassed.asMinutes() >= 10) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
   return <View />;
 }

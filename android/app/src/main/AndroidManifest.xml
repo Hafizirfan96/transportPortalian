@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
      android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     <uses-permission android:name="android.permission.READ_LOGS"/>
+<uses-permission android:name="android.permission.READ_LOGS"/>
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+
 
     <application
       android:name=".MainApplication"
@@ -16,7 +21,7 @@
       android:icon="@mipmap/ic_launcher"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
-      android:supportsRtl="false"
+      android:supportsRtl="true"
 android:usesCleartextTraffic="true"
     >
       <activity
@@ -42,9 +47,110 @@ android:usesCleartextTraffic="true"
           <action android:name="android.intent.action.MAIN" />
         </intent-filter>
       </activity>
-<!--
-      <meta-data android:name="MAPBOX_DOWNLOADS_TOKEN" android:value="pk.eyJ1IjoieWFzaXJiIiwiYSI6ImNsZGx1ZnA1ZTAzNGM0MG1mb2J4Nzc2MnIifQ.Vm9KR5F44R9oHdjuMj-87Q" />
-      -->
-    </application>
 
+      <meta-data android:name="MAPBOX_DOWNLOADS_TOKEN" android:value="pk.eyJ1IjoieWFzaXJiIiwiYSI6ImNsZGx1ZnA1ZTAzNGM0MG1mb2J4Nzc2MnIifQ.Vm9KR5F44R9oHdjuMj-87Q" />
+     
+    </application>
+    <queries>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="http"/>
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="https"/>
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="geo" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="google.navigation" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="applemaps" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="citymapper" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="uber" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="lyft" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="transit" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="truckmap" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="waze" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="yandexnavi" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="moovit" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="yandexmaps://maps.yandex." />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="yandextaxi" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="kakaomap" />
+  </intent>
+    <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="tmap" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="mapycz" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="mapsme" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="osmand.geo" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="gett" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="nmap" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="dgis" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="lftgpas" />
+  </intent>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="petalmaps" />
+  </intent>
+</queries>
 </manifest>

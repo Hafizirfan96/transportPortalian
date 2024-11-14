@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "939038161113",
+    "project_id": "transportportalen-74215",
+    "storage_bucket": "transportportalen-74215.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939038161113:android:64c6b1abf7604345ade6c8",
+        "android_client_info": {
+          "package_name": "no.transportportalen.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLXA-AeXAsKChm4edXs-RkQQUwLWB5fXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

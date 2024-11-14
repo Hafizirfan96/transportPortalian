@@ -8,6 +8,7 @@ const appSlice = createSlice({
       description: '',
       files: [],
     },
+    notificationMessage: null,
   },
   reducers: {
     showToast: (state, action) => {
@@ -19,9 +20,17 @@ const appSlice = createSlice({
     setDamageDesc: (state, action) => {
       state.registerDamage.description = action.payload;
     },
+    setnotificationMessage: (state, action) => {
+      state.notificationMessage = action.payload;
+    },
   },
 });
 
-export const { showToast, setDamageFiles, setDamageDesc } = appSlice.actions;
+export const {
+  showToast,
+  setDamageFiles,
+  setDamageDesc,
+  setnotificationMessage,
+} = appSlice.actions;
 
 export default appSlice.reducer;

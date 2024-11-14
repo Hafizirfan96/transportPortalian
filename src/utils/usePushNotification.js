@@ -9,11 +9,9 @@ import notifee, {
 const usePushNotification = () => {
   const requestUserPermission = async () => {
     if (Platform.OS === 'ios') {
-      //Request iOS permission
       await messaging().requestPermission();
     } else if (Platform.OS === 'android') {
-      //Request Android permission (For API level 33+, for 32 or below is not required)
-      const res = await PermissionsAndroid.request(
+      await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
       );
     }
@@ -22,18 +20,16 @@ const usePushNotification = () => {
   const getFCMToken = async () => {
     const fcmToken = await messaging().getToken();
     if (fcmToken) {
-      let pushToken = fcmToken;
-      // console.log('token-----', pushToken);
-      // await Storage.setString('pushtoken', pushToken);
+      console.log('Token retrieved successfully:', fcmToken);
     } else {
-      console.log('Failed', 'No token received');
-      Alert('No token received');
+      console.log('Failed to retrieve FCM token');
+      Alert.alert('No token received');
     }
   };
 
   const listenToForegroundNotifications = async handleNotification => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log('listenToForegroundNotifications----', remoteMessage);
+      console.log('Foreground notification:', remoteMessage);
       await handleNotification(remoteMessage);
 
       await notifee.requestPermission({
@@ -42,75 +38,83 @@ const usePushNotification = () => {
         alert: true,
       });
 
-      // Create a channel (required for Android)
       const channelId = await notifee.createChannel({
-        id: 'SkolemeldingChannel',
-        name: 'Skolemelding Channel',
+        id: 'transportportalenChannel',
+        name: 'Transportportalen Channel',
         importance: AndroidImportance.HIGH,
         visibility: AndroidVisibility.PUBLIC,
-        smallIcon: 'ic_launcher_round',
         sound: 'default',
-        vibration: true,
       });
+
       await notifee.displayNotification({
-        title: remoteMessage.notification.title,
-        body: remoteMessage.notification.body,
-        data: remoteMessage.data,
-        ios: {
-          badgeCount: remoteMessage?.notification?.ios?.badge,
-          sound: 'default',
-        },
+        title: remoteMessage.notification?.title,
+        body: remoteMessage.notification?.body,
         android: {
-          channelId: channelId,
+          channelId,
           sound: 'default',
-          pressAction: {
-            id: 'default',
-          },
+          pressAction: { id: 'default' },
         },
       });
+
+      await handleNotification(remoteMessage.notification);
     });
+
     return unsubscribe;
   };
 
   const listenToForegroundNotifeeNotifications =
     async handleNotificationFromTray => {
-      var unsubscribe = notifee.onForegroundEvent(async ({ type, detail }) => {
-        switch (type) {
-          case EventType.DISMISSED:
-            console.log('User dismissed notification', detail.notification);
-            break;
-          case EventType.PRESS:
-            console.log('User pressed notification', detail.notification);
+      const unsubscribe = notifee.onForegroundEvent(
+        async ({ type, detail }) => {
+          if (type === EventType.PRESS) {
+            console.log('Notification pressed:', detail.notification);
             await handleNotificationFromTray(detail.notification);
-            break;
-        }
-      });
-
+          } else if (type === EventType.DISMISSED) {
+            console.log('Notification dismissed:', detail.notification);
+          }
+        },
+      );
       return unsubscribe;
     };
 
   const listenToBackgroundNotifications = async handleNotification => {
-    const unsubscribe = messaging().setBackgroundMessageHandler(
-      async remoteMessage => {
-        console.log(
-          'A new message arrived! (BACKGROUND)',
-          JSON.stringify(remoteMessage),
-        );
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log(
+        'Background notification received:',
+        remoteMessage.notification,
+      );
 
-        await handleNotification(remoteMessage);
-      },
-    );
-    return unsubscribe;
+      // Display notification using notifee
+      const channelId = await notifee.createChannel({
+        id: 'transportportalenChannel',
+        name: 'Transportportalen Channel',
+        importance: AndroidImportance.HIGH,
+        visibility: AndroidVisibility.PUBLIC,
+        sound: 'default',
+      });
+
+      await notifee.displayNotification({
+        title: remoteMessage.notification?.title,
+        body: remoteMessage.notification?.body,
+        android: {
+          channelId,
+          sound: 'default',
+          pressAction: { id: 'default' },
+        },
+      });
+
+      await handleNotification(remoteMessage.notification);
+    });
   };
 
   const onNotificationOpenedAppFromBackground =
     async handleNotificationFromTray => {
       const unsubscribe = messaging().onNotificationOpenedApp(
         async remoteMessage => {
-          // console.log(
-          //   'App opened from BACKGROUND by tapping notification:',
-          //   JSON.stringify(remoteMessage),
-          // )
+          console.log(
+            'App opened from background via notification:',
+            remoteMessage,
+          );
           await handleNotificationFromTray(remoteMessage);
         },
       );
@@ -118,9 +122,13 @@ const usePushNotification = () => {
     };
 
   const onNotificationOpenedAppFromQuit = async handleNotification => {
-    const message = await messaging().getInitialNotification();
-    if (message) {
-      await handleNotification(message);
+    const initialMessage = await messaging().getInitialNotification();
+    if (initialMessage) {
+      console.log(
+        'App opened from quit state via notification:',
+        initialMessage,
+      );
+      await handleNotification(initialMessage);
     }
   };
 
@@ -128,10 +136,10 @@ const usePushNotification = () => {
     requestUserPermission,
     getFCMToken,
     listenToForegroundNotifications,
+    listenToForegroundNotifeeNotifications,
     listenToBackgroundNotifications,
     onNotificationOpenedAppFromBackground,
     onNotificationOpenedAppFromQuit,
-    listenToForegroundNotifeeNotifications,
   };
 };
 

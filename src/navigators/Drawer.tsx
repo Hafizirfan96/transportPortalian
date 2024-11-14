@@ -4,6 +4,8 @@ import useTheme from '@/hooks/useTheme';
 import CustomDrawer from './CustomDrawer';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import NotificationScreen from '@/screens/NotificationScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -41,6 +43,16 @@ const DrawerNavigator = () => {
             <MaterialIcons name="dashboard" size={22} color={color} />
           ),
           drawerLabel: 'Dashboard',
+        }}
+      />
+      <Drawer.Screen
+        name="Notification"
+        component={NotificationScreen}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name="notifications" size={22} color={Colors.black} />
+          ),
+          drawerLabel: 'Notification',
         }}
       />
     </Drawer.Navigator>

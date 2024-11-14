@@ -1,46 +1,47 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     ext {
-        firebaseIidVersion = "19.0.1"
-        googlePlayServicesIidVersion = "17.0.0"
-        buildToolsVersion = "33.0.0"
-        minSdkVersion = 21
-        compileSdkVersion = 33
-        targetSdkVersion = 33
-
-        // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
-        ndkVersion = "23.1.7779620"
-        kotlin_version = '1.6.10' // <- add this line
-        RNMapboxMapsImpl = "mapbox" // required for v10
+        buildToolsVersion = "35.0.0"
+        minSdkVersion = 24
+        compileSdkVersion = 35
+        targetSdkVersion = 34
+        ndkVersion = "26.1.10909125"
+        kotlinVersion = "1.9.24"
     }
+
     repositories {
         google()
         mavenCentral()
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
-        classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version" // <- add this line
+        maven { url 'https://api.mapbox.com/downloads/v2/releases/maven' }
 
     }
-    allprojects {
-    repositories {
-        // ...other repos
-        maven {
-            url 'https://api.mapbox.com/downloads/v2/releases/maven'
-            authentication {
-                basic(BasicAuthentication)
-            }
-            credentials {
-                // Do not change the username below.
-                // This should always be `mapbox` (not your username).
-                username = 'mapbox'
-                // Use the secret token you stored in gradle.properties as the password
-                password = project.properties['MAPBOX_DOWNLOADS_TOKEN'] ?: ""
-            }
-        }
-        // ...even more repos?
+
+    dependencies {
+        classpath('com.android.tools.build:gradle:8.7.1')
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath ("com.google.gms:google-services:4.3.15")
+
+
     }
 }
+
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+       maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            credentials {
+                username = "mapbox"
+                password = project.hasProperty('MAPBOX_DOWNLOADS_TOKEN') ? project.MAPBOX_DOWNLOADS_TOKEN : "pk.eyJ1IjoieWFzaXJiIiwiYSI6ImNsZGx1ZnA1ZTAzNGM0MG1mb2J4Nzc2MnIifQ.Vm9KR5F44R9oHdjuMj-87Q"
+            }
+             authentication {
+                basic(BasicAuthentication)
+            }
+        }
+         
+    }
 }
+
+apply plugin: "com.facebook.react.rootproject"

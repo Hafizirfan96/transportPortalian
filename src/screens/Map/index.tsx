@@ -24,9 +24,9 @@ Mapbox.setAccessToken(mapKey);
 const MapboxScreen = () => {
   const { Layout, Colors, Images } = useTheme();
   const styles = getStyles(Colors);
-  const [zoomLevel, setZoomLevel] = useState(6);
+  const [zoomLevel, setZoomLevel] = useState(7);
   const { workloadData, isLoading } = useAppSelector(workloadSelector);
-  const [coordinate, setCordinate] = useState([]);
+  const [coordinate, setCoordinate] = useState([]);
   const [showCallout, setShowCallout] = useState(false);
   const [selectedCoords, setSelectedCoords] = useState(null);
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const MapboxScreen = () => {
     if (workloadData) {
       const coordinates = workloadData
         .map(item => {
-          if (item.WorkloadLatlng) {
+          if (item?.WorkloadLatlng) {
             const [latitude, longitude] =
               item.WorkloadLatlng.split(',').map(Number);
             if (!isNaN(latitude) && !isNaN(longitude)) {
@@ -55,7 +55,7 @@ const MapboxScreen = () => {
         })
         .filter(coords => coords !== null);
 
-      setCordinate(coordinates);
+      setCoordinate(coordinates);
     }
   }, [workloadData]);
 
@@ -105,39 +105,50 @@ const MapboxScreen = () => {
   const handleMarkerPress = coords => {
     setSelectedCoords(coords);
     setShowCallout(true);
+    setZoomLevel(prevZoom => Math.min(prevZoom + 1, 20));
   };
 
-  const Marker = React.memo(({ coords }: any) => (
-    <Mapbox.MarkerView
-      coordinate={[coords.latitude, coords.longitude]}
-      id={`workload-${coords.latitude}-${coords.longitude}`}
-    >
-      <View style={[Layout.center]}>
-        <TouchableOpacity onPress={() => handleMarkerPress(coords)}>
-          <Image
-            source={
-              coords.status === Config.WORKLOAD_STATUS.NEW
-                ? Images.pinBlack
-                : coords.status === Config.WORKLOAD_STATUS.STARTED
-                  ? Images.pinYellow
-                  : Config.WORKLOAD_STATUS.COMPLETED
-                    ? Images.pinGreen
-                    : null
-            }
-            style={styles.image}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        {showCallout && selectedCoords === coords && (
-          <View style={[styles.calloutContainer, Layout.center]}>
-            <Text style={styles.calloutText}>{coords.address}</Text>
-          </View>
-        )}
-      </View>
-    </Mapbox.MarkerView>
-  ));
+  const Marker = React.memo(({ coords }) => {
+    if (
+      typeof coords.latitude !== 'number' ||
+      typeof coords.longitude !== 'number'
+    ) {
+      return null;
+    }
+
+    return (
+      <Mapbox.MarkerView
+        coordinate={[coords.latitude, coords.longitude]}
+        id={`workload-${coords.latitude}-${coords.longitude}`}
+      >
+        <View style={[Layout.center]}>
+          <TouchableOpacity onPress={() => handleMarkerPress(coords)}>
+            <Image
+              source={
+                coords.status === Config.WORKLOAD_STATUS.NEW
+                  ? Images.pinBlack
+                  : coords.status === Config.WORKLOAD_STATUS.STARTED
+                    ? Images.pinYellow
+                    : Config.WORKLOAD_STATUS.COMPLETED
+                      ? Images.pinGreen
+                      : null
+              }
+              style={styles.image}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+          {showCallout && selectedCoords === coords && (
+            <View style={[styles.calloutContainer, Layout.center]}>
+              <Text style={styles.calloutText}>{coords.address}</Text>
+            </View>
+          )}
+        </View>
+      </Mapbox.MarkerView>
+    );
+  });
 
   const getCenterCoordinate = () => {
+    if (coordinate.length === 0) return [0, 0];
     const total = coordinate.reduce(
       (acc, curr) => {
         acc.latitude += curr.latitude;
@@ -163,7 +174,7 @@ const MapboxScreen = () => {
               zoomLevel={zoomLevel}
               centerCoordinate={getCenterCoordinate()}
             />
-            {coordinate?.map((coords, index) =>
+            {coordinate.map((coords, index) =>
               coords.latitude && coords.longitude ? (
                 <Marker key={`workload-${index}`} coords={coords} />
               ) : null,

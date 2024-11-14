@@ -15,6 +15,7 @@ export { VehicleDetailCard, LorryCard } from './VehicleDetail';
 export { Inspection, Damagecontrol } from './VehicleInspection';
 export { Reference, ProductList, AdditionalProduct } from './EndTour';
 export { default as NewWorkloadComponents } from './NewWorkload/index';
+export { default as InAppNotification } from './Notification/index';
 export { TimeLocationInHeader, Searchbar, VehicleCard } from './Vehicles';
 
 export {
