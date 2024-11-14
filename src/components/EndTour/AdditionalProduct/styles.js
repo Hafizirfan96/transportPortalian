@@ -9,7 +9,7 @@ const getStyles = Colors =>
       marginLeft: wp(5),
     },
     controlView: {
-      width: wp(100),
+      width: wp(140),
       height: wp(30),
       backgroundColor: Colors.darkGrey,
       borderRadius: wp(3),
@@ -28,18 +28,24 @@ const getStyles = Colors =>
       marginTop: -15,
       marginBottom: wp(15),
     },
+    toastError: {
+      fontFamily: 'OsloSans-regular',
+      color: Colors.error,
+      marginTop: wp(5),
+      textAlign: 'center',
+    },
     errorColor: {
       color: Colors.red,
     },
     textStyleBold: {
       fontFamily: 'OsloSans-Bold',
-      color: Colors.text,
+      color: Colors.black,
       marginTop: wp(15),
       width: wp(140),
     },
     textStyleSmallBold: {
       fontFamily: 'OsloSans-Bold',
-      color: Colors.text,
+      color: Colors.black,
       marginTop: wp(17),
       marginLeft: wp(15),
     },
@@ -48,17 +54,18 @@ const getStyles = Colors =>
     },
     textStyleMedium: {
       fontFamily: 'OsloSans-Bold',
-      color: Colors.text,
-      marginRight: wp(3),
+      color: Colors.black,
     },
 
     InputText: {
       width: wp(50),
-      height: wp(30),
+      height: wp(25),
       backgroundColor: Colors.darkGrey,
       borderRadius: wp(3),
-      marginLeft: wp(65),
+      marginLeft: wp(25),
       padding: wp(6),
+      color: Colors.black,
+      paddingRight: wp(13),
     },
     ProductInputItem: {
       backgroundColor: Colors.grey,
@@ -74,9 +81,30 @@ const getStyles = Colors =>
       width: wp(140),
       height: hp(45),
     },
+    textarea: {
+      height: hp(100),
+
+      fontFamily: 'OsloSans-Bold',
+      color: Colors.black,
+      paddingLeft: wp(10),
+      paddingRight: wp(10),
+      width: '100%',
+    },
     checkbox: {
       alignSelf: 'center',
-      marginLeft: wp(35),
+      marginLeft: wp(25),
+    },
+    borderColor: {
+      borderWidth: wp(1),
+      borderRadius: wp(5),
+      borderColor: 'gray',
+      marginBottom: wp(15),
+    },
+    errorBorder: {
+      borderWidth: wp(1),
+      borderRadius: wp(5),
+      borderColor: Colors.red,
+      marginBottom: wp(15),
     },
     commentInputText: {
       height: hp(100),
@@ -85,15 +113,15 @@ const getStyles = Colors =>
       borderRadius: wp(5),
       borderColor: 'gray',
       fontFamily: 'OsloSans-Bold',
-      color: Colors.text,
+      color: Colors.black,
       paddingLeft: wp(10),
       paddingRight: wp(10),
       width: '100%',
     },
 
     addButtonStyle: {
-      width: wp(15),
-      height: hp(15),
+      width: wp(20),
+      height: hp(20),
     },
     marginhorizontal30: {
       marginHorizontal: wp(30),
@@ -110,12 +138,10 @@ const getStyles = Colors =>
     marginRight10: {
       marginRight: wp(10),
     },
-    marginBottom30: {
-      marginBottom: wp(10),
-      marginTop: wp(10),
-    },
+
     marginvertical10: {
       marginVertical: wp(10),
+      height: wp(35),
     },
     colorwhite: {
       color: Colors.black,
@@ -123,11 +149,14 @@ const getStyles = Colors =>
     width150: {
       width: wp(150),
       bottom: wp(10),
+      // backgroundColor:Colors.darkGrey,
+      color: Colors.black,
     },
     fontAwism: {
-      right: wp(15),
-      top: wp(10),
+      right: wp(10),
+      top: wp(6),
     },
+    bottomNeProduct: { bottom: hp(15) },
   });
 
 export default getStyles;

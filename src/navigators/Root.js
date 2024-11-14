@@ -15,9 +15,13 @@ export function navigateBack() {
   }
 }
 export function navigate(name, params) {
+ try {
   if (navigationRef.current?.isReady()) {
     navigationRef.current?.navigate(name, params);
   }
+ } catch (error) {
+  console.log(error)
+ }
 }
 
 export function navigateAndReset(routes = [], index = 0) {

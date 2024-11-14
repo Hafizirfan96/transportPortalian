@@ -11,7 +11,7 @@ let tourUrl = '/api/mobile/tour';
 export async function getMyTours(): Promise<TourDetailModel> {
   let url = tourUrl + '/list';
   const response: AxiosResponse<TourDetailModel> = await api.get(url);
-  return response;
+  return response.data;
 }
 
 export async function startTour(data: TourStartRequestModel): Promise<number> {

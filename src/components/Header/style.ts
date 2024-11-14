@@ -1,16 +1,15 @@
 import { StyleSheet } from 'react-native';
-import { wp, hp } from '@/utils/layout-scaling';
-import { ThemeColors } from '@/Theme/theme.type';
+import { wp } from '@/utils/layout-scaling';
 
-const getStyles = (colors: ThemeColors) =>
+const getStyles = (colors: any, props: any) =>
   StyleSheet.create({
     headerStyles: {
       backgroundColor: colors.primaryBackground,
       paddingHorizontal: wp(20),
       paddingVertical: wp(10),
-      paddingBottom: wp(30),
-      borderBottomEndRadius: wp(10),
-      borderBottomStartRadius: wp(10),
+      paddingBottom: props?.notShowIcons ? 0 : wp(35),
+      borderBottomEndRadius: props?.notShowIcons ? 0 : wp(10),
+      borderBottomStartRadius: props?.notShowIcons ? 0 : wp(10),
     },
     titleMessageTextStyles: {
       fontSize: wp(25),
@@ -21,7 +20,11 @@ const getStyles = (colors: ThemeColors) =>
     locationHeading: {
       width: '70%',
     },
-    backArrow: { width: wp(13), height: wp(22) },
+    backArrow: { width: wp(10), height: wp(18) },
+    imageIcon: {
+      width: wp(40),
+      height: wp(40),
+    },
   });
 
 export default getStyles;

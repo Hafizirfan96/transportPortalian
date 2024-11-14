@@ -38,9 +38,7 @@ const NewTour = () => {
     formState: { errors },
   } = useForm();
   // console.log('route----', routes[0].key == 'second');
-  const onSaveClick = async (data: any) => {
-    console.log('data-----', data);
-  };
+  const onSaveClick = async (data: any) => {};
   const product = [
     {
       IsComment: true,
@@ -85,7 +83,6 @@ const NewTour = () => {
                       defaultButtonText={'Search filter'}
                       dropdownIconPosition={'right'}
                       onSelect={(selectedItem, index) => {
-                        console.log('selet------', selectedItem, index);
                         onChange(selectedItem.ProductId);
                       }}
                       buttonTextAfterSelection={(selectedItem, index) => {

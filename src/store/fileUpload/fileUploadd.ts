@@ -5,7 +5,6 @@ export const fileUpload = createAsyncThunk(
   'file/upload',
   async (args, thunkAPI) => {
     try {
-      console.log('args------:', args);
       const response = await fileUploadService.fileUpload(args);
       return response;
     } catch (error) {

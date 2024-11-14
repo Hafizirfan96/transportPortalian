@@ -7,7 +7,7 @@ import { StyleSheet } from 'react-native';
 import buttonStyles from './components/Buttons';
 import { CommonParams } from '../../@types/theme';
 import { hp, wp } from '@/utils/layout-scaling';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 
 export default function <C>({
   Colors,
@@ -25,14 +25,14 @@ export default function <C>({
         backgroundColor: Colors.transparent,
       },
       card: {
-        borderRadius: wp(6),
+        borderRadius: wp(5),
         backgroundColor: Colors.white,
         shadowColor: Colors.primaryTextColor,
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.5,
+        shadowOffset: { width: wp(1), height: wp(1) },
+        shadowOpacity: wp(0.5),
         shadowRadius: wp(3),
-        elevation: 5,
-        zIndex: 0,
+        elevation: wp(5),
+        zIndex: wp(0),
       },
       textInput: {
         borderWidth: 1,
@@ -53,10 +53,10 @@ export default function <C>({
         width: 25,
       },
       contentWrapper: {
-        top: wp(-15),
+        top: wp(-22),
       },
       contentWrapperDashboard: {
-        top: wp(-25),
+        top: wp(-32),
         ...Gutters.mediumHMargin,
       },
       itemShadow: {
@@ -86,7 +86,9 @@ export default function <C>({
         marginRight: 10,
         color: Colors.appColor,
       },
-
+      gapProperity: {
+        gap: wp(-12),
+      },
       // End - Search box style
 
       customButton: {
@@ -105,8 +107,8 @@ export default function <C>({
         minWidth: Config.ACCESSIBILIY_WIDTH,
       },
       wcagArea: {
-        minHeight: Config.ACCESSIBILIY_HEIGHT,
-        minWidth: Config.ACCESSIBILIY_WIDTH,
+        minHeight: wp(Config.ACCESSIBILIY_HEIGHT),
+        minWidth: wp(Config.ACCESSIBILIY_WIDTH),
       },
 
       wcagHeightAA: {

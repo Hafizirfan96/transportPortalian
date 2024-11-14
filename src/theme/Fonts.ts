@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
 import { ThemeVariables } from '../../@types/theme';
-import { wp } from '../utils/layout-scaling';
 
 export default function ({ FontSize, Colors }: ThemeVariables) {
   const base = {
     ...mediumFontFamily,
     fontSize: FontSize.small,
-    color: Colors.primaryTextColor,
+    color: Colors.black,
   };
 
   const baseBold: any = {
@@ -39,21 +38,32 @@ export default function ({ FontSize, Colors }: ThemeVariables) {
       lineHeight: FontSize.regular * 1.5,
     },
     textNormalBold: {
-      ...baseBold,
-      fontSize: FontSize.normal,
+      ...boldFontFamily,
+      color: Colors.black,
+      fontSize: FontSize.smallNormal,
     },
 
     textNormal: {
-      ...base,
+      ...regularFontFamily,
+      color: Colors.black,
       fontSize: FontSize.normal,
     },
     textMedium: {
-      ...base,
-      fontSize: FontSize.medium,
+      ...boldFontFamily,
+      color: Colors.black,
+      fontSize: FontSize.smallTiny,
+      fontWeight: 'bold',
+    },
+    textMediumLightBlack: {
+      ...boldFontFamily,
+      color: Colors.lightBlack,
+      fontSize: FontSize.smallTiny,
     },
     textMediumBold: {
-      ...baseBold,
-      fontSize: FontSize.medium,
+      ...boldFontFamily,
+      color: Colors.black,
+      fontSize: FontSize.small,
+      fontWeight: 'bold',
     },
 
     textLarge: {
@@ -61,8 +71,9 @@ export default function ({ FontSize, Colors }: ThemeVariables) {
       fontSize: FontSize.large,
     },
     textLargeBold: {
-      ...baseBold,
-      fontSize: FontSize.large,
+      ...boldFontFamily,
+      color: Colors.black,
+      fontSize: FontSize.regular,
     },
     regularFamily: {
       ...regularFontFamily,

@@ -1,15 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { wp, hp } from '@/utils/layout-scaling';
 
-export default getStyles = (Colors, FontSize) =>
+export default getStyles = Colors =>
   StyleSheet.create({
-    marginLeftRight: {
-      marginLeft: wp(50),
-      marginRight: wp(20),
-    },
     itemQuestionsText: {
       fontFamily: 'OsloSans-Bold',
-      // fontSize: hp(12),
       color: Colors.black,
     },
     itemQuestionsMargin: {
@@ -21,7 +16,6 @@ export default getStyles = (Colors, FontSize) =>
       width: wp(8),
       height: hp(8),
       borderRadius: wp(4),
-      marginLeft: wp(40),
       marginTop: wp(19),
     },
     checkbox: {
@@ -43,18 +37,15 @@ export default getStyles = (Colors, FontSize) =>
     },
     radioButtonMainView: { width: wp(195) },
     inputText: {
-      height: hp(120),
-      marginTop: wp(20),
+      minHeight: hp(80),
       borderWidth: 0.7,
       borderRadius: wp(5),
       borderColor: Colors.grey,
-      marginRight: wp(20),
-      marginLeft: wp(20),
       fontFamily: 'OsloSans-Bold',
-      // fontSize: hp(FontSize.small),
       color: Colors.text,
       paddingLeft: wp(10),
       paddingRight: wp(10),
+      backgroundColor: Colors.white,
     },
     errorText: {
       color: 'red',

@@ -14,13 +14,18 @@ const createDefaultState = (): productState => {
     isLoading: false,
     productListsData: null,
     allProduct: null,
+    searchLoading: false,
   };
 };
 
 const productSlice = createSlice({
   name: 'product',
   initialState: createDefaultState() as productState,
-  reducers: {},
+  reducers: {
+    resetProduct: (state, action) => {
+      state = createDefaultState();
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(productLists.pending, state => {
@@ -33,12 +38,31 @@ const productSlice = createSlice({
         };
       })
       .addCase(productLists.fulfilled, (state, action: PayloadAction<any>) => {
+        const modifiedResponse = action.payload.map(group => ({
+          ...group,
+          Products: group.Products.map(product => ({
+            ...product,
+            data: {
+              price: { value: '', error: false, isRequired: product.IsPrice },
+              quantity: {
+                value: '',
+                error: false,
+                isRequired: product.IsQuantity,
+              },
+              comment: {
+                value: '',
+                error: false,
+                isRequired: product.IsComment,
+              },
+            },
+          })),
+        }));
         return {
           ...state,
           status: 'succeeded',
           isLoading: false,
           error: null,
-          productData: action.payload,
+          productData: modifiedResponse,
         };
       })
       .addCase(productLists.rejected, (state, action: PayloadAction<any>) => {
@@ -86,8 +110,8 @@ const productSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: false,
-          allProduct: null,
+          searchLoading: true,
+          // allProduct: null,
         };
       })
       .addCase(
@@ -96,6 +120,7 @@ const productSlice = createSlice({
           return {
             ...state,
             status: 'succeeded',
+            searchLoading: false,
             allProduct: action.payload,
           };
         },
@@ -107,7 +132,8 @@ const productSlice = createSlice({
             ...state,
             status: 'failed',
             error: action.payload as string,
-            allProduct: null,
+            // allProduct: null,
+            searchLoading: false,
           };
         },
       );
@@ -116,4 +142,4 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 export const productSelector = (state: RootState) => state.product;
-export const {} = productSlice.actions;
+export const { resetProduct } = productSlice.actions;

@@ -5,24 +5,26 @@ import React, {
   useState,
 } from 'react';
 import { View } from 'react-native';
-import { useTheme } from '@/hooks';
+import { useAppSelector, useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import RadioButtonWithText from '../RadioButtonWithText';
+import { workloadSelector } from '@/store/Workload';
 
 function SortModal(props: any, ref: any) {
   const { Layout, Gutters } = useTheme();
   const modalizeRef = useRef(null);
-
   const [sort, SetSort] = useState(props.selected);
 
   useImperativeHandle(ref, () => ({
     open() {
       modalizeRef.current?.open();
     },
+    reset() {
+      SetSort(3);
+    },
   }));
   const handleSortToggle = (item: any) => {
-    console.log('handleSortToggle', item);
     SetSort(item.Id);
     props.onSelected(item);
     modalizeRef.current?.close();
@@ -30,7 +32,7 @@ function SortModal(props: any, ref: any) {
   const myconsole = () => console.log('rendering sort Modal');
   return (
     <>
-      {myconsole()}
+      {/* {myconsole()} */}
       <Modalize
         ref={modalizeRef}
         adjustToContentHeight={true}

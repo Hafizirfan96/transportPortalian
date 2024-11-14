@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 
-import TokenStorage from '@/services/TokenStorageService';
-import { authService } from './auth';
+import TokenStorage from '../services/TokenStorageService';
+import { authService } from './Auth';
+import { showToast } from '@/store/appState';
+import { store } from '@/store';
+const { dispatch } = store;
 
 const api = axios.create({
   baseURL: Config.API_URL,
@@ -10,24 +13,31 @@ const api = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-  timeout: 3000,
+  timeout: 5000,
 });
+
 // Request interceptor for API calls
 api.interceptors.request.use(
-  config => {
-    const token = TokenStorage.getToken();
-    if (config.data?._parts) {
-      config.headers = {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      };
-    } else {
-      config.headers = {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      };
+  async config => {
+    try {
+      const token = await TokenStorage.getToken();
+      // await requestPermissions();
+      // const position = await fetchGeolocation();
+      if (config.data?._parts) {
+        config.headers = {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        };
+      } else {
+        config.headers = {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        };
+      }
+    } catch (error) {
+      console.error('Error retrieving geolocation or location name:', error);
     }
     return config;
   },
@@ -46,13 +56,29 @@ api.interceptors.response.use(
   },
   function (error) {
     const errorResponse = error.response;
+
     if (error.message === 'Network Error') {
+      dispatch(
+        showToast({
+          type: 'error',
+          text1: 'Error Message',
+          text2: error.message,
+        }),
+      );
       return Promise.reject({
         response: {
           data: { message: 'Network Error' },
           status: 0, //error.response ? error.response.status : null,
         },
       });
+    } else if (error.response.status == '500') {
+      dispatch(
+        showToast({
+          type: 'error',
+          text1: 'Error Message',
+          text2: 'Server Error',
+        }),
+      );
     }
     if (isTokenExpiredError(errorResponse)) {
       return resetTokenAndReattemptRequest(error);
@@ -98,9 +124,9 @@ async function resetTokenAndReattemptRequest(error) {
     });
     if (!isAlreadyFetchingAccessToken) {
       isAlreadyFetchingAccessToken = true;
-      const refreshToken = TokenStorage.getRefreshToken();
-      // const userName = TokenStorage.getUsername();
-      const userId = TokenStorage.getUserId();
+
+      const refreshToken = await TokenStorage.getRefreshToken();
+      const userId = await TokenStorage.getUserId();
 
       const response = await authService.refreshTokens(refreshToken, userId);
       if (!response) {
@@ -142,12 +168,19 @@ class ApiClient {
       .get(route)
       .then(function (response) {
         // handle success
-        console.log(`Success route - ${route} response `, response.data);
+        // console.log(`Success route - ${route} response `, response.data);
         return response;
       })
       .catch(function (error) {
         // handle error
         console.log(`ERROR route - ${route}`, JSON.stringify(error));
+        // const errorResponse = JSON.stringify(error);
+        // console.log(errorResponse.message)
+        // dispatch(showToast({
+        //   type: 'error',
+        //   text1: 'Error Message',
+        //   text2:  errorResponse.message,
+        // }))
         throw error;
       });
   }
@@ -156,18 +189,24 @@ class ApiClient {
     return api
       .post(route, params)
       .then(function (response) {
-        console.log(
-          `POST Route Success route - ${route} response ${JSON.stringify(
-            response.data,
-          )}`,
-        );
+        // console.log(
+        //   `POST Route Success route - ${route} response ${JSON.stringify(
+        //     response.data,
+        //   )}`,
+        // );
         return response;
       })
       .catch(function (error) {
         console.log(
           `POST Route Error route - ${route} response ${JSON.stringify(error)}`,
         );
-
+        // const errorResponse = JSON.stringify(error);
+        // console.log(errorResponse.message)
+        // dispatch(showToast({
+        //   type: 'error',
+        //   text1: 'Error Message',
+        //   text2:  errorResponse.message,
+        // }))
         throw error;
       });
   }
@@ -175,18 +214,25 @@ class ApiClient {
     return api
       .put(route, params)
       .then(function (response) {
-        console.log(
-          `POST Route Success route - ${route} response ${JSON.stringify(
-            response.data,
-          )}`,
-        );
+        // console.log(
+        //   `POST Route Success route - ${route} response ${JSON.stringify(
+        //     response.data,
+        //   )}`,
+        // );
         return response;
       })
       .catch(function (error) {
         console.log(
           `POST Route Error route - ${route} response ${JSON.stringify(error)}`,
         );
+        const errorResponse = JSON.stringify(error);
+        console.log(error);
 
+        // dispatch(showToast({
+        //   type: 'error',
+        //   text1: 'Error Message',
+        //   text2: errorResponse.message,
+        // }))
         throw error;
       });
   }

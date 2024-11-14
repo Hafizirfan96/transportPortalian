@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Input, Icon, Item } from 'native-base';
+// import { Input, Icon, Item } from 'native-base';
 import { useTheme } from '@/hooks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -11,7 +11,7 @@ const Searchbar = () => {
   return (
     <View>
       <View style={Common.itemShadow}>
-        <Input
+        {/* <Input
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Search"
@@ -26,7 +26,7 @@ const Searchbar = () => {
               style={Common.searchIcon}
             />
           }
-        />
+        /> */}
         {/* <Input
           placeholder="Search vehicle"
           placeholderTextColor={Colors.grey}

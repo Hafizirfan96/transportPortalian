@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import { ActivityIndicator, View, StatusBar } from 'react-native';
-import { useTheme } from '@/hooks';
-import { useDispatch } from 'react-redux';
-import init from '@/store/startup/Init';
+import init from '@/store/Startup/Init';
 import StorageService from '@/services/StorageService';
 import { clearUserData } from '@/store/auth';
 import { Colors } from '@/theme/Variables';
+import { useEffect } from 'react';
+import { ActivityIndicator, StatusBar, View } from 'react-native';
+import React from 'react';
+import useTheme from '@/hooks/useTheme';
+import { useDispatch } from 'react-redux';
 
 const IndexStartupContainer = () => {
   const { Layout, Gutters } = useTheme();

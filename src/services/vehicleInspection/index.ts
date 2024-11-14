@@ -18,7 +18,30 @@ export async function createVehicleInspection(
   return response.data;
 }
 
+export async function createVehicleDamage(data: {DamageDetail: string, VehicleId: string}): Promise<any> {
+  let url = '/api/mobile/vehicle/damage/create';
+  const response: AxiosResponse<any> = await api.post(url, data);
+  return response.data;
+}
+
+export async function getDamageImages(data: any): Promise<any> {
+  let url = '/api/mobile/vehicle/damage/list';
+  const response: AxiosResponse<any> = await api.post(url, data);
+  return response.data;
+}
+
+export async function uploadDamageImages(
+  data: InspectionModel,
+): Promise<any> {
+  const url = 'api/file/upload/multiple/mobile';
+  const response: AxiosResponse<any> = await api.post(url, data);
+  return response.data;
+}
+
 export const vehicleInspectionService = {
   getInspectionQuestions,
+  getDamageImages,
   createVehicleInspection,
+  createVehicleDamage,
+  uploadDamageImages,
 };

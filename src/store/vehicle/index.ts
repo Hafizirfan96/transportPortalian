@@ -12,17 +12,34 @@ const createDefaultState = (): VehicleState => {
   return {
     status: 'idle',
     error: '',
+    selectedVehicleId: '',
     vehicleData: null,
     isLoading: false,
     vehicleStartData: null,
     isError: false,
+    isUpdating: false,
   };
 };
 
 const vehicleInfoSlice = createSlice({
   name: 'vehicle',
   initialState: createDefaultState() as VehicleState,
-  reducers: {},
+  reducers: {
+    setVehicleData: (state, action) => {
+      let index = state.vehicleData.Items.findIndex(
+        (item: any) => item.VehicleId == action.payload.VehicleId,
+      );
+      state.vehicleData.Items[index].TourVehicleId = action.payload.id;
+      state.vehicleData.Items[index].IsVehicleActive =
+        action.payload.IsVehicleActive;
+      state.vehicleData.Items[index].LastKm = action.payload.km;
+      state.vehicleData.Items[index].LastPosition = action.payload.position;
+      state.isUpdating = false;
+    },
+    setVehicleId: (state, action)=> {
+      state.selectedVehicleId = action.payload;
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(getMyVehicles.pending, state => {
@@ -60,7 +77,7 @@ const vehicleInfoSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: true,
+          isUpdating: true,
           vehicleStartData: null,
           isError: false,
         };
@@ -69,8 +86,6 @@ const vehicleInfoSlice = createSlice({
         return {
           ...state,
           status: 'succeeded',
-          isLoading: false,
-          vehicleStartData: action.payload,
           isError: false,
         };
       })
@@ -79,10 +94,8 @@ const vehicleInfoSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          vehicleData: null,
-          isLoading: false,
+          isUpdating: false,
           isError: true,
-          vehicleStartData: null,
         };
       });
     // end vehicle
@@ -91,7 +104,7 @@ const vehicleInfoSlice = createSlice({
         ...state,
         loading: 'pending',
         error: null,
-        isLoading: true,
+        isUpdating: true,
         isError: false,
       };
     });
@@ -101,9 +114,8 @@ const vehicleInfoSlice = createSlice({
         return {
           ...state,
           status: 'succeeded',
-          vehicleData: action.payload,
-          isLoading: false,
           isError: false,
+          isUpdating: false,
         };
       },
     );
@@ -113,8 +125,7 @@ const vehicleInfoSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          vehicleData: null,
-          isLoading: false,
+          isUpdating: false,
           isError: true,
         };
       })
@@ -136,6 +147,7 @@ const vehicleInfoSlice = createSlice({
           vehicleData: action.payload,
           isLoading: false,
           isError: false,
+          isUpdating: false,
         };
       })
       .addCase(pickupLorry.rejected, (state, action: PayloadAction<any>) => {
@@ -146,6 +158,7 @@ const vehicleInfoSlice = createSlice({
           vehicleData: null,
           isLoading: false,
           isError: true,
+          isUpdating: false,
         };
       });
   },
@@ -153,4 +166,5 @@ const vehicleInfoSlice = createSlice({
 
 export default vehicleInfoSlice.reducer;
 export const vehicleSelector = (state: RootState) => state.vehicle;
-export const {} = vehicleInfoSlice.actions;
+export const getSelectedVehicleId = (state: RootState) => state.vehicle.selectedVehicleId;
+export const { setVehicleData, setVehicleId } = vehicleInfoSlice.actions;

@@ -1,10 +1,8 @@
 import 'react-native';
-import React from 'react';
 import App from './App';
-
-// Note: test renderer must be required after react-native.
-import { Provider } from 'react-redux';
+import React from 'react';
 import { store } from './store';
+import { Provider } from 'react-redux';
 import { render } from '@testing-library/react-native';
 
 it('App renders correctly', () => {

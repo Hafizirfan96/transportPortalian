@@ -1,7 +1,16 @@
 import React, { useState, memo, useEffect } from 'react';
-import { View, TouchableOpacity, Linking, Platform, Text } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Linking,
+  Platform,
+  Text,
+  Image,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Config } from '@/config';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { Config } from '@/Config';
 import CheckItem from '@/components/CheckItem';
 import { useTheme } from '@/hooks';
 import styles from './style';
@@ -11,52 +20,46 @@ import moment from 'moment';
 function WorkloadItem(props) {
   const workload = props.workload;
 
+  const { Common, Layout, Colors, Gutters, Fonts, Images } = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const isSelected = props.workload.isSelected ? true : false;
-  const [selected, setSelected] = useState(isSelected);
-
-  const { Common, Layout, Colors, Gutters, Fonts } = useTheme();
-  useEffect(() => {
-    if (props.workload.isSelected) {
-      setSelected(true);
-    } else {
-      setSelected(false);
-    }
-  }, [props.workload]);
-  let cardColor = selected ? Colors.appColor : Colors.white;
-  let textColor = selected ? Colors.white : Colors.text;
-  let icnColor = selected ? Colors.white : Colors.appColor;
-
-  let cardBorderColor = {
+  // var selected = workload.isSelected || false;
+  const [cardBorderColor, setCardBorderColor] = useState({
     borderLeftColor: Colors.white,
-    borderLeftWidth: 0,
-  };
-  if (workload.Status == Config.WORKLOAD_STATUS.LOADED) {
-    cardBorderColor.borderColor = Colors.blue;
-    cardBorderColor.borderLeftWidth = 5;
-  } else if (workload.Status == Config.WORKLOAD_STATUS.STARTED) {
-    cardBorderColor.borderColor = Colors.yellow;
-    cardBorderColor.borderLeftWidth = 5;
-  } else if (workload.Status == Config.WORKLOAD_STATUS.COMPLETED) {
-    cardBorderColor.borderColor = Colors.appColor;
-    cardBorderColor.borderLeftWidth = 5;
-  }
-  let cardBg = {
-    backgroundColor: cardColor,
-  };
-  let txtColor = {
-    color: textColor,
-  };
-  let iconColor = {
-    color: icnColor,
+  });
+  useEffect(() => {
+    updateCardBorderColor();
+  }, [workload.Status]);
+
+  const updateCardBorderColor = () => {
+    let borderColor;
+    switch (workload.Status) {
+      case Config.WORKLOAD_STATUS.LOADED:
+        borderColor = Colors.blue;
+        break;
+      case Config.WORKLOAD_STATUS.STARTED:
+        borderColor = Colors.yellow;
+        break;
+      case Config.WORKLOAD_STATUS.COMPLETED:
+        borderColor = Colors.appColor;
+        break;
+      default:
+        borderColor = Colors.schedul;
+    }
+    setCardBorderColor({
+      borderLeftColor: borderColor,
+    });
   };
 
   const handleChangeExpanded = () => {
-    setExpanded(!expanded);
+    const isTrue = workload.Detail.every(item => item.KolliNumber == null);
+    if (!isTrue) {
+      setExpanded(!expanded);
+    }
   };
+
   const handleWorkloadItemSelectToggle = () => {
-    props.onToggle(workload, !selected);
-    setSelected(!selected);
+    // setSelected(!selected);
+    props.onToggle({ ...workload, index: props.index });
   };
 
   const makeCall = number => {
@@ -68,92 +71,70 @@ function WorkloadItem(props) {
       phoneNumber = 'telprompt:' + number;
     }
 
-    console.log(phoneNumber);
     Linking.openURL(phoneNumber);
   };
 
   const _renderWorkloadTypeIcon = type => {
-    let iconName = 'truck-delivery-outline';
+    let iconName = 'truck-delivery';
     if (type == 2) {
-      iconName = 'package-variant';
+      // iconName = 'package-variant';
+      return <FontAwesome5 name={'box'} size={wp(18)} color={Colors.black} />;
     } else if (type == 3) {
-      iconName = 'room-service-outline';
+      iconName = 'room-service';
     }
     return (
       <MaterialCommunityIcons
         name={iconName}
         size={wp(18)}
-        color={Colors.primaryTextColor}
+        color={Colors.black}
       />
     );
   };
 
-  const _renderSubItem = sub => {
-    return (
-      <View
-        style={[
-          Gutters.smallPadding,
-          Common.card,
-          Gutters.smallBMargin,
-          Gutters.mediumTPadding,
-          styles.subItem,
-          Layout.selfEnd,
-          cardBg,
-        ]}
-      >
-        {sub.map(subItem => {
-          return (
-            <View style={[Layout.row, Layout.fill]} key={subItem.KolliNumber}>
-              {/*  <View style={{ flex: 0.25 }}>
-                 <CheckItem
-                    onChangeValue={() =>
-                      handleWorkloadSubItemSelectToggle(
-                        workloadIndex,
-                        subItemIndex,
-                      )
-                    }
-                    value={selected}
-                    isContainerClickable={true}
-                  /> 
-                </View>*/}
-              <Text style={[Fonts.textTiny]}>{subItem.KolliNumber}</Text>
-            </View>
-          );
-        })}
-      </View>
-    );
-  };
-  const myconsole = () => console.log('rendering workload item', workload);
   return (
-    <>
-      {/* {myconsole()} */}
-      {/* {console.log(cardBorderColor)} */}
+    <View style={[Gutters.smallBMargin]}>
       <TouchableOpacity
         style={[
-          Gutters.smallPadding,
+          {
+            backgroundColor: Colors.white,
+            borderLeftWidth: 5,
+          },
+          Gutters.smallVPadding,
           Common.card,
           Gutters.mediumHMargin,
-          Gutters.smallBMargin,
-          cardBg,
+
           cardBorderColor,
         ]}
         onPress={handleChangeExpanded}
         activeOpacity={0.9}
       >
-        <View style={[Layout.row]}>
+        <View style={[Layout.row, Gutters.smallHPadding]}>
           <View style={[Layout.fill, Layout.row]}>
             {workload.Status == Config.WORKLOAD_STATUS.COMPLETED ? null : (
               <View style={styles.mainCheckbox}>
                 <CheckItem
                   onChangeValue={handleWorkloadItemSelectToggle}
-                  value={selected}
+                  value={props.isSelected}
                   isContainerClickable={true}
+                  colorActive={Colors.appColor}
+                  colorInactive={Colors.schedul}
+                  Icon={
+                    props.isSelected ? (
+                      <Image source={Images.activeCheckBox} />
+                    ) : (
+                      <Image source={Images.inActiveCheckBox} />
+                    )
+                  }
                 />
               </View>
             )}
             <View style={[Layout.fill, Layout.column]}>
               <View style={[Layout.row]}>
-                <View style={[{ flex: 2.5, borderWidth: 0 }]}>
+                <TouchableOpacity
+                  style={[{ flex: 2.5 }]}
+                  onPress={handleWorkloadItemSelectToggle}
+                  disabled={workload.Status == Config.WORKLOAD_STATUS.COMPLETED}
+                >
                   <Text
                     style={[Fonts.textTinyBold]}
                     numberOfLines={1}
@@ -161,12 +142,8 @@ function WorkloadItem(props) {
                   >
                     {workload.Address}
                   </Text>
-                </View>
-                <View>
-                  <Text style={[Fonts.textTiny]}>
-                    {moment(workload?.Deadline).format('HH[h] mm[min]')}
-                  </Text>
-                </View>
+                </TouchableOpacity>
+
                 <View style={[Layout.fill, Layout.alignItemsEnd]}>
                   <Text style={[Fonts.textTiny]}>
                     1 of {workload.Detail.length}
@@ -192,21 +169,63 @@ function WorkloadItem(props) {
                   {_renderWorkloadTypeIcon(workload.Type)}
                 </View>
               </View>
-              <View style={[Layout.row]}>
+              <View style={[Layout.row, Layout.justifyContentBetween]}>
                 <Text style={[Fonts.textTiny]}>
                   {workload.PostCode} {workload.City}
+                </Text>
+                <Text style={[Fonts.textTiny]}>
+                  {moment(workload?.Deadline).format('HH[h] mm[min]')}
                 </Text>
               </View>
             </View>
           </View>
         </View>
+        {workload.Detail && expanded && (
+          <>
+            <View
+              style={[
+                Gutters.smallTMargin,
+                {
+                  height: wp(4),
+                  backgroundColor: Colors.background,
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
+
+                  elevation: 24,
+                },
+              ]}
+            />
+            <View style={[Gutters.smallHPadding, Gutters.smallTMargin]}>
+              {workload.Detail.map((subItem, index) => {
+                if (subItem.KolliNumber !== null)
+                  return (
+                    <View
+                      style={[Layout.row, Layout.fill, Layout.alignItemsCenter]}
+                      key={index}
+                    >
+                      <Entypo
+                        name="box"
+                        size={wp(12)}
+                        color={Colors.iconBlackGrey}
+                      />
+                      <Text style={[Fonts.textTiny, Gutters.tinyLMargin]}>
+                        {subItem.KolliNumber}
+                      </Text>
+                    </View>
+                  );
+              })}
+            </View>
+          </>
+        )}
       </TouchableOpacity>
-      {workload.Detail && expanded && _renderSubItem(workload.Detail)}
-    </>
+    </View>
   );
 }
-const propsAreEqual = (prev, next) => {
-  return prev.workload.Status === next.workload.Status;
-  // return prev.isSelected === next.isSelected
+const PrevEqual = (prevProps, nextProps) => {
+  return prevProps.isSelected === nextProps.isSelected;
 };
-export default memo(WorkloadItem, propsAreEqual);
+export default React.memo(WorkloadItem, PrevEqual);

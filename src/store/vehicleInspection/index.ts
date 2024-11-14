@@ -15,7 +15,7 @@ const createDefaultState = (): vehicleInspectionQuestion => {
 
 const vehicleInsPectionSlice = createSlice({
   name: 'vehicleInspection',
-  initialState: createDefaultState() as vehicleInspectionQuestion,
+  initialState: createDefaultState() as any,
   reducers: {},
   extraReducers: builder => {
     builder

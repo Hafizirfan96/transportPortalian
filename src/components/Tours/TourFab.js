@@ -1,6 +1,5 @@
 import React, { useState, memo, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Button, Icon, Fab, Box } from 'native-base';
 import { useTheme } from '@/hooks';
 import { useSelector, useDispatch } from 'react-redux';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -23,7 +22,6 @@ function TourFab(props) {
   //   }
 
   const EndTour = () => {
-    console.log('End Tour');
     props.endTour(props.cardSelect.payload);
   };
 

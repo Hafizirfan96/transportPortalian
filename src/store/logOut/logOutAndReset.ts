@@ -1,6 +1,6 @@
 import { logOutService } from '@/services/logout';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { storage } from '@/store';
+import { reduxStorage, storage } from '@/store';
 import StorageService from '@/services/StorageService';
 
 export const logOutAndReset = createAsyncThunk(
@@ -8,12 +8,13 @@ export const logOutAndReset = createAsyncThunk(
   async (args, thunkAPI) => {
     try {
       const response = await logOutService.logOut();
-      storage.clearAll();
-      StorageService.clearAll();
+      await StorageService.clearAll();
+      await reduxStorage.clearAll();
+      await storage.clear();
       return response;
     } catch (error) {
       console.log(error);
-      thunkAPI.rejectWithValue(error);
+      return error;
     }
   },
 );

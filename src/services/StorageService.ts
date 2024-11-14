@@ -1,25 +1,31 @@
-import { MMKV } from 'react-native-mmkv';
-export const storage = new MMKV();
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// export const storage = __DEV__ ? new MMKVFaker() : new MMKV();
+export const storage = AsyncStorage;
 
 const StorageService = {
-  get: (key: any) => {
-    let data = storage.getString(key) || '';
-    return data === '' || data === undefined ? data : JSON.parse(data);
+  get: async (key: any) => {
+    let data = await AsyncStorage.getItem(key);
+    return data === null || data === '' || data === undefined
+      ? data
+      : JSON.parse(data);
   },
 
-  set(key: any, value: any) {
-    storage.set(key, JSON.stringify(value));
+  async set(key: any, value: any) {
+    await AsyncStorage.setItem(key, JSON.stringify(value));
   },
 
-  clear(key: any) {
-    storage.delete(key);
+  async clear(key: any) {
+    await AsyncStorage.removeItem(key);
   },
 
-  clearAll() {
-    storage.clearAll();
-    const keys = storage.getAllKeys();
-
-    console.log('keys', keys);
+  async clearAll() {
+    // storage.clearAll();
+    const keys = await AsyncStorage.getAllKeys();
+    keys.map(item => {
+      if (item !== 'password' && item !== 'rememberMe' && item !== 'email') {
+        AsyncStorage.removeItem(item);
+      }
+    });
   },
 };
 

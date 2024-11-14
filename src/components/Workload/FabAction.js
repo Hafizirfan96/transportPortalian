@@ -21,7 +21,6 @@ function FabAction(props) {
   // }
 
   const openActionList = () => {
-    console.log('Open action list');
     //SetFabIcon(!fabIcon)
     props.openAction();
   };

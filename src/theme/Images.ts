@@ -11,6 +11,9 @@ export default function () {
     pin_blue: require('@/theme/assets/images/pin_blue.png'),
     pin_orange: require('@/theme/assets/images/pin_orange.png'),
     pin_blue_g: require('@/theme/assets/images/pin_blue_g.png'),
+    pinBlack: require('@/theme/assets/images/54.png'),
+    pinYellow: require('@/theme/assets/images/51.png'),
+    pinGreen: require('@/theme/assets/images/52.png'),
     calendar: require('@/theme/assets/images/calendar.png'),
     tours: require('@/theme/assets/images/tours.png'),
     logoGreen: require('@/theme/assets/images/logoGreen.png'),
@@ -22,6 +25,7 @@ export default function () {
     deliveryIcon: require('@/theme/assets/images/deliveryIcon.png'),
     vehiclesIcon: require('@/theme/assets/images/vehiclesIcon.png'),
     mapTabIcon: require('@/theme/assets/images/mapTabIcon.png'),
+    mapTabLocation: require('@/theme/assets/images/43.png'),
     fabButtonIcon: require('@/theme/assets/images/fabButtonIcon.png'),
     fbIcon: require('@/theme/assets/images/fbIcon.png'),
     gPlusIcon: require('@/theme/assets/images/gPlusIcon.png'),
@@ -32,7 +36,7 @@ export default function () {
     notesIcon: require('@/theme/assets/images/35.png'),
     closeIcon: require('@/theme/assets/images/27.png'),
     dashBoard: require('@/theme/assets/images/4.png'),
-    //signatureIcon: require('@/theme/assets/images/1.png'),
+    notFound: require('@/theme/assets/images/46.png'),
     upcomingShiftIcon: require('@/theme/assets/images/18.png'),
     shiftDetailsIcon: require('@/theme/assets/images/19.png'),
     leaveIcon: require('@/theme/assets/images/20.png'),
@@ -48,10 +52,41 @@ export default function () {
     timeIcon: require('@/theme/assets/images/40.png'),
     workloadEnd: require('@/theme/assets/images/26.png'),
     vehicleInspection: require('@/theme/assets/images/car_4.png'),
-    signatureIcon: require('@/theme/assets/images/29.png'),
-    BarcodeIcon: require('@/theme/assets/images/barcodeIcon.png'),
+    signatureIcon: require('@/theme/assets/images/signatureIcon.png'),
+    barcodeIcon: require('@/theme/assets/images/barcodeIcon.png'),
     deleteIcon: require('@/theme/assets/images/31.png'),
     crossIcon: require('@/theme/assets/images/23.png'),
+    dashboard: require('@/theme/assets/images/dashboard.png'),
+    tour: require('@/theme/assets/images/tour.png'),
+    vehicle: require('@/theme/assets/images/vehicle.png'),
+    workload: require('@/theme/assets/images/workload.png'),
+    alret: require('@/theme/assets/images/alret.png'),
+    deleteImage: require('@/theme/assets/images/deleteImage.png'),
+    crossImage: require('@/theme/assets/images/crossImage.png'),
+    editImage: require('@/theme/assets/images/editImage.png'),
+    activeCheckBox: require('@/assets/Images/activeCheckBox.png'),
+    inActiveCheckBox: require('@/assets/Images/InActiveCheckBox.png'),
+    cross: require('@/theme/assets/images/cross.png'),
+    productList: `<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_503_652)">
+<path d="M0.5 3.75C0.5 2.37109 1.62109 1.25 3 1.25H18C19.3789 1.25 20.5 2.37109 20.5 3.75V16.25C20.5 17.6289 19.3789 18.75 18 18.75H3C1.62109 18.75 0.5 17.6289 0.5 16.25V3.75ZM3 3.75V6.25H5.5V3.75H3ZM18 3.75H8V6.25H18V3.75ZM3 8.75V11.25H5.5V8.75H3ZM18 8.75H8V11.25H18V8.75ZM3 13.75V16.25H5.5V13.75H3ZM18 13.75H8V16.25H18V13.75Z" fill="#5D5D5D"/>
+</g>
+<defs>
+<clipPath id="clip0_503_652">
+<rect width="20" height="20" fill="white" transform="translate(0.5)"/>
+</clipPath>
+</defs>
+</svg>`,
+    newWorkload: `<svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.68726 1.875H13.3123C13.4841 1.875 13.6248 2.01562 13.6248 2.1875V3.75H7.37476V2.1875C7.37476 2.01562 7.51538 1.875 7.68726 1.875ZM5.49976 2.1875V3.75H2.99976C1.62085 3.75 0.499756 4.87109 0.499756 6.25V10H7.99976H12.9998H20.4998V6.25C20.4998 4.87109 19.3787 3.75 17.9998 3.75H15.4998V2.1875C15.4998 0.980469 14.5193 0 13.3123 0H7.68726C6.48022 0 5.49976 0.980469 5.49976 2.1875ZM20.4998 11.25H12.9998V12.5C12.9998 13.1914 12.4412 13.75 11.7498 13.75H9.24976C8.55835 13.75 7.99976 13.1914 7.99976 12.5V11.25H0.499756V16.25C0.499756 17.6289 1.62085 18.75 2.99976 18.75H17.9998C19.3787 18.75 20.4998 17.6289 20.4998 16.25V11.25Z" fill="#5D5D5D"/>
+</svg>`,
+    routes: `<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5 3.75C20.5 5.71094 18.1914 8.63672 17.1953 9.80469C17.0469 9.97656 16.8281 10.043 16.6289 10H13C12.3086 10 11.75 10.5586 11.75 11.25C11.75 11.9414 12.3086 12.5 13 12.5H16.75C18.8203 12.5 20.5 14.1797 20.5 16.25C20.5 18.3203 18.8203 20 16.75 20H5.95312C6.29297 19.6133 6.70703 19.1172 7.125 18.5625C7.37109 18.2344 7.625 17.875 7.86719 17.5H16.75C17.4414 17.5 18 16.9414 18 16.25C18 15.5586 17.4414 15 16.75 15H13C10.9297 15 9.25 13.3203 9.25 11.25C9.25 9.17969 10.9297 7.5 13 7.5H14.5547C13.7344 6.26953 13 4.85547 13 3.75C13 1.67969 14.6797 0 16.75 0C18.8203 0 20.5 1.67969 20.5 3.75ZM5.07422 19.1055C4.92578 19.2734 4.79297 19.4219 4.67969 19.5469L4.60938 19.625L4.60156 19.6172C4.36719 19.7969 4.03125 19.7734 3.82031 19.5469C2.83594 18.4766 0.5 15.7227 0.5 13.75C0.5 11.6797 2.17969 10 4.25 10C6.32031 10 8 11.6797 8 13.75C8 14.9219 7.17578 16.3672 6.30078 17.5742C5.88281 18.1484 5.45312 18.668 5.09766 19.0781L5.07422 19.1055ZM5.5 13.75C5.5 13.4185 5.3683 13.1005 5.13388 12.8661C4.89946 12.6317 4.58152 12.5 4.25 12.5C3.91848 12.5 3.60054 12.6317 3.36612 12.8661C3.1317 13.1005 3 13.4185 3 13.75C3 14.0815 3.1317 14.3995 3.36612 14.6339C3.60054 14.8683 3.91848 15 4.25 15C4.58152 15 4.89946 14.8683 5.13388 14.6339C5.3683 14.3995 5.5 14.0815 5.5 13.75ZM16.75 5C17.0815 5 17.3995 4.8683 17.6339 4.63388C17.8683 4.39946 18 4.08152 18 3.75C18 3.41848 17.8683 3.10054 17.6339 2.86612C17.3995 2.6317 17.0815 2.5 16.75 2.5C16.4185 2.5 16.1005 2.6317 15.8661 2.86612C15.6317 3.10054 15.5 3.41848 15.5 3.75C15.5 4.08152 15.6317 4.39946 15.8661 4.63388C16.1005 4.8683 16.4185 5 16.75 5Z" fill="#5D5D5D"/>
+</svg>`,
+    crossButton: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 20C12.6522 20 15.1957 18.9464 17.0711 17.0711C18.9464 15.1957 20 12.6522 20 10C20 7.34784 18.9464 4.8043 17.0711 2.92893C15.1957 1.05357 12.6522 0 10 0C7.34784 0 4.8043 1.05357 2.92893 2.92893C1.05357 4.8043 0 7.34784 0 10C0 12.6522 1.05357 15.1957 2.92893 17.0711C4.8043 18.9464 7.34784 20 10 20ZM6.83594 6.83594C7.20312 6.46875 7.79688 6.46875 8.16016 6.83594L9.99609 8.67188L11.832 6.83594C12.1992 6.46875 12.793 6.46875 13.1562 6.83594C13.5195 7.20312 13.5234 7.79688 13.1562 8.16016L11.3203 9.99609L13.1562 11.832C13.5234 12.1992 13.5234 12.793 13.1562 13.1562C12.7891 13.5195 12.1953 13.5234 11.832 13.1562L9.99609 11.3203L8.16016 13.1562C7.79297 13.5234 7.19922 13.5234 6.83594 13.1562C6.47266 12.7891 6.46875 12.1953 6.83594 11.832L8.67188 9.99609L6.83594 8.16016C6.46875 7.79297 6.46875 7.19922 6.83594 6.83594Z" fill="#606367"/>
+</svg>
+`,
     RadioButtonUnCheck:
       '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7.5" fill="#EEEEEE" stroke="#2C2C2C"/></svg>',
     RadioButtonCheck: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,13 +104,27 @@ export default function () {
         <path d="M7.99483 0.0300354C6.41118 0.0280755 4.86253 0.495902 3.54482 1.37431C2.22711 2.25271 1.19955 3.50222 0.592156 4.96476C-0.0152399 6.4273 -0.175156 8.03712 0.132597 9.59058C0.44035 11.144 1.20195 12.5713 2.32106 13.6918C3.44018 14.8123 4.86652 15.5757 6.4196 15.8854C7.97268 16.1951 9.58271 16.0371 11.046 15.4315C12.5093 14.826 13.7601 13.7999 14.6401 12.4833C15.5201 11.1667 15.9899 9.61863 15.9899 8.03497C15.9899 5.91364 15.1479 3.87907 13.6488 2.37814C12.1497 0.877204 10.1162 0.0326608 7.99483 0.0300354ZM12.5323 9.09504H3.6159C3.35315 9.09504 3.10114 8.99068 2.91535 8.80489C2.72955 8.61909 2.62519 8.36709 2.62519 8.10433C2.62519 7.84158 2.72955 7.5896 2.91535 7.40381C3.10114 7.21801 3.35315 7.11362 3.6159 7.11362H12.5323C12.7951 7.11362 13.047 7.21801 13.2328 7.40381C13.4186 7.5896 13.523 7.84158 13.523 8.10433C13.523 8.36709 13.4186 8.61909 13.2328 8.80489C13.047 8.99068 12.7951 9.09504 12.5323 9.09504Z" fill="#999999"/>
         </svg>
         `,
-    CheckBoxUnChecked: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0.5" y="0.5" width="15" height="15" rx="1.5" fill="#EEEEEE" stroke="#2C2C2C"/>
-    </svg>`,
-    CheckBoxChecked: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0.5" y="0.5" width="15" height="15" rx="1.5" fill="#43F8B6" stroke="#666666"/>
-        <path d="M12.8253 5.68038C12.8274 5.6778 12.8293 5.67501 12.831 5.67207C12.8494 5.64276 12.8662 5.61302 12.8817 5.58241C12.9244 5.4966 12.9558 5.40491 12.975 5.30993C12.975 5.30249 12.9791 5.29505 12.9804 5.28762C12.9816 5.28018 12.9824 5.27319 12.9836 5.26619C12.9942 5.2034 12.9997 5.13974 13 5.07593C12.9998 4.79065 12.8936 4.51711 12.7049 4.31539C12.5161 4.11366 12.2602 4.00023 11.9933 4C11.9593 4 11.9262 4 11.893 4.00525C11.6615 4.02904 11.4452 4.13876 11.2816 4.31534L6.51966 9.40372L4.719 7.47928C4.62589 7.37885 4.51502 7.29922 4.39284 7.245C4.27066 7.19079 4.13962 7.16309 4.00733 7.1635C3.8081 7.16329 3.6133 7.22628 3.4476 7.3445C3.2819 7.46272 3.15276 7.63084 3.07655 7.82756C3.00033 8.02429 2.98047 8.24076 3.01948 8.44957C3.05848 8.65837 3.1546 8.85009 3.29566 9.00046L5.80717 11.6846C5.9007 11.7846 6.01174 11.8639 6.13396 11.918C6.25617 11.9721 6.38717 12 6.51946 12C6.65175 12 6.78274 11.9721 6.90496 11.918C7.02717 11.8639 7.13822 11.7846 7.23174 11.6846L12.7058 5.83608C12.7287 5.81159 12.7504 5.78578 12.7708 5.7591L12.7729 5.75692C12.7909 5.73243 12.8085 5.70662 12.8253 5.68038Z" fill="#2C2C2C"/>
-        </svg>`,
+    CheckBoxUnChecked: `<svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131" fill="none">
+<g clip-path="url(#clip0_95_17)">
+<path d="M18.7057 0C8.40052 0 0 8.40052 0 18.7057V112.294C0 122.62 8.40052 131 18.7057 131H112.294C122.62 131 131 122.62 131 112.294V18.7057C131 8.40052 122.62 0 112.294 0L18.7057 0Z" fill="#A7C4D3"/>
+</g>
+<defs>
+<clipPath id="clip0_95_17">
+<rect width="131" height="131" fill="white"/>
+</clipPath>
+</defs>
+</svg>`,
+    CheckBoxChecked: `<svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131" fill="none">
+<g clip-path="url(#clip0_94_12)">
+<path d="M18.7224 0C8.37133 0 0 8.37133 0 18.7224V112.278C0 122.572 8.37133 131 18.7224 131H112.278C122.572 131 131 122.572 131 112.278V18.7224C131 8.37133 122.572 0 112.278 0L18.7224 0ZM98.5328 51.7552L61.0881 89.1433C58.3731 91.9149 53.9046 91.9149 51.1896 89.1433L32.4672 70.4775C29.7522 67.706 29.7522 63.2375 32.4672 60.5224C35.2388 57.8074 39.6507 57.8074 42.3657 60.5224L56.1105 74.2673L88.5777 41.8001C91.3493 39.0851 95.7612 39.0851 98.4762 41.8001C101.191 44.5717 101.248 48.9836 98.4762 51.6986L98.5328 51.7552Z" fill="#43F7B6"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M98.5331 51.7552L61.0883 89.1433C58.3733 91.9149 53.9048 91.9149 51.1898 89.1433L32.4674 70.4775C29.7524 67.7059 29.7524 63.2375 32.4674 60.5224C35.239 57.8074 39.6509 57.8074 42.366 60.5224L56.1108 74.2673L88.578 41.8001C91.3495 39.085 95.7615 39.085 98.4765 41.8001C101.192 44.5717 101.248 48.9836 98.4765 51.6986L98.5331 51.7552Z" fill="#373535"/>
+</g>
+<defs>
+<clipPath id="clip0_94_12">
+<rect width="131" height="131" fill="white"/>
+</clipPath>
+</defs>
+</svg>`,
     CheckBoxPartiallyChecked: `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="0.5" y="0.5" width="13" height="13" rx="1.5" fill="#43F8B6" stroke="#666666"/>
         <path d="M9.61251 6.1167H4.38749C3.89734 6.1167 3.5 6.51225 3.5 7.00019C3.5 7.48814 3.89734 7.88369 4.38749 7.88369H9.61251C10.1027 7.88369 10.5 7.48814 10.5 7.00019C10.5 6.51225 10.1027 6.1167 9.61251 6.1167Z" fill="#2C2C2C"/>

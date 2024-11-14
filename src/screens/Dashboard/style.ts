@@ -4,10 +4,13 @@ import { wp } from '@/utils/layout-scaling';
 const getStyles = (colors: any, fonts: any) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.background,
     },
     shiftToggler: {
-      bottom: wp(55),
+      bottom: wp(25),
+    },
+    tourContainer: {
+      marginTop: -40,
     },
     avtar: {
       width: wp(52),
@@ -15,15 +18,10 @@ const getStyles = (colors: any, fonts: any) => {
       borderRadius: wp(52),
     },
 
-    authorText: {
-      ...fonts.textSmallBold,
-      fontSize: wp(22),
-    },
-
     scheduleText: {
       ...fonts.textSmallBold,
-      color: colors.placeHolderColor,
-      top: wp(-4),
+      color: colors.lightBlack,
+      top: wp(-3),
     },
     shiftImage: { width: wp(35), height: wp(35) },
     listImage: { width: wp(37), height: wp(37), borderRadius: wp(20) },

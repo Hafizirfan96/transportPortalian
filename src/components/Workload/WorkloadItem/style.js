@@ -26,10 +26,14 @@ export default styles = StyleSheet.create({
   },
 
   subItem: {
-    width: '82%',
-    marginTop: -20,
-    zIndex: -10,
-    marginHorizontal: wp(42),
+    width: '88.5%',
+    // zIndex: -10,
+    marginLeft: wp(20),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -5 }, // Negative height for top shadow
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 10, // Adds depth to the shadow on Android
   },
   workloadName: {
     maxWidth: wp(180),

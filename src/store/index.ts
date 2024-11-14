@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   persistReducer,
   persistStore,
@@ -11,13 +12,12 @@ import {
   REGISTER,
   Storage,
 } from 'redux-persist';
-import { MMKV } from 'react-native-mmkv';
 import theme from './theme';
-import startup from './startup';
-import dashboard from './dashboard';
-import shift from './shift';
-import workload from './workload';
-import signature from './signature';
+import startup from './Startup';
+import dashboard from './Dashboard';
+import shift from './Shift';
+import workload from './Workload';
+import signature from './Signature';
 import barcodeScanner from './barcodeScanner';
 import auth from './auth';
 import tour from './tour';
@@ -33,11 +33,15 @@ import newWorkload from './newWorkload';
 import vehicleService from './vehicleService';
 import localFileUpload from './localFileUpload';
 import signatures from './signatures';
-import formVal from './newWorkload/formState';
+import appState from './appState';
+import location from './location';
+import log from './log';
+import externalLink from './externalLink';
 
 const reducers = combineReducers({
   startup,
   auth,
+  appState,
   theme,
   dashboard,
   shift,
@@ -57,30 +61,50 @@ const reducers = combineReducers({
   logOut,
   forgot,
   productHistory,
-  formVal,
+  location,
+  log,
+  externalLink,
   //[api.reducerPath]: api.reducer,
 });
 
-export const storage = new MMKV();
+export const storage = AsyncStorage;
 export const reduxStorage: Storage = {
-  setItem: (key, value) => {
-    storage.set(key, value);
+  setItem: async (key, value) => {
+    await AsyncStorage.setItem(key, value);
     return Promise.resolve(true);
   },
-  getItem: key => {
-    const value = storage.getString(key);
+  getItem: async key => {
+    const value = await AsyncStorage.getItem(key);
     return Promise.resolve(value);
   },
-  removeItem: key => {
-    storage.delete(key);
+  removeItem: async key => {
+    await AsyncStorage.removeItem(key);
     return Promise.resolve();
+  },
+  clearAll: async () => {
+    // storage.clearAll();
+    const keys = await AsyncStorage.getAllKeys();
+    keys.map(async item => {
+      if (item !== 'password' && item !== 'rememberMe' && item !== 'email') {
+        await AsyncStorage.removeItem(item);
+      }
+    });
   },
 };
 
 const persistConfig = {
   key: 'root',
-  storage: reduxStorage,
-  whitelist: ['theme', 'auth'],
+  version: 1,
+  storage: AsyncStorage,
+  whitelist: [
+    'theme',
+    'auth',
+    'dashboard',
+    'location',
+    'vehicleService',
+    'tour',
+    'vehicle',
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -92,13 +116,10 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
+      ignoredActions: ['your/action/type'],
+      ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
+      ignoredPaths: ['items.dates'],
     });
-
-    if (__DEV__ && !process.env.JEST_WORKER_ID) {
-      const createDebugger = require('redux-flipper').default;
-      middlewares.push(createDebugger());
-    }
-
     return middlewares;
   },
 });

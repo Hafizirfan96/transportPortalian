@@ -1,13 +1,22 @@
+export { default as Tag } from './Tag';
 export { default as Brand } from './Brand';
+export { default as Button } from './Button';
+export { default as SubTitle } from './SubTitle';
+export { TourItem, TourFab } from './Tours/index';
+export { default as Seprator } from './Seprator';
+export { default as AppButton } from './AppButton';
 export { default as Header } from './Header/index';
 export { default as SearchBox } from './SearchBox';
 export { default as CheckItem } from './CheckItem';
-export { default as ToggleButton } from './ToggleButton';
-export { default as Tag } from './Tag';
-export { default as NewWorkloadComponents } from './NewWorkload/index';
-
-export { TourItem, TourFab } from './Tours/index';
+export { Signature, TextComponent } from './Signature';
 export { ShiftToggler, ShiftTimer } from './Dashboard';
+export { default as ToggleButton } from './ToggleButton';
+export { VehicleDetailCard, LorryCard } from './VehicleDetail';
+export { Inspection, Damagecontrol } from './VehicleInspection';
+export { Reference, ProductList, AdditionalProduct } from './EndTour';
+export { default as NewWorkloadComponents } from './NewWorkload/index';
+export { TimeLocationInHeader, Searchbar, VehicleCard } from './Vehicles';
+
 export {
   WorkloadItem,
   FilterModal,
@@ -15,8 +24,6 @@ export {
   FabAction,
   TabButtons,
 } from './Workload';
-export { TimeLocationInHeader, Searchbar, VehicleCard } from './Vehicles';
-export { VehicleDetailCard, LorryCard } from './VehicleDetail';
 export {
   Additionalproperty,
   Addproduct,
@@ -24,6 +31,3 @@ export {
   Mostusedof,
   Endworkloadtab,
 } from './Endworkload';
-export { Inspection, Damagecontrol } from './VehicleInspection';
-export { Reference, ProductList, AdditionalProduct } from './EndTour';
-export { Signature, TextComponent } from './Signature';

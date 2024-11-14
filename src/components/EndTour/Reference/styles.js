@@ -6,25 +6,21 @@ export default getStyles = (Colors, FontSize) =>
     textStyle: {
       fontFamily: 'OsloSans-Bold',
       color: Colors.text,
-      marginTop: wp(20),
-      marginBottom: wp(5),
-      marginLeft: wp(10),
+      marginTop: wp(10),
+      color: Colors.black,
     },
     distanceHeading: {
       fontFamily: 'OsloSans-Bold',
-      color: Colors.text,
+      color: Colors.black,
       marginBottom: wp(5),
-      marginLeft: wp(10),
     },
     referenceInputText: {
-      height: hp(35),
+      height: wp(35),
       paddingLeft: wp(10),
       paddingRight: wp(10),
+      color: 'black',
     },
-    InputTextItem: {
-      height: hp(35),
-      width: wp(140),
-    },
+
     InputText: {
       paddingLeft: wp(10),
       paddingRight: wp(10),
@@ -49,6 +45,16 @@ export default getStyles = (Colors, FontSize) =>
       borderRadius: 4,
       elevation: 10,
       shadowColor: Colors.black,
-      marginBottom: 30,
+    },
+    marginBottom: {
+      marginBottom: wp(15),
+    },
+    error: {
+      fontFamily: 'sf-ui-display-regular',
+      color: Colors.red,
+      fontSize: wp(10),
+    },
+    width40: {
+      width: '100%',
     },
   });

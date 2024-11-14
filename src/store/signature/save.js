@@ -5,7 +5,6 @@ export const SaveSignatureState = {
 };
 export const SaveReducers = {
   saveSignature: state => {
-    console.log('saving Signature');
     state.savingSignatureLoading = true;
     state.savingSignatureError = false;
   },
@@ -14,7 +13,6 @@ export const SaveReducers = {
     state.savingSignatureData = action.payload;
   },
   savedFailed: (state, action) => {
-    console.log('saving Signature failed', action);
     state.savingSignatureLoading = false;
     state.savingSignatureError = false;
   },

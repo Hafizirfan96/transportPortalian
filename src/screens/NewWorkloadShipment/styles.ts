@@ -4,21 +4,15 @@ import { wp } from '@/utils/layout-scaling';
 const getStyles = (colors: any) => {
   return StyleSheet.create({
     container: {
-      backgroundColor: colors.white,
+      height: wp(42),
     },
     tabBar: {
-      backgroundColor: colors.white,
-      transform: [{ rotate: '180deg' }],
-      width: '90%',
-      shadowColor: colors.white,
+      paddingVertical: wp(8),
+      paddingHorizontal: wp(12),
+      borderTopLeftRadius: wp(5),
+      borderTopRightRadius: wp(5),
     },
-    title: {
-      transform: [{ rotate: '180deg' }],
-      fontSize: wp(16),
-    },
-    controllerChildView: {
-      height: wp(80),
-    },
+
     date: {
       fontFamily: 'OsloSans-Bold',
       color: colors.black,
@@ -50,6 +44,19 @@ const getStyles = (colors: any) => {
       borderRadius: wp(4),
       elevation: wp(10),
       shadowColor: colors.black,
+    },
+    tabContainerStyle: {
+      width: 'auto',
+      paddingHorizontal: 0,
+    },
+    controllerChildView: {
+      height: wp(80),
+    },
+    transprent: {
+      backgroundColor: colors.transprent,
+    },
+    tabStyle: {
+      backgroundColor: colors.appColor,
     },
   });
 };

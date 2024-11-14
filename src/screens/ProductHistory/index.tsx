@@ -7,10 +7,11 @@ import { wp } from '@/utils/layout-scaling';
 import { getProductHistory } from '@/store/productHistory/productHistoryInfo';
 import { productHistorySelector } from '@/store/productHistory';
 import moment from 'moment';
+import EmptyList from '@/components/EmptyList';
 
 function ProductHistory(props: any) {
   const { Common, Layout, Fonts, Gutters, Colors } = useTheme();
-  const styles = getStyles();
+  const styles = getStyles(Colors);
   const dispatch = useAppDispatch();
   const { poductHistoryData } = useAppSelector(productHistorySelector);
   useEffect(() => {
@@ -77,11 +78,17 @@ function ProductHistory(props: any) {
     );
   };
   return (
-    <FlatList
-      data={poductHistoryData}
-      renderItem={({ item }) => <Item item={item} />}
-      // keyExtractor={item => item.id}
-    />
+    <>
+      <View style={[styles.whiteSpace]} />
+      <FlatList
+        data={poductHistoryData}
+        renderItem={({ item }) => <Item item={item} />}
+        // keyExtractor={item => item.id}
+        ListEmptyComponent={
+          <EmptyList text="No product history is available." />
+        }
+      />
+    </>
   );
 }
 

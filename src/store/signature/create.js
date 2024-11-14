@@ -5,7 +5,6 @@ export const CreateSignatureState = {
 };
 export const CreateReducers = {
   createSignature: state => {
-    console.log('createing Signature');
     state.Loading = true;
     state.Error = false;
   },
@@ -14,7 +13,6 @@ export const CreateReducers = {
     state.SignatureID = action.payload;
   },
   CreatedFailed: (state, action) => {
-    console.log('createing Signature failed', action);
     state.Loading = false;
     state.Error = false;
   },

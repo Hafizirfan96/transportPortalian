@@ -1,17 +1,23 @@
 import { navigateBack } from '@/navigators/Root';
 import { vehicleServices } from '@/services/vehicleService';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { showToast } from '../appState';
 
 export const vehiclesService = createAsyncThunk(
   'vehicle/service',
-  async (args, thunkAPI) => {
+  async (args: any, thunkAPI) => {
     try {
       const response = await vehicleServices.vehicleService(args);
       navigateBack();
       return response;
     } catch (error) {
       console.log(error);
-      thunkAPI.rejectWithValue(error);
+      // thunkAPI.rejectWithValue(error);
+      thunkAPI.dispatch(showToast ({
+        type: 'error',
+        text1: 'Error Message',
+        text2: error,
+      }));
     }
   },
 );

@@ -6,9 +6,24 @@ export interface WorkloadState extends ApiState {
   // shiftEnd: boolean;
   status: string;
   // myStartedShifts: MobileWorkloadGroupModel | null;
-  workloadData: object | null;
+  workloadData: any | object | null;
+  defaultWorlLoadData: any | object | null;
   isLoading: boolean;
   selectedItems: string[];
+  selectedItemsIndexs: number[];
   hasSelectedItems: boolean;
+  hasNewItems: boolean;
   workLoadList: string[];
+  filter: WorkloadFilter;
+}
+
+export interface WorkloadFilter {
+  Type: number[];
+  Status: string[];
+  Sort: number;
+  Term: string;
+}
+export interface WorkloadResult {
+  filter: WorkloadFilter;
+  result: any[];
 }

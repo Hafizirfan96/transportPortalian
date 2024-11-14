@@ -3,11 +3,13 @@ import React, {
   useRef,
   useImperativeHandle,
   useState,
+  useEffect,
+  useCallback,
 } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '@/hooks';
+import { useAppSelector, useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import RadioButtonWithText from '../RadioButtonWithText';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -16,20 +18,38 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { wp } from '@/utils/layout-scaling';
 import { ThemeColors } from '@/Theme/theme.type';
 import { navigate } from '@/navigators/Root';
+import { workloadSelector } from '@/store/Workload';
+import { useFocusEffect } from '@react-navigation/native';
+import { SvgXml } from 'react-native-svg';
 
 function FabActionList(props: any, ref: any) {
-  const { Colors, Fonts, Layout, Gutters } = useTheme();
+  const { selectedItemsIndexs, hasNewItems } = useAppSelector(workloadSelector);
+  const { Colors, Fonts, Layout, Gutters, Images } = useTheme();
   const styles = getStyles(Colors, Gutters);
+  // const [start, setStart] = useState(false);
   const modalizeRef = useRef(null);
 
-  const showButton = props.selectedWorloads.length > 0;
+  const showButton = selectedItemsIndexs.length > 0;
+  // const checkWorkload = () => {
+  //   console.log('called');
+  //   let newStatusArray = selectedItemsIndexs.map((x: any) => {
+  //     if (workloadData[x].Status === Config.WORKLOAD_STATUS.NEW) {
+  //       return x;
+  //     }
+  //   });
+  //   if (newStatusArray.length > 0) {
+  //     setStart(true);
+  //   } else {
+  //     setStart(false);
+  //   }
+  // };
 
-  const start = props.selectedWorloads.every(
-    x => x.Status === Config.WORKLOAD_STATUS.NEW,
-  );
-  const end = props.selectedWorloads.every(
-    x => x.Status === Config.WORKLOAD_STATUS.STARTED,
-  );
+  // useEffect(() => {
+  //   checkWorkload();
+  // });
+  // const end = selectedItems.every(
+  //   x => x.Status === Config.WORKLOAD_STATUS.STARTED,
+  // );
   useImperativeHandle(ref, () => ({
     open() {
       modalizeRef.current?.open();
@@ -42,17 +62,14 @@ function FabActionList(props: any, ref: any) {
     // modalizeRef.current?.close()
   };
   const _handleStartWorkload = () => {
-    console.log('Start workload pressed');
     props.startWorkload();
     modalizeRef.current?.close();
   };
   const _handleEndWorkload = () => {
-    console.log('End workload pressed');
     props.endWorkload();
     modalizeRef.current?.close();
   };
   const _handleNewWorkload = () => {
-    console.log('new workload');
     navigate('NewWorkloadShipment');
     modalizeRef.current?.close();
   };
@@ -61,6 +78,10 @@ function FabActionList(props: any, ref: any) {
     props.deleteWorkload();
     modalizeRef.current?.close();
   };
+
+  const navigateToMapScreen = (item: any) => {
+    navigate('MapboxScreen', props);
+  };
   return (
     <Modalize
       ref={modalizeRef}
@@ -68,7 +89,7 @@ function FabActionList(props: any, ref: any) {
       withHandle={false}
       avoidKeyboardLikeIOS={true}
     >
-      <View style={[Layout.column, Gutters.mediumPadding]}>
+      <View style={[Layout.column, Gutters.mediumHPadding]}>
         <View style={[Layout.row, Gutters.smallVMargin]}>
           {!showButton ? (
             <>
@@ -77,25 +98,33 @@ function FabActionList(props: any, ref: any) {
                 // disabled={true}
                 style={[Layout.center, Layout.fill]}
               >
-                <MaterialIcons name="work" style={[styles.ActionIcon]} />
-                <Text style={[Fonts.textTiny]}>New Workload</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                // disabled={true}
-                style={[Layout.center, Layout.fill]}
-              >
-                <FontAwesome5
-                  name="clipboard-list"
-                  style={[styles.ActionIcon]}
+                <SvgXml
+                  xml={Images.newWorkload}
+                  height={wp(19)}
+                  width={wp(20)}
                 />
-                <Text style={[Fonts.textTiny]}>Product List</Text>
+                <Text style={[Fonts.textTiny, styles.text]}>New Workload</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                // disabled={true}
+                style={[Layout.center, Layout.fill, styles.borders]}
+              >
+                {/* <FontAwesome5 name="table-list" style={[styles.ActionIcon]} /> */}
+                <SvgXml
+                  xml={Images.productList}
+                  height={wp(20)}
+                  width={wp(20)}
+                />
+                <Text style={[Fonts.textTiny, styles.text]}>Product List</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 // disabled={true}
                 style={[Layout.center, Layout.fill]}
               >
-                <FontAwesome5 name="route" style={[styles.ActionIcon]} />
-                <Text style={[Fonts.textTiny]}>Optimmize Route</Text>
+                <SvgXml xml={Images.routes} height={wp(20)} width={wp(20)} />
+                <Text style={[Fonts.textTiny, styles.text]}>
+                  Optimmize Route
+                </Text>
               </TouchableOpacity>
             </>
           ) : (
@@ -116,7 +145,7 @@ function FabActionList(props: any, ref: any) {
                 <MaterialIcons name="work" style={[styles.ActionIcon]} />
                 <Text style={[Fonts.textTiny]}>New Workload</Text>
               </TouchableOpacity>
-              {start && (
+              {hasNewItems && (
                 <TouchableOpacity
                   onPress={_handleStartWorkload}
                   style={[Layout.center, Layout.fill]}
@@ -125,7 +154,7 @@ function FabActionList(props: any, ref: any) {
                   <Text style={[Fonts.textTiny]}>Start</Text>
                 </TouchableOpacity>
               )}
-              {end && (
+              <>
                 <TouchableOpacity
                   onPress={_handleEndWorkload}
                   style={[Layout.center, Layout.fill]}
@@ -133,26 +162,7 @@ function FabActionList(props: any, ref: any) {
                   <Fontisto name="import" style={[styles.ActionIcon]} />
                   <Text style={[Fonts.textTiny]}>End</Text>
                 </TouchableOpacity>
-              )}
-
-              {!start && !end && (
-                <>
-                  <TouchableOpacity
-                    onPress={_handleStartWorkload}
-                    style={[Layout.center, Layout.fill]}
-                  >
-                    <Fontisto name="export" style={[styles.ActionIcon]} />
-                    <Text style={[Fonts.textTiny]}>Start</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={_handleEndWorkload}
-                    style={[Layout.center, Layout.fill]}
-                  >
-                    <Fontisto name="import" style={[styles.ActionIcon]} />
-                    <Text style={[Fonts.textTiny]}>End</Text>
-                  </TouchableOpacity>
-                </>
-              )}
+              </>
             </>
           )}
         </View>
@@ -175,21 +185,21 @@ function FabActionList(props: any, ref: any) {
                   name="delete-forever"
                   style={[styles.ActionIcon]}
                 />
-                <Text style={[Fonts.textTiny]}>Delete</Text>
+                <Text style={[Fonts.textTiny, styles.text]}>Delete</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => console.log('press 1')}
+                onPress={item => navigateToMapScreen(item)}
                 style={[Layout.center, Layout.fill]}
               >
                 <Fontisto name="map-marker-alt" style={[styles.ActionIcon]} />
-                <Text style={[Fonts.textTiny]}>Navigate</Text>
+                <Text style={[Fonts.textTiny, styles.text]}>Navigate</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => console.log('press 1')}
                 style={[Layout.center, Layout.fill]}
               >
                 <MaterialIcons name="message" style={[styles.ActionIcon]} />
-                <Text style={[Fonts.textTiny]}>Message</Text>
+                <Text style={[Fonts.textTiny, styles.text]}>Message</Text>
               </TouchableOpacity>
             </View>
           </>
@@ -206,6 +216,16 @@ const getStyles = (colors: ThemeColors, gutters: any) =>
       fontSize: wp(25),
       alignSelf: 'center',
       ...gutters.tinyBMargin,
+    },
+    borders: {
+      borderLeftWidth: wp(1),
+      borderRightWidth: wp(1),
+      // marginHorizontal: wp(2),
+    },
+    text: {
+      width: wp(70),
+      textAlign: 'center',
+      marginTop: wp(5),
     },
   });
 

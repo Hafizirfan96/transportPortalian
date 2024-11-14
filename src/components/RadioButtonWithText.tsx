@@ -1,13 +1,12 @@
 import React from 'react';
 import { useTheme } from '@/hooks';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SvgXml } from 'react-native-svg';
 import { RadioButtonWithTextType } from '@/Interfaces/Shared/RadioButtonWithTextType';
 import { wp } from '@/utils/layout-scaling';
-import { Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 const RadioButtonWithText = (props: RadioButtonWithTextType) => {
-  console.log('props in radio', props);
+  // console.log('props in radio', props);
   const { Gutters, Layout, Images, Fonts } = useTheme();
   return (
     <TouchableOpacity

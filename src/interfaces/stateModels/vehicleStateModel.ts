@@ -3,8 +3,10 @@ import { ApiState } from '../shared/apiState';
 
 export interface VehicleState extends ApiState {
   status: string;
-  vehicleData: object | null;
+  vehicleData: any | null | object;
   isLoading: boolean;
   vehicleStartData?: object | null;
   isError: boolean;
+  isUpdating: boolean;
+  selectedVehicleId: string;
 }

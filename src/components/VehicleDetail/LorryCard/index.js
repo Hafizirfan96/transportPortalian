@@ -1,13 +1,20 @@
-import React, { useState, useRef } from 'react';
-import { Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
-import { useTheme } from '@/hooks';
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  ActivityIndicator,
+} from 'react-native';
+import { useAppSelector, useTheme } from '@/hooks';
 import styles from './styles';
 import _ from 'lodash';
+import { lorriSelector } from '@/store/lorry';
 
 const LorryCard = props => {
   const { Images, Fonts, Layout, Common, Gutters, Colors } = useTheme();
-  const [togglebutton, setTogglebutton] = useState(props.lorry.IsVehicleActive);
-
+  const { isUpdatingLorry, selectedIndex } = useAppSelector(lorriSelector);
   const ref_input_field = useRef(null);
 
   const initialState = props.lorry.LastKm;
@@ -29,8 +36,8 @@ const LorryCard = props => {
       StartKm: kmtext,
       StartPosition: 'Oslo',
       TVId: props.lorry.TourVehicleId,
+      index: props.index,
     };
-    setTogglebutton(true);
     props.lorryStart(payload);
   };
   const lorryEnd = () => {
@@ -39,9 +46,9 @@ const LorryCard = props => {
       TourVehicleId: props.lorry.TourVehicleId,
       EndKm: kmtext,
       EndPosition: 'Oslo',
+      index: props.index,
     };
 
-    setTogglebutton(false);
     props.lorryEnd(endVehicles);
   };
   return (
@@ -73,13 +80,26 @@ const LorryCard = props => {
           </View>
         </View>
         <View style={[Layout.center, styles.width60]}>
-          {props.lorry.IsVehicleActive ? (
+          {isUpdatingLorry && selectedIndex == props.index ? (
+            <ActivityIndicator
+              size={35}
+              style={[Layout.justifyContentFlexStart]}
+            />
+          ) : props.lorry.IsVehicleActive ? (
             <TouchableOpacity onPress={lorryEnd}>
-              <Image source={Images.toggleOn} style={styles.togglebutton} />
+              <Image
+                source={Images.toggleOn}
+                style={styles.togglebutton}
+                resizeMode="contain"
+              />
             </TouchableOpacity>
           ) : (
             <TouchableOpacity onPress={lorryStart}>
-              <Image source={Images.toggleOff} style={styles.togglebutton} />
+              <Image
+                source={Images.toggleOff}
+                style={styles.togglebutton}
+                resizeMode="contain"
+              />
             </TouchableOpacity>
           )}
         </View>

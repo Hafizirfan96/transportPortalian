@@ -6,14 +6,14 @@ export default getStyles = (Colors: any, FontSize: any) =>
     container: { width: '90%', alignSelf: 'center' },
     textStyle: {
       fontFamily: 'OsloSans-Bold',
-      fontSize: hp(FontSize.small),
-      color: Colors.text,
+      fontSize: FontSize.smallNormal,
+      color: Colors.black,
     },
     formView: {
       marginBottom: wp(-10),
     },
     lengthHWview: {
-      width: '27%',
+      width: '31%',
     },
 
     errorView: {

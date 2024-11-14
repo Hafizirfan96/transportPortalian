@@ -1,84 +1,71 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '@/hooks';
+import Button from '../Button';
 import getStyles from './styles';
+import { useTheme } from '@/hooks';
+import SubTitle from '../SubTitle';
+import { Text, View } from 'react-native';
+import Input from '@/components/Input/Input';
 import { useForm, Controller } from 'react-hook-form';
 
-import Input from '../Input/Input';
-
 const KolliForm = (props: any) => {
-  const { Colors, FontSize, Gutters, Layout, Common } = useTheme();
+  const { Colors, FontSize, Gutters, Layout } = useTheme();
   const styles = getStyles(Colors, FontSize);
 
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
   const addKolli = (data: any) => {
     props.sendDataToParent([...props.list, data]);
     props.toggleModal();
-    // reset();
   };
 
   return (
     <View style={[styles.container]}>
-      <View style={[styles.formView]}>
-        <Text
-          style={[
-            styles.textStyle,
-            Gutters.smallTMargin,
-            Gutters.regularLMargin,
-          ]}
-        >
-          Kolli ID
-        </Text>
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <View>
-              <Input
-                placeholder="3023"
-                onChangeText={onChange}
-                value={value}
-                onBlur={onBlur}
-                keyboardType={true}
-              />
-            </View>
-          )}
-          name="KolliID"
-          rules={{
-            required: {
-              value: true,
-              message: 'KolliID is required.',
-            },
-          }}
-        />
-        <View style={[styles.errorView]}>
-          {errors.KolliID && (
-            <Text style={[styles.error, Gutters.smallLMargin]}>
-              {errors?.KolliID?.message}
-            </Text>
-          )}
-        </View>
+      <View style={[Layout.center]}>
+        <Text style={[styles.textStyle]}>Kolli Update</Text>
       </View>
+      <View style={[Gutters.tinyTMargin]}>
+        <SubTitle text="Kolli ID" />
+      </View>
+      <Controller
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <View style={[Gutters.tinyTMargin]}>
+            <Input
+              placeholder="3023"
+              onChangeText={onChange}
+              value={value}
+              onBlur={onBlur}
+              keyboardType={true}
+            />
+          </View>
+        )}
+        name="KolliID"
+        rules={{
+          required: {
+            value: true,
+            message: 'KolliID is required.',
+          },
+        }}
+      />
+
+      {errors.KolliID && (
+        <Text style={[styles.error, Gutters.tinyTMargin]}>
+          {errors?.KolliID?.message?.toString()}
+        </Text>
+      )}
 
       <View style={[styles.formView]}>
-        <Text
-          style={[
-            styles.textStyle,
-            Gutters.smallTMargin,
-            Gutters.regularLMargin,
-          ]}
-        >
-          Weight
-        </Text>
+        <View style={[Gutters.smallTMargin]}>
+          <SubTitle text="Weight" />
+        </View>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
-            <View>
+            <View style={[Gutters.tinyTMargin]}>
               <Input
                 placeholder="Weight"
                 onChangeText={onChange}
@@ -96,29 +83,22 @@ const KolliForm = (props: any) => {
             },
           }}
         />
-        <View style={[styles.errorView]}>
-          {errors.Weight && (
-            <Text style={[styles.error, Gutters.smallLMargin]}>
-              {errors?.Weight?.message}
-            </Text>
-          )}
-        </View>
+
+        {errors.Weight && (
+          <Text style={[styles.error, Gutters.tinyTMargin]}>
+            {errors?.Weight?.message?.toString()}
+          </Text>
+        )}
       </View>
 
       <View style={[styles.formView]}>
-        <Text
-          style={[
-            styles.textStyle,
-            Gutters.smallTMargin,
-            Gutters.regularLMargin,
-          ]}
-        >
-          Volume
-        </Text>
+        <View style={[Gutters.mediumTMargin]}>
+          <SubTitle text="Volume" />
+        </View>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
-            <View>
+            <View style={[Gutters.tinyTMargin]}>
               <Input
                 placeholder="Volume"
                 onChangeText={onChange}
@@ -136,42 +116,21 @@ const KolliForm = (props: any) => {
             },
           }}
         />
-        <View style={[styles.errorView]}>
-          {errors.Volume && (
-            <Text style={[styles.error, Gutters.smallLMargin]}>
-              {errors?.Volume?.message}
-            </Text>
-          )}
-        </View>
-      </View>
-      <View style={[Layout.alignItemsCenter]}>
-        <Text
-          style={[
-            styles.textStyle,
-            Gutters.smallTMargin,
-            Gutters.regularLMargin,
-          ]}
-        >
-          =
-        </Text>
+
+        {errors.Volume && (
+          <Text style={[styles.error, Gutters.tinyTMargin]}>
+            {errors?.Volume?.message?.toString()}
+          </Text>
+        )}
       </View>
 
-      <View style={[Layout.row]}>
-        <View style={[styles.lengthHWview]}>
-          <Text
-            style={[
-              styles.textStyle,
-              Gutters.smallTMargin,
-              Gutters.regularLMargin,
-              Gutters.tinyVMargin,
-            ]}
-          >
-            Length
-          </Text>
+      <View style={[Layout.row, Layout.justifyContentBetween]}>
+        <View style={[styles.lengthHWview, Gutters.mediumTMargin]}>
+          <SubTitle text="Length" />
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <View>
+              <View style={[Gutters.tinyTMargin]}>
                 <Input
                   placeholder="Length"
                   onChangeText={onChange}
@@ -185,36 +144,24 @@ const KolliForm = (props: any) => {
             rules={{
               required: {
                 value: true,
-                message: 'Length is required.',
+                message: 'required',
               },
             }}
           />
-          <View style={[styles.errorView]}>
-            {errors.Volume && (
-              <Text style={[styles.error, Gutters.smallLMargin]}>
-                {errors?.Volume?.message}
-              </Text>
-            )}
-          </View>
+
+          {errors.Length && (
+            <Text style={[styles.error, Gutters.tinyTMargin]}>
+              {errors?.Length?.message?.toString()}
+            </Text>
+          )}
         </View>
-        <View style={[Layout.alignSelfCenter, Gutters.smallLMargin]}>
-          <Text style={[styles.textStyle, Gutters.mediumTMargin]}> * </Text>
-        </View>
-        <View style={[styles.lengthHWview]}>
-          <Text
-            style={[
-              styles.textStyle,
-              Gutters.smallTMargin,
-              Gutters.regularLMargin,
-              Gutters.tinyVMargin,
-            ]}
-          >
-            Height
-          </Text>
+
+        <View style={[styles.lengthHWview, Gutters.mediumTMargin]}>
+          <SubTitle text="Height" />
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <View>
+              <View style={[Gutters.tinyTMargin]}>
                 <Input
                   placeholder="Height"
                   onChangeText={onChange}
@@ -228,36 +175,24 @@ const KolliForm = (props: any) => {
             rules={{
               required: {
                 value: true,
-                message: 'Height is required.',
+                message: 'required',
               },
             }}
           />
-          <View style={[styles.errorView]}>
-            {errors.Height && (
-              <Text style={[styles.error, Gutters.smallLMargin]}>
-                {errors?.Height?.message}
-              </Text>
-            )}
-          </View>
+
+          {errors.Height && (
+            <Text style={[styles.error, Gutters.tinyTMargin]}>
+              {errors?.Height?.message?.toString()}
+            </Text>
+          )}
         </View>
-        <View style={[Layout.alignSelfCenter, Gutters.smallLMargin]}>
-          <Text style={[styles.textStyle, Gutters.mediumTMargin]}> * </Text>
-        </View>
-        <View style={[styles.lengthHWview]}>
-          <Text
-            style={[
-              styles.textStyle,
-              Gutters.smallTMargin,
-              Gutters.regularLMargin,
-              Gutters.tinyVMargin,
-            ]}
-          >
-            Width
-          </Text>
+
+        <View style={[styles.lengthHWview, Gutters.mediumTMargin]}>
+          <SubTitle text="Width" />
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <View>
+              <View style={[Gutters.tinyTMargin]}>
                 <Input
                   placeholder="Width"
                   onChangeText={onChange}
@@ -271,29 +206,22 @@ const KolliForm = (props: any) => {
             rules={{
               required: {
                 value: true,
-                message: 'Width is required.',
+                message: 'required',
               },
             }}
           />
-          <View style={[styles.errorView]}>
-            {errors.Width && (
-              <Text style={[styles.error, Gutters.smallLMargin]}>
-                {errors?.Width?.message}
-              </Text>
-            )}
-          </View>
+
+          {errors.Width && (
+            <Text style={[styles.error, Gutters.tinyTMargin]}>
+              {errors?.Width?.message?.toString()}
+            </Text>
+          )}
         </View>
       </View>
-      <TouchableOpacity
-        onPress={handleSubmit(addKolli)}
-        style={[
-          Common.button.fullRounded,
-          styles.container,
-          Gutters.smallBMargin,
-        ]}
-      >
-        <Text style={Common.button.buttonText}>Add Kolli</Text>
-      </TouchableOpacity>
+
+      <View style={[Gutters.regularBMargin]}>
+        <Button title="Add Kolli" handleSubmit={handleSubmit(addKolli)} />
+      </View>
     </View>
   );
 };

@@ -3,6 +3,12 @@ import { wp } from '@/utils/layout-scaling';
 
 const getStyles = (colors: any, layout: any) => {
   return StyleSheet.create({
+    container: {
+      height: wp(44),
+    },
+    listWrapper: {
+      marginBottom: wp(70),
+    },
     ItemSpacing: {
       //marginLeft: wp(15),
       //marginRight: wp(15),
@@ -10,7 +16,7 @@ const getStyles = (colors: any, layout: any) => {
       //marginTop: wp(10),
     },
     ItemWrapper: {
-      paddingTop: wp(10),
+      // paddingTop: wp(10),
       paddingBottom: wp(10),
       //borderBottomColor: 'gray',
       // borderBottomWidth: 1,

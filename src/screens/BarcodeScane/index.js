@@ -21,7 +21,7 @@ function BarcodeScane() {
   useEffect(() => {
     async function getPermission() {
       const newCameraPermission = await Camera.requestCameraPermission();
-      console.log(newCameraPermission);
+      // console.log(newCameraPermission);
     }
     getPermission();
   }, []);
@@ -31,7 +31,7 @@ function BarcodeScane() {
       const photo = await camera.current.takePhoto({});
       setImageSource(photo.path);
       setShowCamera(false);
-      console.log(photo.path);
+      // console.log(photo.path);
     }
   };
 

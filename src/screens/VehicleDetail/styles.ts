@@ -4,7 +4,7 @@ import { wp } from '@/utils/layout-scaling';
 const getStyles = (colors: any) => {
   return StyleSheet.create({
     container: {
-      marginTop: wp(-20),
+      marginTop: wp(-15),
     },
     marginToText: {
       marginLeft: wp(20),
@@ -20,6 +20,9 @@ const getStyles = (colors: any) => {
     lorry: {
       marginLeft: wp(18),
       marginRight: wp(18),
+    },
+    backgroundColor: {
+      backgroundColor: colors.background,
     },
   });
 };

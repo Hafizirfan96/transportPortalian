@@ -1,11 +1,12 @@
-import { productService } from '@/services/product';
+import { productService } from '@/services/Product';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const productLists = createAsyncThunk(
   'produc/productList',
-  async (args, thunkAPI) => {
+  async (args: any, thunkAPI) => {
     try {
       const response = await productService.getMyProducts(args);
+      console.log(JSON.stringify(response));
       return response;
     } catch (error) {
       if (error?.response.data.errors && error.response.status === 400) {
@@ -33,7 +34,7 @@ export const getProductsWorkload = createAsyncThunk(
 );
 export const getAllProductss = createAsyncThunk(
   'all/product',
-  async (args, thunkAPI) => {
+  async (args: any, thunkAPI) => {
     try {
       const response = await productService.getAllProducts(args);
       return response;

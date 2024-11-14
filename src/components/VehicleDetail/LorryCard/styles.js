@@ -10,9 +10,6 @@ export default styles = StyleSheet.create({
   card: {
     marginTop: wp(1),
   },
-  imageView: {
-    margin: wp(2),
-  },
   imagewithHeight: {
     width: wp(80),
     height: hp(50),
@@ -24,15 +21,15 @@ export default styles = StyleSheet.create({
     fontFamily: 'OsloSans-Bold',
   },
   togglebutton: {
-    width: wp(40),
-    height: hp(25),
+    width: wp(32),
+    height: wp(20),
   },
   addbutton: {
     width: wp(50),
     height: hp(50),
   },
   width60: {
-    width: wp(60),
+    width: wp(40),
   },
   margin5: {
     margin: wp(5),

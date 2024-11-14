@@ -8,7 +8,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import EndTourScreen from '../EndTour';
 import WorkloadHistory from '../WorklodHistory';
 
-const EndTourAndWorkloadHistory = ({ route }) => {
+const EndTourAndWorkloadHistory = ({ route }: { route: any }) => {
   const { Layout, Colors } = useTheme();
   const styles = getStyles(Colors);
   const [index, setIndex] = React.useState(1);
@@ -74,16 +74,17 @@ const EndTourAndWorkloadHistory = ({ route }) => {
   };
   return (
     <CustomSafeArea>
-      <Header backPage="Tour" />
+      <Header title={route?.params?.Name} backPage="Tour" />
       <>
-        <View style={[styles.container, Layout.fill]}>
-          <TabView
+        <View style={[Layout.fill]}>
+          <EndTourScreen route={route} />
+          {/* <TabView
             renderTabBar={renderTabBar}
             navigationState={{ index, routes }}
             renderScene={renderScene}
             onIndexChange={setIndex}
             initialLayout={{ width: layout.width }}
-          />
+          /> */}
         </View>
       </>
     </CustomSafeArea>

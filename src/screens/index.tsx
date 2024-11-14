@@ -23,3 +23,6 @@ export { default as EndworkloadProductHistory } from './EndworkloadProductHistor
 export { default as ProductHistory } from './ProductHistory/index';
 export { default as EndTourAndWorkloadHistory } from './EndTourAndWorkloadHistory/index';
 export { default as Shipment } from './Shipment/index';
+export { default as MapboxScreen } from './Map/index';
+export { default as ExternalLinks } from './ExternalLinks/Index';
+export { default as DamageGallery } from './DamageGallery';

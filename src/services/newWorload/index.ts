@@ -15,12 +15,9 @@ export async function newWorkload(
 }
 export async function createNewWorkload(
   data: createWorkloadRequestModel,
-): Promise<createWorkloadState> {
-  let url = '/api/Workload/create';
-  const response: AxiosResponse<createWorkloadState> = await api.post(
-    url,
-    data,
-  );
+): Promise<any> {
+  let url = '/api/Mobile/Workload/create';
+  const response: AxiosResponse<any> = await api.post(url, data);
   return response.data;
 }
 export const newWorkloadService = {

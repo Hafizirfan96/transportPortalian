@@ -33,16 +33,22 @@ const DateTimePickers = (props: any) => {
 
   return (
     <View>
-      <View style={[Layout.fill, Layout.column, Gutters.tinyPadding]}>
+      <View style={[Layout.fill, Layout.column]}>
         <TouchableOpacity
           onPress={_toggleIsDateVisible}
           style={[
             styles.textContainer,
-            Gutters.smallLPadding,
+            Gutters.tinyLPadding,
             Gutters.tinyVPadding,
           ]}
         >
-          <Text style={[Fonts.textTiny, styles.textMessageInput]}>
+          <Text
+            style={[
+              props.labelstyle,
+              Fonts.textNormal,
+              styles.textMessageInput,
+            ]}
+          >
             {props.value ? <> {_handleDateValue()} </> : <>{props.label}</>}
           </Text>
         </TouchableOpacity>
@@ -77,11 +83,13 @@ export const getStyles = (colors: any) => {
       shadowColor: colors.black,
     },
     textMessageInput: {
-      height: Platform.OS == 'ios' ? wp(25) : wp(35),
-      fontSize: wp(12),
-      padding: wp(10),
-      color: colors.grey,
-      fontFamily: 'OsloSans-Bold',
+      height: Platform.OS == 'ios' ? wp(25) : wp(30),
+      fontSize: wp(14),
+      padding: wp(5),
+      marginLeft: wp(5),
+      color: colors.placeHolderColor,
+
+      // fontFamily: 'OsloSans-Bold',
     },
   });
 

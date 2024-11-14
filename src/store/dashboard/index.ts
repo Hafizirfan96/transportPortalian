@@ -21,7 +21,7 @@ const dashboardSlice = createSlice({
       .addCase(dashboardScheduleInfo.pending, state => {
         return {
           ...state,
-          loading: 'pending',
+          status: 'pending',
           error: null,
         };
       })
@@ -42,7 +42,6 @@ const dashboardSlice = createSlice({
             ...state,
             status: 'failed',
             error: action.payload as string,
-            scheduleInfo: null,
           };
         },
       );

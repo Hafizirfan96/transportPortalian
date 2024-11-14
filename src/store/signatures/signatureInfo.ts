@@ -1,4 +1,4 @@
-import { signatureService } from '@/services/signature';
+import { signatureService } from '@/services/Signature';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const saveSignatureImages = createAsyncThunk(

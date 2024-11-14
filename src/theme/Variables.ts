@@ -16,6 +16,7 @@ export const Colors = {
   secondaryTextColor: '#333333',
   primaryBackground: '#43F8B6',
   secondaryBackground: '#618a5c',
+  tabBackground: '#4ae9aa',
   inputBackground: '#FFFFFF',
   white: '#ffffff',
   black: '#000000',
@@ -27,7 +28,7 @@ export const Colors = {
   lightGrey: '#F9F9F9',
   appColor: '#43F8B6',
   darkGrey: '#EEEEEE',
-  lightBlack: '#777777',
+  lightBlack: '#606367',
   signatureColor: '#f0ffff',
   //darkGrey: '#696969',
   grey: '#666666',
@@ -40,6 +41,11 @@ export const Colors = {
   placeHolderColor: '#BDBDBD',
   borderColor: '#cfcfce',
   warningColor: '#F66667',
+  background: '#e9eef6',
+  schedul: '#708fbe',
+  darkgray: '#9CB3D6',
+  iconBlackGrey: '#554E53',
+  emptyBorderColor: '#CEDAEC',
 };
 
 export const NavigationColors = {
@@ -58,6 +64,7 @@ export const FontSize = {
   regular: wp(18),
   regularMedium: wp(20), //Adding new Font size to numbers
   medium: wp(21),
+  mediumPlus: wp(22),
   large: wp(40),
   exLarge: wp(50),
 };

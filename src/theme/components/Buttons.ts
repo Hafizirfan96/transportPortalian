@@ -1,6 +1,6 @@
-import { wp } from '@/utils/layout-scaling';
 import { StyleSheet } from 'react-native';
 import { CommonParams } from '../../../@types/theme';
+import { wp } from '@/utils/layout-scaling';
 
 export default function <C>({
   Fonts,
@@ -17,6 +17,10 @@ export default function <C>({
   const rounded = {
     ...base,
     borderRadius: 60,
+  };
+  const smallrounded = {
+    ...base,
+    borderRadius: 7,
   };
 
   return StyleSheet.create({
@@ -39,7 +43,7 @@ export default function <C>({
       backgroundColor: Colors.primaryBackground,
       // borderWidth: 2,
       borderColor: Colors.secondaryBackground,
-      width: '100%',
+      // width: '100%',
     },
     btnSmall: {
       //backgroundColor: Colors.darkGreen,
@@ -56,6 +60,11 @@ export default function <C>({
       minWidth: 120,
       height: 35,
     },
+    btnRegularRounded: {
+      ...smallrounded,
+      borderColor: Colors.secondaryBackground,
+      minWidth: 120,
+    },
     btnTinyRounded: {
       ...rounded,
       //backgroundColor: Colors.darkGreen,
@@ -65,11 +74,10 @@ export default function <C>({
       height: 30,
     },
     buttonText: {
-      //fontFamily: 'OsloSans-Bold',
-      color: Colors.primaryTextColor,
-      fontSize: 20,
-      textAlign: 'center',
-      letterSpacing: 0.2,
+      ...Fonts.boldFontFamily,
+      color: Colors.black,
+      fontSize: wp(14),
+      marginVertical: wp(2),
     },
     btnNormalSmall: {
       ...base,
@@ -102,13 +110,14 @@ export default function <C>({
     },
 
     btnWhiteSmall: {
-      borderRadius: 4,
+      borderRadius: wp(5),
       backgroundColor: Colors.white,
-      borderWidth: 0,
+      borderWidth: wp(0),
       borderColor: Colors.primaryTextColor,
-      paddingHorizontal: 15,
-      paddingVertical: 5,
-      minHeight: 40,
+      paddingHorizontal: wp(10),
+      paddingVertical: wp(5),
+      minHeight: wp(38),
+      minWidth: wp(70),
       alignText: 'center',
     },
   });

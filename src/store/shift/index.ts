@@ -41,6 +41,7 @@ const shiftSlice = createSlice({
             ...state,
             status: 'succeeded',
             isLoading: false,
+            myStartShiftData: action.payload,
             shiftStart: action.payload,
           };
         },
@@ -74,7 +75,8 @@ const shiftSlice = createSlice({
             ...state,
             status: 'succeeded',
             isLoading: false,
-            shiftEnd: action.payload,
+            shiftStart: null,
+            myStartShiftData: null,
           };
         },
       )
@@ -85,7 +87,6 @@ const shiftSlice = createSlice({
             ...state,
             status: 'failed',
             error: action.payload,
-            shiftEnd: false,
             isLoading: false,
           };
         },
@@ -119,7 +120,7 @@ const shiftSlice = createSlice({
             ...state,
             status: 'failed',
             error: action.payload,
-            myStartShiftData: null,
+            // myStartShiftData: null,
             // isLoading: false,
           };
         },

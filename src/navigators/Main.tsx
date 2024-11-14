@@ -1,72 +1,51 @@
 import React from 'react';
+import useTheme from '@/hooks/useTheme';
+import CustomTabBar from './CustomTabBar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   ToursScreen,
   DashboardScreen,
   VehiclesScreen,
   WorkloadScreen,
-  NewWorkload,
+  MapboxScreen,
 } from '@/screens';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import useTheme from '@/hooks/useTheme';
+const { Navigator, Screen } = createBottomTabNavigator();
 
-const Tab = createBottomTabNavigator();
-
-// @refresh reset
 const MainNavigator = () => {
-  const { Colors } = useTheme();
+  const { Images } = useTheme();
 
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        borderTopColor: 'transparent',
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          let iconSize = focused ? 25 : size;
-
-          if (route.name === 'Dashboard') {
-            iconName = focused ? 'ios-home' : 'ios-home-outline';
-            // return (
-            //   <MaterialIcons name="dashboard" color={color} size={iconSize} />
-            // );
-          } else if (route.name === 'Tours') {
-            iconName = focused ? 'ios-list-circle' : 'ios-list-circle-outline';
-          } else if (route.name === 'Vehicles') {
-            iconName = focused ? 'car-sport-sharp' : 'car-sport-outline';
-          } else if (route.name === 'Workloads') {
-            iconName = focused ? 'cube' : 'cube-outline';
-          }
-
-          return <Ionicons name={iconName} color={color} size={iconSize} />;
-        },
-        tabBarActiveTintColor: Colors.black,
-        tabBarInactiveTintColor: Colors.grey,
-        tabBarStyle: {
-          borderTopWidth: 1,
-          borderTopColor: Colors.darkGrey,
-          elevation: 0,
-          height: 55,
-          paddingBottom: 10,
-        },
-      })}
+    <Navigator
+      screenOptions={{ headerShown: false }}
+      tabBar={props => <CustomTabBar {...props} />}
     >
-      <Tab.Screen
+      <Screen
         name="Dashboard"
         component={DashboardScreen}
-        unmountOnBlur={true}
+        options={{ tabBarIcon: Images.dashboard }}
       />
-      <Tab.Screen name="Tours" component={ToursScreen} />
-      <Tab.Screen name="Vehicles" component={VehiclesScreen} />
-      <Tab.Screen
+      <Screen
+        name="Tours"
+        component={ToursScreen}
+        options={{ tabBarIcon: Images.tour }}
+      />
+      <Screen
+        name="Vehicles"
+        component={VehiclesScreen}
+        options={{ tabBarIcon: Images.vehicle }}
+      />
+      <Screen
         name="Workloads"
         component={WorkloadScreen}
-        unmountOnBlur={true}
+        options={{ tabBarIcon: Images.workload }}
       />
-      {/* <Tab.Screen name="NewWorkload" component={NewWorkload} /> */}
-    </Tab.Navigator>
+      <Screen
+        name="Map"
+        component={MapboxScreen}
+        options={{ tabBarIcon: Images.mapTabLocation }}
+      />
+    </Navigator>
   );
 };
 

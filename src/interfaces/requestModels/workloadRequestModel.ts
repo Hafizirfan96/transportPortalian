@@ -34,3 +34,39 @@ export interface WorkloadSpecificData {
   status: number;
   kolliIds: number[];
 }
+
+export interface WorkloadModel extends ShipmentModel {
+  id?: number;
+  Latitude?: string;
+  priority?: string;
+  note?: string;
+  ProjectId?: number;
+  KolliNumber?: string;
+  tourId?: string;
+  ReadyFrom?: Date;
+  Deadline?: Date;
+  Status?: number;
+  CustomerId?: number;
+  StartPosition?: string;
+  StartDatetime?: string;
+}
+
+export interface ShipmentModel {
+  ReceiverName?: string;
+  ReceiverPhone?: string;
+  Address?: string;
+  SenderName?: string;
+  SenderAddress?: string;
+  SenderPhone?: string;
+  Trackingnumber?: string;
+  KolliDetail: KolliDetail[];
+}
+
+export interface KolliDetail {
+  Height: number;
+  KolliID: number;
+  Length: number;
+  Volume: number;
+  Weight: number;
+  Width: number;
+}

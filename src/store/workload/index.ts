@@ -8,29 +8,90 @@ import {
 } from './workloadApi';
 import { WorkloadState } from '@/interfaces';
 import { RootState } from '..';
-
-const createDefaultState = (): WorkloadState => {
-  return {
-    status: 'idle',
-    error: null,
-    workloadData: null,
-    isLoading: false,
-    selectedItems: [],
-    hasSelectedItems: false,
-    workLoadList: [],
-  };
-};
+import { Config } from '@/Config';
+import {
+  WorkloadFilter,
+  WorkloadResult,
+} from '@/interfaces/stateModels/workloadStateModel';
+import _ from 'lodash';
+import {
+  checkAndPerformSearch,
+  createDefaultState,
+  doSearch,
+  handleSelectedItems,
+  updateWorkloadStatus,
+} from '@/utils/workload';
 
 const workloadSlice = createSlice({
   name: 'workload',
-  initialState: createDefaultState() as WorkloadState,
+  initialState: createDefaultState,
   reducers: {
     workloadSelected: (state, action) => {
-      state.selectedItems = action.payload;
-      state.hasSelectedItems = action.payload.length > 0;
+      if (action.payload.Id >= 0) {
+        if (!state.selectedItemsIndexs.includes(action.payload.Id)) {
+          state.selectedItemsIndexs = [
+            ...state.selectedItemsIndexs,
+            action.payload.Id,
+          ];
+        } else {
+          state.selectedItemsIndexs = state.selectedItemsIndexs.filter(
+            (items: any) => items !== action.payload.Id,
+          );
+        }
+        state.hasSelectedItems = state.selectedItemsIndexs.length > 0;
+        const startedItems = state.selectedItemsIndexs.filter((x: any) => {
+          const index = state.workloadData.findIndex(
+            (item: any) => item.Id === x,
+          );
+          if (state.workloadData[index].Status === Config.WORKLOAD_STATUS.NEW) {
+            return state.workloadData[index].Id;
+          }
+        });
+        state.hasNewItems = startedItems.length > 0;
+      }
     },
     workLoadListData: (state, action) => {
-      state.workLoadList = action.payload;
+      // let workLoad = action.payload.map((item: any) => ({
+      //   ...item,
+      //   isSelected: false,
+      // }));
+      state.workloadData = action.payload;
+      state.selectedItemsIndexs = [];
+    },
+    workLoadStatusChange: (state, action) => {
+      const { endWorkload, WorkloadEndStatus } = action.payload;
+      updateWorkloadStatus(
+        state.workloadData,
+        state.defaultWorlLoadData,
+        endWorkload,
+        state.selectedItemsIndexs,
+        WorkloadEndStatus,
+      );
+
+      handleSelectedItems(
+        state.selectedItemsIndexs,
+        state.workloadData,
+        state.filter,
+      );
+
+      checkAndPerformSearch(
+        state,
+        state.workloadData,
+        state.defaultWorlLoadData,
+      );
+      state.selectedItemsIndexs = [];
+    },
+    setSortFilter: (state, action) => {
+      const { Id, SortBy, SortOrder } = action.payload;
+      state.filter.Sort = Id;
+      state.workloadData = _.orderBy(state.workloadData, [SortBy], SortOrder);
+    },
+    setTypeFilter: (state, action) => {
+      state.filter = action.payload;
+      doSearch(state, state.defaultWorlLoadData);
+    },
+    resetFilter: state => {
+      state.filter = createDefaultState.filter;
     },
   },
   extraReducers: builder => {
@@ -41,15 +102,19 @@ const workloadSlice = createSlice({
           loading: 'pending',
           error: null,
           isLoading: true,
-          workloadData: null,
+          selectedItems: [],
+          selectedItemsIndexs: [],
+          filter: createDefaultState.filter,
+          defaultWorlLoadData: [],
         };
       })
       .addCase(myWorkloads.fulfilled, (state, action: PayloadAction<any>) => {
         return {
           ...state,
           status: 'succeeded',
-          isLoading: false,
           workloadData: action.payload,
+          defaultWorlLoadData: action.payload,
+          isLoading: false,
         };
       })
       .addCase(myWorkloads.rejected, (state, action: PayloadAction<any>) => {
@@ -58,7 +123,6 @@ const workloadSlice = createSlice({
           status: 'failed',
           error: action.payload as string,
           isLoading: false,
-          workloadData: null,
         };
       })
       // start workload
@@ -67,7 +131,7 @@ const workloadSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: true,
+          // isLoading: true,
         };
       })
       .addCase(startWorkload.fulfilled, (state, action: PayloadAction<any>) => {
@@ -75,7 +139,6 @@ const workloadSlice = createSlice({
           ...state,
           status: 'succeeded',
           isLoading: false,
-          workloadData: action.payload,
         };
       })
       .addCase(startWorkload.rejected, (state, action: PayloadAction<any>) => {
@@ -83,7 +146,6 @@ const workloadSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          workloadData: null,
           isLoading: false,
         };
       })
@@ -93,14 +155,13 @@ const workloadSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: true,
+          // isLoading: true,
         };
       })
       .addCase(endWorkload.fulfilled, (state, action: PayloadAction<any>) => {
         return {
           ...state,
           status: 'succeeded',
-          workloadData: action.payload,
           isLoading: false,
         };
       })
@@ -109,7 +170,6 @@ const workloadSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          workloadData: null,
           isLoading: false,
         };
       })
@@ -119,7 +179,7 @@ const workloadSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: true,
+          // isLoading: true,
         };
       })
       .addCase(
@@ -138,7 +198,6 @@ const workloadSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          workloadData: null,
           isLoading: false,
         };
       });
@@ -147,4 +206,11 @@ const workloadSlice = createSlice({
 
 export default workloadSlice.reducer;
 export const workloadSelector = (state: RootState) => state.workload;
-export const { workloadSelected, workLoadListData } = workloadSlice.actions;
+export const {
+  workloadSelected,
+  workLoadListData,
+  workLoadStatusChange,
+  setTypeFilter,
+  setSortFilter,
+  resetFilter,
+} = workloadSlice.actions;

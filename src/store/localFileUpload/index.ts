@@ -5,7 +5,7 @@ const localFilesSlice = createSlice({
   name: 'filesSave',
   initialState: {
     ...SaveFilesState,
-    savingFilesDataImage: {},
+    savingFilesDataImage: {} as any,
   },
   reducers: {
     ...SaveReducers,

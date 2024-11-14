@@ -13,7 +13,6 @@ import RadioButtonWithText from '../RadioButtonWithText';
 function ProductModal(props: any, ref: any) {
   const { Layout, Gutters } = useTheme();
   const modalizeRef = useRef(null);
-  console.log('props', props);
   const [sort, SetSort] = useState(props.selected);
 
   useImperativeHandle(ref, () => ({
@@ -25,13 +24,11 @@ function ProductModal(props: any, ref: any) {
     },
   }));
   const handleSortToggle = (item: any) => {
-    console.log('handleSortToggle', item);
     SetSort(item.Id);
     // props.onSelected(item)
     modalizeRef.current?.close();
   };
   const renderItem = (item: any) => {
-    console.log('product item', item.item);
     return (
       <View
         style={[Layout.row, Gutters.regularHPadding, Gutters.smallVPadding]}

@@ -11,6 +11,7 @@ export interface VehicleStartModel {
   VehicleId: number;
   StartKm: number;
   StartPosition: string;
+  TourGuids?: string[];
 }
 export interface VehicleLorryModel {
   CurrentPage: number;
@@ -19,4 +20,11 @@ export interface VehicleLorryModel {
   SortOrder: string;
   SortBy: string;
   IsLorry: boolean;
+}
+
+export interface VehicleEndModel {
+  VehicleId?: number;
+  TourVehicleId: number;
+  EndKm: any;
+  EndPosition: string;
 }

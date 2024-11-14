@@ -18,5 +18,9 @@ const getStyles = colors =>
     },
     selfView: { flex: 0.5 },
     limit: { maxWidth: wp(100) },
+    toggleImage: {
+      width: wp(32),
+      height: wp(20),
+    },
   });
 export default getStyles;

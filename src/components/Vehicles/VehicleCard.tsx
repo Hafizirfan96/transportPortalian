@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useAppDispatch, useTheme } from '@/hooks';
+import React from 'react';
+import { wp, hp } from '@/utils/layout-scaling';
 import {
   View,
   Text,
@@ -6,66 +8,57 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  ActivityIndicator,
+  Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
-import { useTheme } from '@/hooks';
-import _ from 'lodash';
-import { wp, hp } from '@/utils/layout-scaling';
+import { setVehicleId } from '@/store/vehicle';
 
-const VehicleCard = (props: any) => {
+const VehicleCard = (props: {
+  key: any;
+  isUpdating: boolean;
+  vehicle: any;
+  index: Number;
+  handleNavigation: any;
+  vehicleStart: any;
+  vehicleEnd: any;
+}) => {
+  const dispatch = useAppDispatch();
   const { Colors, Fonts, Gutters, Common, Layout, Images } = useTheme();
   const styles = getStyles(Colors);
-
-  const ref_input_field = useRef(null);
-
   const handleNavigation = () => {
+    dispatch(setVehicleId(props.vehicle.VehicleId));
     props.handleNavigation(props.vehicle);
-  };
-  const initialState = props.vehicle.LastKm;
-  const [kmtext, setKmtext] = useState(initialState);
-
-  const editableKm = () => {
-    ref_input_field?.current.focus();
-  };
-
-  const onInputText = (killometers: number) => {
-    console.log('text entered ', killometers);
-    setKmtext(killometers);
-  };
-
-  const debouncedSearch = _.debounce(onInputText, 1000);
-
-  const inputTextKm = (killometers: string) => {
-    debouncedSearch(killometers);
   };
 
   const vehicleStart = () => {
-    const payload = {
-      VehicleId: props.vehicle.VehicleId,
-      StartKm: kmtext,
-      StartPosition: 'Oslo',
-    };
-    props.vehicleStart(payload);
-  };
-  const vehicleEnd = () => {
-    const endVehicles = {
-      VehicleId: props.vehicle.VehicleId,
-      TourVehicleId: props.vehicle.TourVehicleId,
-      EndKm: 0,
-      EndPosition: 'Oslo',
-    };
-    console.log('endVehicles', endVehicles);
-    props.vehicleEnd(endVehicles);
+    props.vehicleStart({
+      ...props.vehicle,
+      index: props.index,
+    });
+    Keyboard.dismiss();
   };
 
+  const vehicleEnd = () => {
+    props.vehicleEnd({
+      ...props.vehicle,
+      index: props.index,
+    });
+    Keyboard.dismiss();
+  };
   return (
-    <>
-      <View
-        style={[
-          Gutters.smallPadding,
-          Common.card,
-          Gutters.mediumHMargin,
-          Gutters.regularBMargin,
-        ]}
+    <View
+      style={[
+        Gutters.smallPadding,
+        Common.card,
+        Gutters.mediumHMargin,
+        Gutters.smallBMargin,
+      ]}
+    >
+      <KeyboardAvoidingView
+        behavior="position"
+        // keyboardVerticalOffset={100}
+        needsOffscreenAlphaCompositing={true}
       >
         <View style={[Layout.row]}>
           <TouchableOpacity onPress={handleNavigation}>
@@ -73,7 +66,7 @@ const VehicleCard = (props: any) => {
               style={[
                 Layout.column,
                 Layout.alignItemsStart,
-                styles.imageWrapper,
+                // styles.imageWrapper,
               ]}
             >
               <Image
@@ -82,26 +75,32 @@ const VehicleCard = (props: any) => {
               />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleNavigation}>
-            <View style={[Layout.column, styles.vehicleInfoWrapper]}>
+          <TouchableOpacity
+            onPress={handleNavigation}
+            disabled={props.isUpdating}
+          >
+            <View style={[Layout.column]}>
               <View style={[Layout.column, Gutters.tinyMargin]}>
                 <Text style={[Fonts.textRegularBold, Gutters.tinyRMargin]}>
                   {props.vehicle.RegistrationNumber}
                 </Text>
-                <Text
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                  style={[Fonts.textTiny, styles.lastPosition]}
-                >
-                  {props.vehicle.Name}
-                </Text>
+                <View style={Layout.row}>
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    style={[Fonts.textTiny, styles.lastPosition]}
+                  >
+                    {props.vehicle.Name}
+                  </Text>
+                </View>
+
                 {!props.vehicle.capacity && (
                   <View style={Layout.row}>
-                    <Text style={[Fonts.textTiny, styles.textStyles]}>
+                    <Text style={[Fonts.textTinyBold, styles.textStyles]}>
                       Capacity:{' '}
                     </Text>
-                    <Text style={[Fonts.textTinyBold]}>
-                      {props.vehicle.capacity}
+                    <Text style={[Fonts.textTiny]}>
+                      {props.vehicle.Capacity}
                     </Text>
                   </View>
                 )}
@@ -119,56 +118,80 @@ const VehicleCard = (props: any) => {
             </View>
           </TouchableOpacity>
 
-          {props.vehicle.IsVehicleActive ? (
-            <TouchableOpacity onPress={vehicleEnd}>
-              <Image source={Images.toggleOn} style={styles.cardTogglebtn} />
-            </TouchableOpacity>
+          {props.isUpdating ? (
+            <ActivityIndicator
+              size={35}
+              style={[Layout.justifyContentFlexStart]}
+            />
           ) : (
-            <TouchableOpacity onPress={vehicleStart}>
-              <Image source={Images.toggleOff} style={styles.cardTogglebtn} />
-            </TouchableOpacity>
+            <View style={[Gutters.tinyTMargin]}>
+              {props.vehicle.IsVehicleActive ? (
+                <TouchableOpacity onPress={vehicleEnd}>
+                  <Image
+                    source={Images.toggleOn}
+                    style={[styles.cardTogglebtn]}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={vehicleStart}>
+                  <Image
+                    source={Images.toggleOff}
+                    style={[styles.cardTogglebtn]}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
           )}
         </View>
-        {!props.vehicle.IsVehicleActive ? (
-          <View style={[Layout.row, styles.bottomlayout]}>
+        <View style={[Layout.row, styles.bottomlayout]}>
+          <View
+            style={[Layout.column, Layout.fill, Layout.justifyContentCenter]}
+          >
+            <Text style={[Fonts.textTiny]}>Killometer</Text>
+          </View>
+          <View style={[Layout.column, Layout.fill]}>
             <View
-              style={[Layout.column, Layout.fill, Layout.justifyContentCenter]}
+              style={[
+                Layout.row,
+                Layout.fill,
+                Layout.justifyContentEnd,
+                Layout.alignItemsCenter,
+                styles.inputView,
+              ]}
             >
-              <Text style={[Fonts.textTiny]}>Killometer</Text>
-            </View>
-
-            <View style={[Layout.column, Layout.fill]}>
-              <View
-                style={[
-                  Layout.row,
-                  Layout.fill,
-                  Layout.justifyContentEnd,
-                  Layout.alignItemsCenter,
-                  styles.inputView,
-                ]}
-              >
-                <TextInput
-                  ref={ref_input_field}
-                  style={[styles.bottomInputTextStyle, Fonts.textTinyBold]}
-                  keyboardType="numeric"
-                  onChangeText={inputTextKm}
-                  placeholder="0"
-                  placeholderTextColor={Colors.secondaryTextColor}
-                  underlineColorAndroid="transparent"
-                  autoCorrect={false}
-                  blurOnSubmit={false}
-                />
-
-                <Text style={[Fonts.textTinyBold]}>KM</Text>
-                <TouchableOpacity onPress={editableKm}>
-                  <Image source={Images.notesIcon} style={[styles.editIcon]} />
-                </TouchableOpacity>
-              </View>
+              {/* <TextInput
+                ref={ref_input_field}
+                style={[styles.bottomInputTextStyle, Fonts.textTinyBold]}
+                keyboardType="numeric"
+                value={kmtext}
+                onChangeText={inputTextKm}
+                placeholder={props.vehicle.LastKm.toString()}
+                placeholderTextColor={Colors.grey}
+                underlineColorAndroid="transparent"
+                autoCorrect={false}
+                blurOnSubmit={false}
+                focusable={true}
+                onBlur={() => {
+                  ref_input_field.current?.blur();
+                  Keyboard.dismiss();
+                }}
+              /> */}
+              {/* <Text style={[styles.bottomInputTextStyle, Fonts.textTinyBold]}>
+                {props.vehicle.LastKm}
+              </Text> */}
+              <Text style={[styles.bottomInputTextStyle, Fonts.textTinyBold]}>
+                {props.vehicle.LastKm} KM
+              </Text>
+              {/* <TouchableOpacity onPress={editableKm}> */}
+              <Image source={Images.notesIcon} style={[styles.editIcon]} />
+              {/* </TouchableOpacity> */}
             </View>
           </View>
-        ) : null}
-      </View>
-    </>
+        </View>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -185,20 +208,17 @@ const getStyles = (colors: any) =>
       flex: 0.75,
     },
     cardTogglebtn: {
-      // width: wp(30),
-      // height: hp(24),
-      // resizeMode: 'contain',
-      right: wp(15),
+      width: wp(32),
+      height: wp(20),
     },
 
     textStyles: {
-      fontSize: wp(10),
-      color: colors.grey,
+      fontSize: wp(11),
+      color: colors.black,
     },
 
     bottomInputTextStyle: {
       minWidth: wp(80),
-      height: wp(40),
       textAlign: 'right',
       marginTop: wp(2),
       maxWidth: wp(100),
@@ -221,4 +241,5 @@ const getStyles = (colors: any) =>
       width: wp(120),
     },
   });
+
 export default VehicleCard;

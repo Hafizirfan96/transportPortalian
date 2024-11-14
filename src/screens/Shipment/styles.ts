@@ -1,13 +1,19 @@
 import { StyleSheet } from 'react-native';
-import { wp, hp } from '@/utils/layout-scaling';
+import { wp } from '@/utils/layout-scaling';
 
-export default getStyles = (Colors: any, FontSize: any) =>
+const getStyles = (Colors: any, FontSize: any) =>
   StyleSheet.create({
     container: { width: '90%', alignSelf: 'center' },
     textStyle: {
       fontFamily: 'OsloSans-Bold',
-      fontSize: hp(FontSize.small),
-      color: Colors.text,
+      fontSize: FontSize.small,
+      color: Colors.black,
+    },
+    addIcon: {
+      backgroundColor: Colors.primaryBackground,
+      borderRadius: wp(20),
+      width: wp(15),
+      height: wp(15),
     },
     formView: {
       marginBottom: wp(-10),
@@ -38,24 +44,20 @@ export default getStyles = (Colors: any, FontSize: any) =>
     },
     addButtonStyle: {
       width: wp(20),
-      height: hp(20),
+      height: wp(20),
     },
     marginBottom30: {
       marginBottom: wp(10),
       marginTop: wp(10),
     },
     editIcon: {
-      width: wp(20),
-      height: hp(20),
+      width: wp(29),
+      height: wp(29),
       marginLeft: wp(10),
-      resizeMode: 'contain',
     },
     crossIcon: {
-      width: wp(20),
-      height: hp(20),
-      resizeMode: 'contain',
-      alignSelf: 'flex-end',
-      margin: wp(10),
+      width: wp(18),
+      height: wp(18),
     },
     modelView: {
       flex: 0.85,
@@ -65,4 +67,10 @@ export default getStyles = (Colors: any, FontSize: any) =>
     scrollView: {
       top: '15%',
     },
+    whiteSpace: {
+      height: wp(5),
+      backgroundColor: Colors.white,
+    },
   });
+
+export default getStyles;

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native';
 import { useTheme } from '@/hooks';
-import Listofoption from '@/components/VehicleInspection/Listofoption/index';
+import React, { useState } from 'react';
 import { wp, hp } from '@/utils/layout-scaling';
+import { Text, TouchableOpacity, View, Image, StyleSheet } from 'react-native';
+import Listofoption from '@/components/VehicleInspection/Listofoption/index';
 
 const Inspection = props => {
-  // console.log('props inspection---', props);
   const { Images, Layout, Colors } = useTheme();
   const styles = getStyles(Colors);
 
@@ -13,24 +12,25 @@ const Inspection = props => {
   const toggleButtonClicked = () => {
     setTogglebutton(!togglebutton);
   };
-  // const setlistofoption= props.setlistofoption
   return (
     <>
-      <View
-        style={[
-          Layout.row,
-          Layout.justifyContentBetween,
-          styles.marginhorizontal40,
-        ]}
-      >
+      <View style={[Layout.row, Layout.justifyContentBetween]}>
         <Text style={[styles.itemGroupNameText]}>{props.item.GroupName}</Text>
         {togglebutton ? (
           <TouchableOpacity onPress={toggleButtonClicked}>
-            <Image source={Images.toggleOn} style={styles.togglebutton} />
+            <Image
+              source={Images.toggleOn}
+              style={styles.togglebutton}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={toggleButtonClicked}>
-            <Image source={Images.toggleOff} style={styles.togglebutton} />
+            <Image
+              source={Images.toggleOff}
+              style={styles.togglebutton}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
         )}
       </View>
@@ -42,13 +42,9 @@ const Inspection = props => {
               key={items.Id}
               id={items.Id}
               text={items.Text}
-              // setlistofoption={setlistofoption}
               setQuestionAnswerDetail={props.setQuestionAnswerDetail}
               questionList={props.questionList}
               name={props.name}
-              // control={props.control}
-              // errors={props.errors}
-              // clearErrors={props.clearErrors}
             />
           );
         })}
@@ -60,17 +56,14 @@ const getStyles = Colors =>
   StyleSheet.create({
     itemGroupNameText: {
       fontFamily: 'OsloSans-Bold',
-      fontSize: hp(14),
+      fontSize: hp(12),
       color: Colors.black,
       marginTop: wp(15),
     },
     togglebutton: {
-      width: wp(40),
-      height: hp(20),
+      width: wp(32),
+      height: wp(20),
       marginTop: wp(15),
-    },
-    marginhorizontal40: {
-      marginHorizontal: wp(40),
     },
   });
 export default Inspection;

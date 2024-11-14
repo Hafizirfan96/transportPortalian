@@ -6,7 +6,7 @@ export async function getMyProducts(
   data: ProductListRequestModel,
 ): Promise<DashboardInfoModel> {
   let url = '/api/Mobile/Product/lists';
-  const response: AxiosResponse<DashboardInfoModel> = await api.post(url, data);
+  const response: AxiosResponse<any> = await api.post(url, data);
   return response.data;
 }
 
@@ -14,7 +14,7 @@ export async function getAllProducts(
   data: ProductListRequestModel,
 ): Promise<DashboardInfoModel> {
   let url = '/api/Mobile/Product/list';
-  const response: AxiosResponse<DashboardInfoModel> = await api.post(url, data);
+  const response: AxiosResponse<any> = await api.post(url, data);
   return response.data;
 }
 export async function getProductsForWorkload(projectIds: string): Promise<any> {

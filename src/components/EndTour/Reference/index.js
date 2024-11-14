@@ -1,81 +1,66 @@
 import React from 'react';
-import { View, Text, TextInput, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import getStyles from './styles';
 import { useTheme } from '@/hooks';
+import Input from '@/components/Input/Input';
+
+import { Controller } from 'react-hook-form';
+import { wp } from '@/utils/layout-scaling';
 
 const Reference = props => {
-  // console.log('ref---', props.reference);
-  const { Layout, Colors, FontSize } = useTheme();
+  const { Layout, Colors, FontSize, Gutters } = useTheme();
   const styles = getStyles(Colors, FontSize);
   const reference = props.reference;
   const onChangeReference = text => {
     props.onReference(text);
   };
-  const onChangeKm = text => {
-    props.onChangeKm(text);
-  };
-  const onChangeDistance = text => {
-    props.onSumDistance(text);
-  };
-  return (
-    <View style={styles.marginhorizontal}>
-      <Text style={[styles.textStyle]}>Reference</Text>
-      <View style={[styles.referenceView]}>
-        <TextInput
-          placeholder="Optional"
-          onChangeText={onChangeReference}
-          // value={reference.ref}
-          style={[styles.referenceInputText]}
-          keyboardType="number-pad"
-          // onBlur={onBlur}
-        >
-          {reference.ref}
-        </TextInput>
-      </View>
 
-      <View style={[Layout.row, Layout.justifyContentBetween, { bottom: 15 }]}>
-        <View>
-          <Text style={[styles.distanceHeading]}>Killometer</Text>
-          <View style={[styles.InputTextItem]}>
-            <View style={[styles.referenceView]}>
-              <TextInput
-                placeholder="30 Km"
-                onChangeText={onChangeKm}
-                //  value={reference.km}
-                style={[styles.referenceInputText]}
+  return (
+    <View style={[Gutters.mediumHMargin]}>
+      <Text style={[styles.textStyle]}>Reference</Text>
+
+      <Input
+        placeholder="Optional"
+        outerStyle={[Gutters.smallTMargin]}
+        onChangeText={onChangeReference}
+        value={reference.ref}
+      />
+
+      <View
+        style={[Layout.row, styles.marginBottom, Layout.justifyContentBetween]}
+      >
+        <View style={[styles.marginBottom, styles.width40]}>
+          {/* <View style={[{ marginTop: wp(11) }]}>
+            <Text style={[styles.distanceHeading]}>Killometer</Text>
+          </View>
+
+          <Controller
+            control={props.control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                placeholder="Km"
+                onChangeText={onChange}
                 keyboardType="number-pad"
-                // InputRightElement={
-                //   <Icon
-                //     //   as={}
-                //     //   name="ios-search"
-                //     size={5}
-                //     style={[styles.TextInputImage]}
-                //   />
-                // }
-                // onBlur={onBlur}
-              >
-                {reference.km}
-              </TextInput>
-            </View>
-            {/* <Image source={Images.notesIcon} style={[styles.TextInputImage]} /> */}
-          </View>
-        </View>
-        <View>
-          <Text style={[styles.marginleft0, styles.distanceHeading]}>
-            Distance
-          </Text>
-          <View style={[styles.referenceView]}>
-            <TextInput
-              placeholder="Sum"
-              onChangeText={onChangeDistance}
-              // value={reference.distance}
-              style={[styles.referenceInputText, styles.InputTextItem]}
-              keyboardType="number-pad"
-              // onBlur={onBlur}
-            >
-              {reference.distance}
-            </TextInput>
-          </View>
+                outerStyle={[Gutters.tinyTMargin]}
+                // innerStyle={styles.referenceInputText}
+                value={value}
+                validationComponent={
+                  props.errors.km && (
+                    <Text style={styles.error}>
+                      {props.errors?.km?.message?.toString()}
+                    </Text>
+                  )
+                }
+              />
+            )}
+            name="km"
+            rules={{
+              required: {
+                value: true,
+                message: 'Kilometer is required field.',
+              },
+            }}
+          /> */}
         </View>
       </View>
     </View>

@@ -1,34 +1,38 @@
-import React, { useState } from 'react';
-import { Text, View, useWindowDimensions } from 'react-native';
-import { useTheme } from '@/hooks';
-import { Header, NewWorkloadComponents } from '@/components';
 import getStyles from './styles';
+import { useTheme } from '@/hooks';
+import Shipment from '../Shipment';
+import { Header } from '@/components';
+import React, { useEffect } from 'react';
+import NewWorkload from '../NewWorkload';
+import { useRoute } from '@react-navigation/native';
+import { Text, View, useWindowDimensions } from 'react-native';
 import CustomSafeArea from '@/components/Shared/CustomSafeArea';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import Shipment from '../Shipment';
 
 const NewWorkloadShipment = () => {
-  const { Fonts, Layout, Colors } = useTheme();
+  const { Fonts, Colors, Gutters } = useTheme();
   const styles = getStyles(Colors);
-  const [index, setIndex] = React.useState(1);
-  const [color, setColor] = useState(Colors.appColor);
-  const [title, setTitle] = useState('');
+  const [index, setIndex] = React.useState(0);
 
   const [routes] = React.useState([
+    { key: 'second', title: 'Workload' },
     { key: 'first', title: 'Shipment' },
-    { key: 'second', title: 'New Workload' },
   ]);
-  const [drive, setDrive] = React.useState(null); // the lifted state
+  const [drive, setDrive] = React.useState(null);
 
-  const sendDataToNewWorkload = data => {
-    console.log('index----', data);
+  const route = useRoute<any>();
+
+  useEffect(() => {
+    const pageIndex: any = route.params?.index;
+    setIndex(pageIndex);
+  }, [route]);
+
+  const sendDataToParents = (data: any) => {
     setDrive(data);
   };
-  const FirstRoute = () => <NewWorkloadComponents drive={drive} />;
+  const FirstRoute = () => <Shipment sendDataToParents={sendDataToParents} />;
 
-  const SecondRoute = () => (
-    <Shipment sendDataToNewWorkload={sendDataToNewWorkload} />
-  );
+  const SecondRoute = () => <NewWorkload />;
 
   const renderScene = SceneMap({
     first: SecondRoute,
@@ -38,38 +42,26 @@ const NewWorkloadShipment = () => {
   const renderTabBar = (props: any) => {
     return (
       <>
-        <View style={{}}>
+        <View style={[styles.container]}>
           <TabBar
-            onTabPress={({ route }) => {
-              if (route.key == 'first') {
-                setColor('#43F8B6');
-                // setTitle('Added Workload List');
-              } else {
-                setColor('#43F8B6');
-                // setTitle('');
-              }
-              return null;
-            }}
+            {...props}
             renderLabel={({ route, focused }) => (
-              <Text
+              <View
                 style={[
-                  styles.title,
+                  styles.tabBar,
                   {
-                    color: focused ? Colors.appColor : Colors.appColor,
-                    fontWeight: focused ? '400' : '400',
-                    opacity: focused ? 1 : 0.5,
+                    backgroundColor: focused
+                      ? Colors.white
+                      : Colors.tabBackground,
                   },
                 ]}
               >
-                {route.title}
-              </Text>
+                <Text style={[Fonts.textMediumBold]}>{route.title}</Text>
+              </View>
             )}
-            {...props}
-            indicatorStyle={{
-              backgroundColor: color,
-              height: 5,
-            }}
-            style={[styles.tabBar, Layout.alignSelfCenter]}
+            indicatorStyle={[styles.transprent]}
+            style={[styles.tabStyle, Gutters.regularLPadding]}
+            tabStyle={[styles.tabContainerStyle, Gutters.tinyLMargin]}
           />
         </View>
       </>
@@ -77,18 +69,14 @@ const NewWorkloadShipment = () => {
   };
   return (
     <CustomSafeArea>
-      <Header title={title} backPage="Dashboard" />
-      <>
-        <View style={[styles.container, Layout.fill]}>
-          <TabView
-            renderTabBar={renderTabBar}
-            navigationState={{ index, routes }}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{ width: layout.width }}
-          />
-        </View>
-      </>
+      <Header backPage="Dashboard" title={routes[index]?.title} notShowIcons={true} />
+      <TabView
+        renderTabBar={renderTabBar}
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{ width: layout.width }}
+      />
     </CustomSafeArea>
   );
 };

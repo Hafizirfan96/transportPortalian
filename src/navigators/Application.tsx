@@ -1,65 +1,41 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import {
-  IndexStartupContainer,
-  LoginScreen,
-  WorkloadEndScreen,
-  VehicleDetailScreen,
-  VehicleInspection,
-  EndTourScreen,
-  SignatureScreen,
-  CaptureSignatureScreen,
-  BarcodeScaneScreen,
-  NewWorkload,
-  RegisterNewDamage,
-  Service,
-  ForgotPassword,
-  ResetPassword,
-  ShiftDetails,
-  NewTour,
-  NewWorkloadShipment,
-  EndworkloadProductHistory,
-  EndTourAndWorkloadHistory,
-} from '@/screens';
-import { NavigationContainer } from '@react-navigation/native';
+import DrawerNavigator from './Drawer';
+import useTheme from '@/hooks/useTheme';
 import { navigationRef } from '@/navigators/Root';
 import { StatusBar, StyleSheet } from 'react-native';
-import { useFlipper } from '@react-navigation/devtools';
-
-import useTheme from '@/hooks/useTheme';
-import DrawerNavigator from './Drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  Service,
+  NewTour,
+  NewWorkload,
+  LoginScreen,
+  ShiftDetails,
+  MapboxScreen,
+  EndTourScreen,
+  ResetPassword,
+  ExternalLinks,
+  ForgotPassword,
+  SignatureScreen,
+  WorkloadEndScreen,
+  RegisterNewDamage,
+  VehicleInspection,
+  BarcodeScaneScreen,
+  NewWorkloadShipment,
+  VehicleDetailScreen,
+  IndexStartupContainer,
+  CaptureSignatureScreen,
+  EndworkloadProductHistory,
+  EndTourAndWorkloadHistory,
+  DamageGallery
+} from '@/screens';
 
 const Stack = createStackNavigator();
 
-//let MainNavigator;
-
-// @refresh reset
 const ApplicationNavigator = () => {
   const { Layout, darkMode, NavigationTheme, Colors } = useTheme();
   const styles = getStyles(Colors);
-
-  // const [isApplicationLoaded, setIsApplicationLoaded] = useState(false);
-  // const applicationIsLoading = useSelector(state => {
-  //   return state.startup.isAuthenticated;
-  // });
-
-  // useEffect(() => {
-  //   if (MainNavigator == null && !applicationIsLoading) {
-  //     MainNavigator = require('@/navigators/Main').default;
-  //     setIsApplicationLoaded(true);
-  //   }
-  // }, [applicationIsLoading]);
-
-  // on destroy needed to be able to reset when app close in background (Android)
-  // useEffect(
-  //   () => () => {
-  //     setIsApplicationLoaded(false);
-  //     MainNavigator = null;
-  //   },
-  //   [],
-  // );
-  useFlipper(navigationRef);
 
   return (
     <SafeAreaProvider style={[Layout.fill, styles.container]}>
@@ -74,8 +50,6 @@ const ApplicationNavigator = () => {
           <Stack.Screen name="Startup" component={IndexStartupContainer} />
           <Stack.Screen name="Login" component={LoginScreen} />
 
-          {/* {isApplicationLoaded && MainNavigator != null && (
-          <> */}
           <Stack.Screen
             name="Main"
             component={DrawerNavigator}
@@ -83,13 +57,7 @@ const ApplicationNavigator = () => {
               animationEnabled: false,
             }}
           />
-          {/* <Stack.Screen
-              name="Main"
-              component={MainNavigator}
-              options={{
-                animationEnabled: false,
-              }}
-            /> */}
+
           <Stack.Screen
             name="VehicleInspection"
             component={VehicleInspection}
@@ -112,6 +80,7 @@ const ApplicationNavigator = () => {
             component={EndTourAndWorkloadHistory}
           />
           <Stack.Screen name="Service" component={Service} />
+          <Stack.Screen name="DamageGallery" component={DamageGallery} />
           <Stack.Screen name="ShiftDetails" component={ShiftDetails} />
           <Stack.Screen name="WorkloadEnd" component={WorkloadEndScreen} />
           <Stack.Screen name="VehicleDetail" component={VehicleDetailScreen} />
@@ -125,6 +94,8 @@ const ApplicationNavigator = () => {
           />
           <Stack.Screen name="BarcodeScane" component={BarcodeScaneScreen} />
           <Stack.Screen name="NewWorkload" component={NewWorkload} />
+          <Stack.Screen name="MapboxScreen" component={MapboxScreen} />
+          <Stack.Screen name="ExternalLinks" component={ExternalLinks} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

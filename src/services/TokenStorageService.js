@@ -1,7 +1,7 @@
-import { MMKV } from 'react-native-mmkv';
-
-import { Config } from '@/config';
-export const storage = new MMKV();
+import { Config } from '@/Config/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+// export const storage = __DEV__? new MMKVFaker() : new MMKV();
+export const storage = AsyncStorage;
 
 const LOCAL_STORAGE_TOKEN = Config.KEYS.ACCESS_TOKEN;
 const LOCAL_STORAGE_REFRESH_TOKEN = Config.KEYS.REFRESH_TOKEN;
@@ -9,12 +9,12 @@ const LOCAL_STORAGE_USER_NAME = Config.KEYS.USER_NAME;
 const LOCAL_STORAGE_USER_ID = Config.KEYS.USER_ID;
 
 const TokenStorage = {
-  isAuthenticated: () => {
-    var token = storage.getString(LOCAL_STORAGE_TOKEN);
-    return token !== undefined;
+  isAuthenticated: async () => {
+    var token = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN);
+    return token !== undefined && token !== null;
   },
-  getToken() {
-    var token = storage.getString(LOCAL_STORAGE_TOKEN);
+  async getToken() {
+    var token = await AsyncStorage.getItem(LOCAL_STORAGE_TOKEN);
     return token;
   },
 
@@ -35,43 +35,43 @@ const TokenStorage = {
     // });
   },
 
-  storeTokenInfo(token, refreshToken, userId, userName) {
+  async storeTokenInfo(token, refreshToken, userId, userName) {
     this.storeToken(token);
     this.storeRefreshToken(refreshToken);
     this.userId(userId);
-    storage.set(LOCAL_STORAGE_USER_ID, userId);
-    storage.set(LOCAL_STORAGE_USER_NAME, userName);
+    await AsyncStorage.setItem(LOCAL_STORAGE_USER_ID, userId);
+    await AsyncStorage.setItem(LOCAL_STORAGE_USER_NAME, userName);
   },
 
-  storeToken(token) {
-    storage.set(LOCAL_STORAGE_TOKEN, token);
+  async storeToken(token) {
+    await AsyncStorage.setItem(LOCAL_STORAGE_TOKEN, token);
   },
 
-  storeRefreshToken(refreshToken) {
-    storage.set(LOCAL_STORAGE_REFRESH_TOKEN, refreshToken);
+  async storeRefreshToken(refreshToken) {
+    await AsyncStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN, refreshToken);
   },
-  userId(userId) {
-    storage.set(LOCAL_STORAGE_USER_ID, userId);
-  },
-
-  clear() {
-    storage.removeItem(LOCAL_STORAGE_TOKEN);
-    storage.removeItem(LOCAL_STORAGE_REFRESH_TOKEN);
-    storage.removeItem(LOCAL_STORAGE_USER_NAME);
+  async userId(userId) {
+    await AsyncStorage.setItem(LOCAL_STORAGE_USER_ID, userId);
   },
 
-  getRefreshToken() {
-    var refreshToken = storage.getString(LOCAL_STORAGE_REFRESH_TOKEN);
+  async clear() {
+    await AsyncStorage.removeItem(LOCAL_STORAGE_TOKEN);
+    await AsyncStorage.removeItem(LOCAL_STORAGE_REFRESH_TOKEN);
+    await AsyncStorage.removeItem(LOCAL_STORAGE_USER_NAME);
+  },
+
+  async getRefreshToken() {
+    var refreshToken = await AsyncStorage.getItem(LOCAL_STORAGE_REFRESH_TOKEN);
     return refreshToken;
   },
 
-  getUsername() {
-    var userName = storage.getString(LOCAL_STORAGE_USER_NAME);
+  async getUsername() {
+    var userName = await AsyncStorage.getItem(LOCAL_STORAGE_USER_NAME);
     return userName;
   },
 
-  getUserId() {
-    var userId = storage.getString(LOCAL_STORAGE_USER_ID);
+  async getUserId() {
+    var userId = await AsyncStorage.getItem(LOCAL_STORAGE_USER_ID);
     return userId;
   },
 

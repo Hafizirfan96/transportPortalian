@@ -30,6 +30,7 @@ export type {
 export type { ProductHistoryRequestModel } from './requestModels/getProductHistoryRequestModal';
 export type { createWorkloadRequestModel} from './requestModels/createWorkloadRequestModel'
 export  type {serviceModel} from './requestModels/vehicleServiceRequestModel'
+export  type {ExternalLinkModelRoot} from './requestModels/externalLinkRequestModel'
 
 //Response Models
 export type { DashboardInfoModel } from './responseModels/dasboardInfo';
@@ -58,3 +59,4 @@ export type { productHistoryState } from './stateModels/ProductHisoryModel;
 export type { newWorkloadState} from './stateModels/newWorkloadStateModel'
 export type { createWorkloadState} from './stateModels/newWorkloadStateModel'
 export type {vehicleServiceStateModel} from './stateModels/vehicleServiceStateModel'
+export type {ExternalStateModal} from './stateModels/externalStateModel'

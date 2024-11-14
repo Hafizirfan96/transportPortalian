@@ -1,29 +1,21 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import {
-  ToursScreen,
-  DashboardScreen,
-  VehiclesScreen,
-  WorkloadScreen,
-  NewWorkload,
-} from '@/screens';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MainNavigator from './Main';
 import useTheme from '@/hooks/useTheme';
 import CustomDrawer from './CustomDrawer';
-import MainNavigator from './Main';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Drawer = createDrawerNavigator();
 
 // @refresh reset
 const DrawerNavigator = () => {
-  const { Colors, Gutters, FontSize } = useTheme();
+  const { Colors, FontSize } = useTheme();
 
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
+        drawerStatusBarAnimation: 'none',
         drawerType: 'front',
         headerShown: false,
         drawerStyle: {
@@ -32,11 +24,11 @@ const DrawerNavigator = () => {
         },
         drawerActiveBackgroundColor: 'transparent',
         drawerActiveTintColor: Colors.primaryTextColor,
-        drawerInactiveTintColor: '#333',
         drawerLabelStyle: {
           marginLeft: -25,
-          fontFamily: 'oslosans-medium',
-          fontSize: FontSize.small,
+          fontSize: 14,
+          color: Colors.black,
+          fontFamily: 'OsloSans-Bold',
         },
       }}
       initialRouteName="MainDrawer"
@@ -51,68 +43,6 @@ const DrawerNavigator = () => {
           drawerLabel: 'Dashboard',
         }}
       />
-
-      <Drawer.Screen
-        name="Tours"
-        component={ToursScreen}
-        options={{
-          drawerIcon: ({ color }) => (
-            <MaterialIcons name="tour" size={22} color={color} />
-          ),
-          drawerLabel: 'Tours',
-        }}
-      />
-      <Drawer.Screen
-        name="Vehicles"
-        component={VehiclesScreen}
-        options={{
-          drawerIcon: ({ color }) => (
-            <FontAwesome5 name="car" size={22} color={color} />
-          ),
-          drawerLabel: 'Vehicles',
-        }}
-      />
-      <Drawer.Screen
-        name="Workloads"
-        component={WorkloadScreen}
-        options={{
-          drawerIcon: ({ color }) => (
-            <MaterialIcons name="assignment" size={22} color={color} />
-          ),
-          drawerLabel: 'Workloads',
-        }}
-      />
-      {/* <Drawer.Screen
-        name="Tours"
-        component={TourStack}
-        options={{
-          drawerIcon: ({ color }) => (
-            <MaterialIcons name="tour" size={22} color={color} />
-          ),
-          drawerLabel: 'Tours',
-        }}
-      />
-      <Drawer.Screen
-        name="Vehicles"
-        component={VehicleStack}
-        options={{
-          drawerIcon: ({ color }) => (
-            <FontAwesome5 name="car" size={22} color={color} />
-          ),
-          drawerLabel: 'Vehicles',
-        }}
-      />
-
-      <Drawer.Screen
-        name="Workloads"
-        component={WorkloadStack}
-        options={{
-          drawerIcon: ({ color }) => (
-            <MaterialIcons name="assignment" size={22} color={color} />
-          ),
-          drawerLabel: 'Workloads',
-        }}
-      /> */}
     </Drawer.Navigator>
   );
 };

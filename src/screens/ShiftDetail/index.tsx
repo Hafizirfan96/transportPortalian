@@ -24,7 +24,6 @@ import { lorriSelector } from '@/store/lorry';
 import { storage } from '@/store';
 import { StorageKeys } from '@/utils/localStorage';
 import ToastMessage from '@/components/Toast';
-import Toast from 'react-native-toast-message';
 import { tourInfo } from '@/store/tour/tourInfo';
 import { tourSelector } from '@/store/tour';
 const ShiftDetails = ({ route }) => {

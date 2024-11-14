@@ -18,8 +18,7 @@ import { forgotSelector } from '@/store/forgotPassword';
 import Input from '@/components/Input/Input';
 import { wp } from '@/utils/layout-scaling';
 import { navigate, navigateBack } from '@/navigators/Root';
-import Toast from 'react-native-toast-message';
-import ToastMessage from '@/components/Toast';
+import { showToast } from '@/store/appState';
 
 function ForgotPassword() {
   const {
@@ -40,28 +39,27 @@ function ForgotPassword() {
   } = useAppSelector(forgotSelector);
 
   const onLoginClick = async (data: any) => {
+    Keyboard.dismiss();
     const payload = {
       Email: data.Email,
     };
     dispatch(fogotInfo(payload));
     // navigate('ResetPassword');
   };
-  const showToast = (error: string) => {
-    Toast.show({
-      type: 'error',
-      text1: 'Error Message',
-      text2: error,
-    });
-  };
   const errorSection = () => {
     if (isError == true) {
-      showToast(error);
+      dispatch(
+        showToast({
+          type: 'error',
+          text1: 'Error Message',
+          text2: error,
+        }),
+      );
     }
   };
 
   return (
     <>
-      <ToastMessage error={error} />
       {isError && errorSection()}
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

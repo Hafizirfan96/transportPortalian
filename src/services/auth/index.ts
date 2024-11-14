@@ -1,4 +1,4 @@
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import axios, { AxiosResponse } from 'axios';
 
 const api = axios.create({

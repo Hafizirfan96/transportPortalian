@@ -14,7 +14,7 @@ export const SaveReducers = {
     state.savingFilesData = action.payload;
   },
   savedFailed: (state: any, action: any) => {
-    console.log('saving Signature failed', action);
+    // console.log('saving Signature failed', action);
     state.savingSignatureLoading = false;
     state.savingSignatureError = false;
   },

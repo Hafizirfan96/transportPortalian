@@ -1,24 +1,29 @@
-import { workloadService } from '@/services/workload';
+import { WorkloadStartModel } from '@/interfaces';
+import { workloadService } from '@/services/Workload';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { workLoadStatusChange, workloadSelected } from '.';
 
 export const myWorkloads = createAsyncThunk(
   'workload/myworkload',
   async (args, thunkAPI) => {
     try {
-      const response = await workloadService.myWorkloads();
+      console.log('called workload items');
+      let response: any = await workloadService.myWorkloads();
       return response;
     } catch (error) {
       console.log(error);
       thunkAPI.rejectWithValue(error);
+      throw error;
     }
   },
 );
 
 export const startWorkload = createAsyncThunk(
   'workload/start',
-  async (args, thunkAPI) => {
+  async (args: WorkloadStartModel, thunkAPI) => {
     try {
       const response = await workloadService.startWorkload(args);
+      thunkAPI.dispatch(workLoadStatusChange({ ...args, endWorkload: false }));
       return response;
     } catch (error) {
       console.log(error);
@@ -29,9 +34,15 @@ export const startWorkload = createAsyncThunk(
 
 export const endWorkload = createAsyncThunk(
   'workload/end',
-  async (args, thunkAPI) => {
+  async (args: any, thunkAPI) => {
     try {
       const response = await workloadService.endWorkload(args);
+      thunkAPI.dispatch(
+        workLoadStatusChange({
+          endWorkload: true,
+          WorkloadEndStatus: args.WorkloadEndStatus,
+        }),
+      );
       return response;
     } catch (error) {
       console.log(error);
@@ -42,13 +53,14 @@ export const endWorkload = createAsyncThunk(
 
 export const deleteWorkload = createAsyncThunk(
   'workload/delete',
-  async (args, thunkAPI) => {
+  async (args: any, thunkAPI) => {
     try {
       const response = await workloadService.deleteWorkload(args);
       return response;
     } catch (error) {
       console.log(error);
       thunkAPI.rejectWithValue(error);
+      throw error;
     }
   },
 );

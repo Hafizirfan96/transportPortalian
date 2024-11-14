@@ -1,12 +1,13 @@
 import React, { useState, memo, useEffect } from 'react';
 import { useTheme } from '@/hooks';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+import { ThemeColors } from '@/Theme/theme.type';
+import { wp } from '@/utils/layout-scaling';
 
 const ToggleButton = ({ style, text, value, checked, onPress }) => {
-  const { Fonts, Layout, Common, Colors } = useTheme();
-  const [selected, SetSelected] = useState(false);
-
+  const { Fonts, Colors } = useTheme();
+  const [selected, SetSelected] = useState(value || false);
+  const styles = getStyles(Colors);
   let seclectedColor = Colors.primaryBackground;
 
   let unselectedColor = Colors.white;
@@ -18,7 +19,6 @@ const ToggleButton = ({ style, text, value, checked, onPress }) => {
   let currentColor = selected ? seclectedColor : unselectedColor;
   let currentTextColor = selected ? textColorSelected : textColorUnselected;
 
-  const myconsole = () => console.log('rendering toggle button');
   let boxStyle = {
     backgroundColor: currentColor,
     ...style,
@@ -37,12 +37,10 @@ const ToggleButton = ({ style, text, value, checked, onPress }) => {
 
   return (
     <TouchableOpacity
-      style={[Common.button.btnWhiteSmall, Common.card, boxStyle]}
+      style={[styles.buttonContainer, boxStyle]}
       onPress={handleContainerClick}
     >
-      <View style={[Layout.fill, Layout.center]}>
-        <Text style={[Fonts.textTiny, textStyle]}>{text}</Text>
-      </View>
+      <Text style={[Fonts.textTinyBold, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -52,3 +50,18 @@ const propsAreEqual = (prev, next) => {
 };
 //export default memo(ToggleButton, propsAreEqual)
 export default ToggleButton;
+const getStyles = (Colors: ThemeColors) =>
+  StyleSheet.create({
+    ItemWrapper: {
+      paddingTop: wp(10),
+      paddingBottom: wp(10),
+      left: wp(6),
+    },
+    buttonContainer: {
+      backgroundColor: Colors.white,
+      paddingHorizontal: wp(11),
+      paddingVertical: wp(7),
+      borderRadius: wp(5),
+      marginRight: wp(6),
+    },
+  });

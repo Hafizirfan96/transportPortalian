@@ -7,8 +7,8 @@ const getStyles = (colors, layout, gutters, fonts) =>
     dropdownButton: {
       justifyContent: 'space-between',
       alignItems: 'center',
-      //width: width / 2,
-      height: wp(35),
+      // width: wp(100),
+      // height: wp(35),
       overflow: 'hidden',
       ...gutters.smallHPadding,
       //borderWidth: 1,
@@ -19,7 +19,7 @@ const getStyles = (colors, layout, gutters, fonts) =>
     },
     dropdownButtonText: {
       ...layout.fill,
-      ...fonts.textSmall,
+      ...fonts.textTiny,
     },
     dropdownCustomizedButtonParent: {
       flex: 1,
@@ -78,7 +78,7 @@ const getStyles = (colors, layout, gutters, fonts) =>
       borderColor: colors.lightGrey,
       borderBottomColor: colors.primaryTextColor,
       borderBottomWidth: 1,
-      height: wp(45),
+      height: wp(34),
       width: '100%',
       ...fonts.textSmall,
       ...gutters.smallHPadding,
@@ -90,6 +90,12 @@ const getStyles = (colors, layout, gutters, fonts) =>
     },
     selectedElement: {
       backgroundColor: colors.darkGrey,
+    },
+    maxHeight: {
+      maxHeight: wp(150),
+    },
+    loader: {
+      right: wp(28),
     },
   });
 

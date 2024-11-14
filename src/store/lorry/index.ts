@@ -9,15 +9,31 @@ const createDefaultState = (): lorryState => {
     error: null,
     lorryData: null,
     isLoading: false,
+    isUpdatingLorry: false,
     vehicleStartData: null,
     isError: false,
+    selectedIndex: -1,
   };
 };
 
 const lorriInfoSlice = createSlice({
   name: 'lorries',
   initialState: createDefaultState() as lorryState,
-  reducers: {},
+  reducers: {
+    UpdateLorryState: (state, action) => {
+      const index = state.lorryData.Items.findIndex(
+        (item: any) => item.VehicleId === action.payload.VehicleId,
+      );
+      state.lorryData.Items[index].IsVehicleActive =
+        action.payload.IsVehicleActive;
+      state.lorryData.Items[index].TourVehicleId = action.payload.TourVehicleId;
+      state.isUpdatingLorry = false;
+      state.selectedIndex = -1;
+    },
+    setselectedIndex: (state, action) => {
+      state.selectedIndex = action.payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getMyLorries.pending, state => {
@@ -55,8 +71,7 @@ const lorriInfoSlice = createSlice({
       //     ...state,
       //     loading: 'pending',
       //     error: null,
-      //     isLoading: true,
-      //     vehicleStartData: null,
+      //     isUpdatingLorry: true,
       //     isError: false,
       //   };
       // })
@@ -64,8 +79,7 @@ const lorriInfoSlice = createSlice({
       //   return {
       //     ...state,
       //     status: 'succeeded',
-      //     isLoading: false,
-      //     vehicleStartData: action.payload,
+      //     isUpdatingLorry: false,
       //     isError: false,
       //   };
       // })
@@ -74,9 +88,8 @@ const lorriInfoSlice = createSlice({
       //     ...state,
       //     status: 'failed',
       //     error: action.payload as string,
-      //     lorryData: null,
       //     isLoading: false,
-      //     vehicleStartData: null,
+      //     isUpdatingLorry: false,
       //     isError: true,
       //   };
       // })
@@ -86,7 +99,7 @@ const lorriInfoSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: true,
+          isUpdatingLorry: true,
           isError: false,
         };
       })
@@ -94,9 +107,7 @@ const lorriInfoSlice = createSlice({
         return {
           ...state,
           status: 'succeeded',
-          lorryData: action.payload,
           isError: false,
-          isLoading: false,
         };
       })
       .addCase(endLorri.rejected, (state, action: PayloadAction<any>) => {
@@ -104,8 +115,7 @@ const lorriInfoSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          lorryData: null,
-          isLoading: false,
+          isUpdatingLorry: false,
           isError: true,
         };
       })
@@ -116,7 +126,7 @@ const lorriInfoSlice = createSlice({
           ...state,
           loading: 'pending',
           error: null,
-          isLoading: false,
+          isUpdatingLorry: true,
           isError: false,
         };
       })
@@ -124,8 +134,6 @@ const lorriInfoSlice = createSlice({
         return {
           ...state,
           status: 'succeeded',
-          lorryData: action.payload,
-          isLoading: false,
           error: null,
           isError: false,
         };
@@ -135,8 +143,7 @@ const lorriInfoSlice = createSlice({
           ...state,
           status: 'failed',
           error: action.payload as string,
-          lorryData: null,
-          isLoading: false,
+          isUpdatingLorry: false,
           isError: true,
         };
       });
@@ -145,4 +152,4 @@ const lorriInfoSlice = createSlice({
 
 export default lorriInfoSlice.reducer;
 export const lorriSelector = (state: RootState) => state.lorry;
-export const {} = lorriInfoSlice.actions;
+export const { UpdateLorryState, setselectedIndex } = lorriInfoSlice.actions;

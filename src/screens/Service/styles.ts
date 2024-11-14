@@ -8,10 +8,8 @@ export default getStyles = (colors: any) =>
       borderRadius: wp(4),
       elevation: wp(10),
       shadowColor: colors.black,
-      width: '96%',
-      marginTop: wp(15),
-      marginLeft: wp(5),
-      bottom: wp(8),
+      marginTop: wp(5),
+      bottom: wp(2),
     },
     commentInputText: {
       height: hp(270),
@@ -62,6 +60,7 @@ export default getStyles = (colors: any) =>
       width: '90%',
       marginLeft: wp(18),
       bottom: wp(5),
+      top: wp(1),
     },
     controllerChildView: {
       height: wp(70),
@@ -81,8 +80,21 @@ export default getStyles = (colors: any) =>
       fontFamily: 'OsloSans-Bold',
       color: colors.black,
       fontSize: wp(12),
-      top: wp(4.5),
-      marginLeft: wp(10),
+      marginTop: wp(5),
+    },
+    description: {
+      backgroundColor: colors.white,
+      borderRadius: wp(5),
+      elevation: wp(5),
+      shadowColor: colors.black,
+      minHeight: wp(100),
+      marginTop: 5,
+      textAlignVertical: 'top',
+      paddingLeft: 10,
+      borderColor: colors.grey,
+      fontFamily: 'OsloSans-Bold',
+      color: colors.text,
+      padding: wp(10),
     },
     controllerView: {
       bottom: wp(12),
@@ -98,7 +110,7 @@ export default getStyles = (colors: any) =>
       fontFamily: 'sf-ui-display-regular',
       color: 'red',
       fontSize: 16,
-      marginLeft: 10,
+      // marginLeft: 10,
     },
     dateView: {
       backgroundColor: colors.white,
@@ -113,6 +125,16 @@ export default getStyles = (colors: any) =>
       fontSize: 15,
     },
     errorView: {
-      bottom: wp(5),
+      // bottom: wp(5),
     },
+    dropdown: {
+      fontFamily: 'OsloSans-Bold',
+      color: colors.placeHolderColor,
+      fontSize: wp(12),
+    },
+    pickerItem: {
+      color: colors.black,
+      fontFamily: 'OsloSans-Bold',
+    },
+    box: { top: wp(5), bottom: wp(4) },
   });

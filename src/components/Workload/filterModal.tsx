@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import { useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
 import _ from 'lodash';
@@ -18,6 +18,7 @@ function FilterModal(props: any, ref: any) {
   const modalizeRef = useRef(null);
 
   const [status, SetStatus] = useState(Config.STATUS);
+  const [activeButton, setButton] = useState(false);
   const [filterType, SetFilterType] = useState([
     {
       Id: 1,
@@ -65,7 +66,6 @@ function FilterModal(props: any, ref: any) {
 
   const onClose = () => {
     modalizeRef.current?.close();
-
     let selectedStatuses = status.filter(x => x.Selected).map((x: any) => x.Id);
     props.onSelected(selectedStatuses);
   };
@@ -75,6 +75,8 @@ function FilterModal(props: any, ref: any) {
     const index = status.findIndex(todo => todo.Id === item.Id);
     s[index].Selected = !s[index].Selected;
     SetStatus(s);
+    let isTrue = s.every(item => item.Selected === false);
+    setButton(!isTrue);
   };
 
   const myconsole = () => console.log('rendering filter Modal');
@@ -100,7 +102,7 @@ function FilterModal(props: any, ref: any) {
           >
             <Text style={[Fonts.textSmallBold]}>Status</Text>
           </View>
-          {status.map(item => (
+          {status.map((item: any) => (
             <View
               style={[Layout.row, Gutters.regularHPadding, styles.ItemWrapper]}
               key={item.Id}
@@ -131,10 +133,24 @@ function FilterModal(props: any, ref: any) {
             ]}
           >
             <TouchableOpacity
-              style={[Common.button.btnTinyRounded]}
+              style={[
+                Common.button.btnTinyRounded,
+                {
+                  backgroundColor: activeButton
+                    ? Colors.primaryBackground
+                    : Colors.darkgray,
+                },
+              ]}
               onPress={onClose}
             >
-              <Text style={[Fonts.textTiny]}>Ok</Text>
+              <Text
+                style={[
+                  Fonts.textTiny,
+                  { color: !activeButton ? Colors.schedul : Colors.black },
+                ]}
+              >
+                Ok
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

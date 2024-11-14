@@ -1,8 +1,8 @@
 export const Config = {
-  //API_URL: 'http://10.0.2.2',
+  // API_URL: 'http://tpp-dev-api.makesol.no',
   //API_URL: 'http://api.transportør.no',
-  // API_URL: 'http://tpp-api.makesol.no',
-  API_URL: 'http://tpp-dev-api.makesol.no',
+  API_URL: 'http://tpp-api.makesol.no',
+  // API_URL: 'https://localhost:7236',
   CLIENT_ID: 'MobileApp',
   CLIENT_SECRET: '123@abc',
   APP_VERSION: '1.0.1',
@@ -12,8 +12,11 @@ export const Config = {
     ACCESS_TOKEN: 'token',
     REFRESH_TOKEN: 'refresh_token',
     SHIFT_INFO: 'shift_info',
-    API_KEY: 'AIzaSyD4o5C69BSd9JUSHqyUHnT9HkgRdS__eb8',
-    BASE_URL: 'https://maps.googleapis.com/maps/api/geocode/json',
+    // API_KEY: 'AIzaSyD4o5C69BSd9JUSHqyUHnT9HkgRdS__eb8',
+    // BASE_URL: 'https://maps.googleapis.com/maps/api/geocode/json',
+    API_KEY:
+      'pk.eyJ1IjoianVuYWlkYnV0dDMwIiwiYSI6ImNsY290MWY1bDBjZG0zcmxhY2tkdm15OG8ifQ.UlY2lgvhe5XSGvPvWVENuQ',
+    BASE_URL: 'https://api.mapbox.com/geocoding/v5/',
   },
   ACCESSIBILIY_HEIGHT: 44,
   ACCESSIBILIY_WIDTH: 44,
@@ -22,6 +25,7 @@ export const Config = {
   ACCESSIBILIY_WIDTH_AA: 24,
   WORKLOAD_STATUS: {
     NEW: 1,
+    PENDING: 2,
     LOADED: 3,
     STARTED: 4,
     COMPLETED: 5,
@@ -90,13 +94,13 @@ export const Config = {
   FILTER_SORT: [
     {
       Id: 1,
-      Title: 'Customer name A-Z ',
+      Title: 'Name A-Z ',
       SortBy: 'Name',
       SortOrder: 'asc',
     },
     {
       Id: 2,
-      Title: 'Customer name Z-A',
+      Title: 'Name Z-A',
       SortBy: 'Name',
       SortOrder: 'desc',
     },

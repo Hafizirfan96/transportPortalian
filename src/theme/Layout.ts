@@ -72,6 +72,9 @@ export default function ({}: ThemeVariables) {
     justifyContentEnd: {
       justifyContent: 'flex-end',
     },
+    justifyContentFlexStart: {
+      justifyContent: 'flex-start',
+    },
     //Adding Justify content evenly
     justifyContentEvenly: {
       justifyContent: 'space-evenly',
@@ -89,6 +92,9 @@ export default function ({}: ThemeVariables) {
     },
     alignSelfCenter: {
       alignSelf: 'center',
+    },
+    alignSelfEnd: {
+      alignSelf: 'flex-end',
     },
     flexGrow: {
       flexGrow: 1,
@@ -152,6 +158,9 @@ export default function ({}: ThemeVariables) {
     },
     right0: {
       right: 0,
+    },
+    textAlignmentCenter: {
+      textAlign: 'center',
     },
   });
 }

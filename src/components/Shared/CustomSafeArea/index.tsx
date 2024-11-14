@@ -55,7 +55,11 @@ const CustomSafeArea = (props: CustomSafeAreaType) => {
         backgroundColor={Colors.appColor}
       />
       {/* <HeaderErrorMessage /> */}
-      <SafeAreaView style={styles.bottomArea}>{props.children}</SafeAreaView>
+      <SafeAreaView
+        style={[styles.bottomArea, { backgroundColor: Colors.background }]}
+      >
+        {props.children}
+      </SafeAreaView>
     </>
   );
 };
@@ -70,6 +74,7 @@ const getStyles = (topColor: string, bottomColor: string) =>
     },
     bottomArea: {
       flex: 1,
+      // backgroundColor: "white",
       //backgroundColor: 'red',
       //position: 'relative',
     },
