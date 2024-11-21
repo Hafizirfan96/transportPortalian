@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import ToggleButton from '@/components/ToggleButton';
 import { useTheme } from '@/hooks';
 import { wp, hp } from '@/utils/layout-scaling';

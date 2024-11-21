@@ -8,7 +8,7 @@ import {
 } from './workloadApi';
 import { WorkloadState } from '@/interfaces';
 import { RootState } from '..';
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import {
   WorkloadFilter,
   WorkloadResult,

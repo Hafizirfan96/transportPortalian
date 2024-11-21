@@ -9,8 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { vehicleInspectionService } from '@/services/VehicleInspection';
-import { Config } from '@/Config';
+import { vehicleInspectionService } from '@/services/vehicleInspection';
+import { Config } from '@/config';
 import { FileEntityType } from '@/enums';
 import { useAppSelector, useTheme } from '@/hooks';
 import { getSelectedVehicleId } from '@/store/vehicle';

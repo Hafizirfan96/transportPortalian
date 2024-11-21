@@ -1,5 +1,5 @@
 import { Config } from '../../Config/index';
-import { shiftService } from '@/services/Shift';
+import { shiftService } from '@/services/shift';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { showToast } from '../appState';
 import { text } from 'stream/consumers';

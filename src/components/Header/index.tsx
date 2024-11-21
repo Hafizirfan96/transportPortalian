@@ -2,7 +2,7 @@ import axios from 'axios';
 import React = require('react');
 import moment = require('moment');
 import getStyles from './style';
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import { storage } from '@/store';
 import { useDispatch } from 'react-redux';
 import { wp } from '@/utils/layout-scaling';

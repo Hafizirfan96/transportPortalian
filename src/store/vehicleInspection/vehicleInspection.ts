@@ -1,4 +1,4 @@
-import { vehicleInspectionService } from '@/services/VehicleInspection';
+import { vehicleInspectionService } from '@/services/vehicleInspection';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { showToast } from '../appState';
 

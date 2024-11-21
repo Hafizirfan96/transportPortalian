@@ -1,4 +1,4 @@
-import { Config } from '@/Config';
+import { Config } from '@/config';
 // import { StorageService } from '@/Services/StorageService'
 // import { PushNotificationService } from '@/Services/PushNotificationService'
 import messaging from '@react-native-firebase/messaging';

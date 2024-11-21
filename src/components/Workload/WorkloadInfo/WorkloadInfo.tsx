@@ -5,7 +5,7 @@ import WorkloadItem from '../WorkloadItem';
 import { FlatList, View } from 'react-native';
 import EmptyList from '@/components/EmptyList';
 import { useAppSelector, useTheme } from '@/hooks';
-import { workloadSelector } from '@/store/Workload';
+import { workloadSelector } from '@/store/workload';
 
 const WorkloadInfo = (props: any) => {
   const { Layout, Gutters } = useTheme();

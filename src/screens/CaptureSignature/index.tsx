@@ -3,7 +3,7 @@ import { wp } from '@/utils/layout-scaling';
 import { Button, Header } from '@/components';
 import { navigateBack } from '@/navigators/Root';
 import { useAppDispatch, useTheme } from '@/hooks';
-import { signatureImagestored } from '@/store/Signature';
+import { signatureImagestored } from '@/store/signature';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
 

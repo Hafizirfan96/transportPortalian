@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import getStyles from '@/screens/Workload/style';
 import { wp } from '@/utils/layout-scaling';
-import { workloadSelector } from '@/store/Workload';
+import { workloadSelector } from '@/store/workload';
 
 const FilterStatus = (props: any) => {
   const { Colors, Common, Layout, Images, Gutters } = useTheme();

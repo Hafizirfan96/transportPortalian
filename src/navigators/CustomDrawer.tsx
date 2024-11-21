@@ -1,14 +1,14 @@
 import { navigate } from './Root';
 import { ShiftTimer } from '@/components';
 import { wp } from '@/utils/layout-scaling';
-import { shiftSelector } from '@/store/Shift';
+import { shiftSelector } from '@/store/shift';
 import React, { useEffect, useState } from 'react';
-import { myStartedShifts } from '@/store/Shift/shiftThunk';
+import { myStartedShifts } from '@/store/shift/shiftThunk';
 import { logOutAndReset } from '@/store/logOut/logOutAndReset';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useAppDispatch, useAppSelector, useTheme } from '@/hooks';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { clearUserinfo, dashboardSelector } from '@/store/Dashboard';
+import { clearUserinfo, dashboardSelector } from '@/store/dashboard';
 import { externalLinkInfo } from '@/store/externalLink/externalLinkInfo';
 
 import {

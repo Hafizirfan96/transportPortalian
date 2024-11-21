@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { tourInfo, startTour } from '@/store/tour/tourInfo';
 import { setCurrentTour, tourSelector } from '@/store/tour';
-import { shiftSelector } from '@/store/Shift';
+import { shiftSelector } from '@/store/shift';
 import { useCallback, useEffect, useState } from 'react';
 import { TourStartRequestModel } from '@/interfaces';
 import { navigate } from '@/navigators/Root';

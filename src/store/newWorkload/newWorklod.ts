@@ -1,7 +1,7 @@
 import { newWorkloadService } from '@/services/newWorload';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { navigateBack } from '@/navigators/Root';
-import { myWorkloads } from '@/store/Workload/workloadApi';
+import { myWorkloads } from '@/store/workload/workloadApi';
 
 export const newWorkload = createAsyncThunk(
   'new/workload',

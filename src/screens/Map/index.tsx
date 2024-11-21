@@ -1,10 +1,10 @@
 import getStyles from './style';
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import Mapbox from '@rnmapbox/maps';
 import { Header } from '@/components';
 import React, { useEffect, useState } from 'react';
-import { workloadSelector } from '@/store/Workload';
-import { myWorkloads } from '@/store/Workload/workloadApi';
+import { workloadSelector } from '@/store/workload';
+import { myWorkloads } from '@/store/workload/workloadApi';
 import Geolocation from 'react-native-geolocation-service';
 import CustomSafeArea from '@/components/Shared/CustomSafeArea';
 import { useAppDispatch, useAppSelector, useTheme } from '@/hooks';

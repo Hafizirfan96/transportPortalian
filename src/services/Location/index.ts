@@ -1,4 +1,4 @@
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import { StorageKeys } from '@/utils/localStorage';
 import axios from 'axios';
 import Geolocation from 'react-native-geolocation-service';

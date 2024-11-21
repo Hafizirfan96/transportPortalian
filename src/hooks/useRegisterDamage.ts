@@ -12,7 +12,7 @@ import { registerDamage } from '@/store/vehicleInspection/vehicleInspection';
 import { navigateBack } from '@/navigators/Root';
 import { FileEntityType } from '@/enums';
 import { PermissionsAndroid } from 'react-native';
-import { createVehicleDamage } from '@/services/VehicleInspection';
+import { createVehicleDamage } from '@/services/vehicleInspection';
 
 export default function () {
   const dispatch = useAppDispatch();

@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import { useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
 import _ from 'lodash';

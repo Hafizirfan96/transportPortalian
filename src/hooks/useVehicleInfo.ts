@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks';
 import { VehicleInfo, VehicleSearchModel } from '@/interfaces';
 import { navigate } from '@/navigators/Root';
 import { storage } from '@/store';
-import { shiftSelector } from '@/store/Shift';
+import { shiftSelector } from '@/store/shift';
 import { locationSelector } from '@/store/location';
 import { tourSelector } from '@/store/tour';
 import { vehicleSelector } from '@/store/vehicle';

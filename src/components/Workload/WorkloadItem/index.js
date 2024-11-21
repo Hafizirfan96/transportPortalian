@@ -10,7 +10,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { Config } from '@/Config';
+import { Config } from '@/config';
 import CheckItem from '@/components/CheckItem';
 import { useTheme } from '@/hooks';
 import styles from './style';

@@ -1,7 +1,7 @@
 import React from 'react';
 import ShiftTimer from './ShiftTimer';
 import ShiftToggler from './ShiftToggler';
-import { shiftSelector } from '@/store/Shift';
+import { shiftSelector } from '@/store/shift';
 import { Image, Text, View } from 'react-native';
 import getStyles from '@/screens/Dashboard/style';
 import { useAppSelector, useTheme } from '@/hooks';
