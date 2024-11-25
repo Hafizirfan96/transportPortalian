@@ -1,10 +1,12 @@
+import axios from 'axios';
 import getStyles from './style';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import Mapbox from '@rnmapbox/maps';
-import { Header } from '@/components';
+import Modal from 'react-native-modal';
+import { AppButton, Header } from '@/components';
 import React, { useEffect, useState } from 'react';
-import { workloadSelector } from '@/store/workload';
-import { myWorkloads } from '@/store/workload/workloadApi';
+import { workloadSelector } from '@/store/Workload';
+import { myWorkloads } from '@/store/Workload/workloadApi';
 import Geolocation from 'react-native-geolocation-service';
 import CustomSafeArea from '@/components/Shared/CustomSafeArea';
 import { useAppDispatch, useAppSelector, useTheme } from '@/hooks';
@@ -16,20 +18,67 @@ import {
   ActivityIndicator,
   PermissionsAndroid,
   Image,
+  Linking,
 } from 'react-native';
 
 const mapKey = Config.KEYS.API_KEY;
 Mapbox.setAccessToken(mapKey);
 
 const MapboxScreen = () => {
-  const { Layout, Colors, Images } = useTheme();
+  const { Layout, Colors, Images, Gutters, Fonts } = useTheme();
   const styles = getStyles(Colors);
   const [zoomLevel, setZoomLevel] = useState(7);
   const { workloadData, isLoading } = useAppSelector(workloadSelector);
   const [coordinate, setCoordinate] = useState([]);
   const [showCallout, setShowCallout] = useState(false);
   const [selectedCoords, setSelectedCoords] = useState(null);
+  const [Visible, setisVisible] = useState(false);
   const dispatch = useAppDispatch();
+
+  const fetchRoute = async () => {
+    // Ensure coordinates are [longitude, latitude]
+    const start = [77.5946, 12.9716]; // Example: [longitude, latitude]
+    const end = [78.9629, 20.5937];
+    if (!Array.isArray(start) || !Array.isArray(end)) {
+      return [];
+    }
+
+    if (
+      start[1] < -90 ||
+      start[1] > 90 ||
+      end[1] < -90 ||
+      end[1] > 90 ||
+      start[0] < -180 ||
+      start[0] > 180 ||
+      end[0] < -180 ||
+      end[0] > 180
+    ) {
+      console.error('Invalid coordinates:', { start, end });
+      return [];
+    }
+
+    const directionsUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?geometries=geojson&access_token=${Config.KEYS.API_KEY}`;
+
+    try {
+      // console.log('Fetching route with coordinates:', { start, end });
+      const response = await axios.get(directionsUrl);
+
+      const { routes } = response?.data;
+      // console.log('routes----:', routes);
+
+      if (routes && routes.length > 0) {
+        return routes[0]?.geometry.coordinates; // Returns the route's coordinates
+      }
+      console.log('No routes found');
+      return [];
+    } catch (error) {
+      console.error(
+        'Error fetching route:',
+        error.response?.data || error.message,
+      );
+      return [];
+    }
+  };
 
   useEffect(() => {
     dispatch(myWorkloads());
@@ -101,11 +150,31 @@ const MapboxScreen = () => {
   const zoomOut = () => {
     setZoomLevel(prevZoom => Math.max(prevZoom - 1, 0));
   };
+  const handleOpenNavigation = coords => {
+    if (!coords || !coords.latitude || !coords.longitude) {
+      console.error('Invalid coordinates for navigation:', coords);
+      return;
+    }
 
-  const handleMarkerPress = coords => {
+    // const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${coords.latitude},${coords.longitude}`;
+    // console.log('Navigation URL:', navigationUrl);
+
+    // Linking.canOpenURL(navigationUrl)
+    //   .then(supported => {
+    //     if (supported) {
+    //       Linking.openURL(navigationUrl);
+    //     } else {
+    //       console.error("Can't open URL:", navigationUrl);
+    //     }
+    //   })
+    //   .catch(err => console.error('Error opening navigation URL:', err));
+  };
+
+  const handleMarkerPress = (coords: any) => {
     setSelectedCoords(coords);
-    setShowCallout(true);
-    setZoomLevel(prevZoom => Math.min(prevZoom + 1, 20));
+    setisVisible(true);
+
+    handleOpenNavigation(coords);
   };
 
   const Marker = React.memo(({ coords }) => {
@@ -137,11 +206,11 @@ const MapboxScreen = () => {
               resizeMode="contain"
             />
           </TouchableOpacity>
-          {showCallout && selectedCoords === coords && (
+          {/* {showCallout && selectedCoords === coords && (
             <View style={[styles.calloutContainer, Layout.center]}>
               <Text style={styles.calloutText}>{coords.address}</Text>
             </View>
-          )}
+          )} */}
         </View>
       </Mapbox.MarkerView>
     );
@@ -162,6 +231,54 @@ const MapboxScreen = () => {
       total.longitude / coordinate.length,
     ];
   };
+
+  let route: any = [];
+  let routes: any;
+
+  coordinate?.filter(x => {
+    route.push([x.latitude, x.longitude]);
+    fetchRoute(x.longitude, x.latitude);
+  });
+
+  routes = {
+    route: {
+      id: 'route',
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          source: 'route',
+          geometry: {
+            type: 'LineString',
+            coordinates: route,
+          },
+        },
+      ],
+    },
+  };
+  const handleCloseModal = () => {
+    setisVisible(false);
+  };
+
+  const handleNavigate = (coords: any) => {
+    setisVisible(false);
+    if (!coords || !coords.latitude || !coords.longitude) {
+      console.error('Invalid coordinates for navigation:', coords);
+      return;
+    }
+    const navigationUrl = `https://www.google.com/maps/dir/?api=1&destination=${coords.latitude},${coords.longitude}`;
+    Linking.canOpenURL(navigationUrl)
+      .then(supported => {
+        if (supported) {
+          Linking.openURL(navigationUrl);
+        } else {
+          console.error("Can't open URL:", navigationUrl);
+        }
+      })
+      .catch(err => console.error('Error opening navigation URL:', err));
+  };
+
   return (
     <CustomSafeArea>
       <View style={[Layout.fill, { backgroundColor: Colors.background }]}>
@@ -174,6 +291,19 @@ const MapboxScreen = () => {
               zoomLevel={zoomLevel}
               centerCoordinate={getCenterCoordinate()}
             />
+            {routes ? (
+              <Mapbox.ShapeSource id={routes?.route.id} shape={routes?.route}>
+                <Mapbox.LineLayer
+                  id="radiusOutline"
+                  style={{
+                    lineColor: Colors.primary,
+                    lineWidth: 4,
+                    lineDasharray: [2, 2],
+                    lineJoin: 'round',
+                  }}
+                />
+              </Mapbox.ShapeSource>
+            ) : null}
             {coordinate.map((coords, index) =>
               coords.latitude && coords.longitude ? (
                 <Marker key={`workload-${index}`} coords={coords} />
@@ -190,6 +320,39 @@ const MapboxScreen = () => {
             <Text style={styles.zoomText}>-</Text>
           </TouchableOpacity>
         </View>
+        <Modal isVisible={Visible}>
+          <View
+            style={[
+              Gutters.mediumPadding,
+              { backgroundColor: Colors.background },
+            ]}
+          >
+            <Text style={[Layout.alignSelfCenter, Fonts.textNormalBold]}>
+              Open google navigation
+            </Text>
+
+            <View style={[Gutters.smallTMargin]}>
+              <View
+                style={[
+                  Layout.row,
+                  Layout.alignSelfCenter,
+                  Gutters.tinyTMargin,
+                ]}
+              >
+                <AppButton
+                  title="Cancel"
+                  handleSubmit={handleCloseModal}
+                  bodyStyle={[Gutters.tinyRMargin]}
+                />
+                <AppButton
+                  title="Open"
+                  handleSubmit={() => handleNavigate(selectedCoords)}
+                  bodyStyle={[Gutters.tinyRMargin]}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     </CustomSafeArea>
   );

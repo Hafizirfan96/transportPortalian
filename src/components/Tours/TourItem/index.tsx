@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, Pressable } from 'react-native';
 import { useTheme, useAppSelector } from '@/hooks';
 import getStyles from './style';
-import { shiftSelector } from '@/store/shift';
+import { shiftSelector } from '@/store/Shift';
 import { navigate } from '@/navigators/Root';
 import { ActivityIndicator } from 'react-native';
 

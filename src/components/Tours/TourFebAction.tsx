@@ -7,7 +7,7 @@ import React, {
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import RadioButtonWithText from '../RadioButtonWithText';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';

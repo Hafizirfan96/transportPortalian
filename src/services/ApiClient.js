@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 
 import TokenStorage from '../services/TokenStorageService';
-import { authService } from './auth';
+import { authService } from './Auth';
 import { showToast } from '@/store/appState';
 import { store } from '@/store';
 const { dispatch } = store;

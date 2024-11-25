@@ -67,6 +67,10 @@ export default function () {
     activeCheckBox: require('@/assets/Images/activeCheckBox.png'),
     inActiveCheckBox: require('@/assets/Images/InActiveCheckBox.png'),
     cross: require('@/theme/assets/images/cross.png'),
+    pathRoute: require('@/theme/assets/images/pathRoute.png'),
+    bothArrow: require('@/theme/assets/images/bothArrow.png'),
+    markLast: require('@/theme/assets/images/markLast.png'),
+    markFirst: require('@/theme/assets/images/markFirst.png'),
     productList: `<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_503_652)">
 <path d="M0.5 3.75C0.5 2.37109 1.62109 1.25 3 1.25H18C19.3789 1.25 20.5 2.37109 20.5 3.75V16.25C20.5 17.6289 19.3789 18.75 18 18.75H3C1.62109 18.75 0.5 17.6289 0.5 16.25V3.75ZM3 3.75V6.25H5.5V3.75H3ZM18 3.75H8V6.25H18V3.75ZM3 8.75V11.25H5.5V8.75H3ZM18 8.75H8V11.25H18V8.75ZM3 13.75V16.25H5.5V13.75H3ZM18 13.75H8V16.25H18V13.75Z" fill="#5D5D5D"/>

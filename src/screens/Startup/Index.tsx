@@ -1,4 +1,4 @@
-import init from '@/store/startup/Init';
+import init from '@/store/Startup/Init';
 import StorageService from '@/services/StorageService';
 import { clearUserData } from '@/store/auth';
 import { Colors } from '@/theme/Variables';

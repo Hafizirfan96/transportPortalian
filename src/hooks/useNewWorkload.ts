@@ -1,4 +1,4 @@
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { navigateBack } from '@/navigators/Root';
 import { newWorkloadSelector } from '@/store/newWorkload';

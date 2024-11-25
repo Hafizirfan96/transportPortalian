@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Platform } from 'react-native';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import { authService } from '@/services/Auth';
 import TokenStorage from '../../services/TokenStorageService';
 import { navigateAndSimpleReset } from '@/navigators/Root';

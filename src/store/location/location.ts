@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchGeolocation, requestPermissions } from '@/services/Location';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import axios from 'axios';
 import { showToast } from '../appState';
 

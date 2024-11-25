@@ -6,8 +6,8 @@ import {
   buildAsyncActions,
   buildAsyncReducers,
 } from '@thecodingmachine/redux-toolkit-wrapper';
-import { setShiftInfo } from '../shift';
-import { Config } from '@/config/index';
+import { setShiftInfo } from '../Shift';
+import { Config } from '@/Config/index';
 
 export default {
   initialState: {

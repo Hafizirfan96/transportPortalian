@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.makesol.tpp",
+  "applicationId": "no.transportportalen.app",
   "variantName": "release",
   "elements": [
     {

@@ -19,6 +19,10 @@ const LorryCard = props => {
 
   const initialState = props.lorry.LastKm;
   const [kmtext, setKmtext] = useState(initialState);
+  const [showText, setshowText] = useState(false);
+  const handleShowText = () => {
+    setshowText(!showText);
+  };
   const onInputText = killometers => {
     // console.log('text entered ', killometers);
     setKmtext(killometers);
@@ -67,8 +71,14 @@ const LorryCard = props => {
             style={styles.imagewithHeight}
           />
         </View>
-        <View style={[Layout.fill, styles.margin5]}>
-          <Text numberOfLines={1} style={[Fonts.textRegularBold]}>
+        <TouchableOpacity
+          style={[Layout.fill, styles.margin5]}
+          onPress={handleShowText}
+        >
+          <Text
+            numberOfLines={showText ? 2 : 1}
+            style={[Fonts.textRegularBold]}
+          >
             {props.lorry.Name}
           </Text>
 
@@ -78,7 +88,7 @@ const LorryCard = props => {
             </Text>
             <Text style={[Fonts.textTiny]}>{props.lorry.LastKm} Mins away</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View style={[Layout.center, styles.width60]}>
           {isUpdatingLorry && selectedIndex == props.index ? (
             <ActivityIndicator

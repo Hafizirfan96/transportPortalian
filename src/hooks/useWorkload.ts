@@ -6,16 +6,16 @@ import {
   setTypeFilter,
   workloadSelected,
   workloadSelector,
-} from '@/store/workload';
+} from '@/store/Workload';
 import {
   myWorkloads,
   startWorkload,
   deleteWorkload,
-} from '@/store/workload/workloadApi';
+} from '@/store/Workload/workloadApi';
 // import { WorkloadResult, WorkloadFilter } from '@/interfaces/stateModels/workloadStateModel';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 // import produce from 'immer';
 import { navigate } from '@/navigators/Root';
 import useGeolocation from './useGeolocation';

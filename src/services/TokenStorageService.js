@@ -1,4 +1,4 @@
-import { Config } from '@/config/index';
+import { Config } from '@/Config/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // export const storage = __DEV__? new MMKVFaker() : new MMKV();
 export const storage = AsyncStorage;

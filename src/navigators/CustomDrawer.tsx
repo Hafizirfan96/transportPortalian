@@ -1,14 +1,14 @@
 import { navigate } from './Root';
 import { ShiftTimer } from '@/components';
 import { wp } from '@/utils/layout-scaling';
-import { shiftSelector } from '@/store/shift';
+import { shiftSelector } from '@/store/Shift';
 import React, { useEffect, useState } from 'react';
-import { myStartedShifts } from '@/store/shift/shiftThunk';
+import { myStartedShifts } from '@/store/Shift/shiftThunk';
 import { logOutAndReset } from '@/store/logOut/logOutAndReset';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useAppDispatch, useAppSelector, useTheme } from '@/hooks';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { clearUserinfo, dashboardSelector } from '@/store/dashboard';
+import { clearUserinfo, dashboardSelector } from '@/store/Dashboard';
 import { externalLinkInfo } from '@/store/externalLink/externalLinkInfo';
 
 import {
@@ -142,13 +142,24 @@ function CustomDrawer(props: any) {
   const { scheduleInfo } = useAppSelector(dashboardSelector);
   const isShiftStarted = myStartedShifts !== null;
   const { myStartShiftData: shiftInfo } = useAppSelector(shiftSelector);
+  const [showText, setshowText] = useState(false);
+  const handleShowText = () => {
+    setshowText(!showText);
+  };
   return (
     <View style={[Layout.fill]}>
       <View style={[Gutters.smallMargin]}>
         <View style={[Layout.row]}>
           <Image source={Images.avatar} style={styles.avtar} />
-          <View style={[Gutters.regularLMargin]}>
-            <Text style={styles.authorText}>{scheduleInfo?.EmployeeName}</Text>
+          <View style={[Gutters.tinyLMargin, Gutters.tinyTMargin]}>
+            <TouchableOpacity onPress={handleShowText}>
+              <Text
+                numberOfLines={showText ? 2 : 1}
+                style={[styles.authorText]}
+              >
+                {scheduleInfo?.EmployeeName}
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.scheduleText}>Scheduled to work at DHL</Text>
             {!isShiftStarted ||
               (shiftInfo == null && (

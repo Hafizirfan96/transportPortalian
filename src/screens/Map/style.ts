@@ -13,25 +13,19 @@ const getStyles = (Colors: any) => {
       top: wp(20),
       right: wp(20),
     },
-
-    // zoomButton: {
-    //   backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    //   padding: 10,
-    //   borderRadius: 5,
-    // },
     pinContainer: {
       alignItems: 'center',
       justifyContent: 'center',
     },
     pinHead: {
-      width: 20, // Adjust size as needed
-      height: 20, // Adjust size as needed
+      width: 20,
+      height: 20,
       borderRadius: 10, // Half of width and height to make it a circle
       backgroundColor: Colors.primary, // Color of the pin head
     },
     pinStem: {
-      width: 4, // Adjust size as needed
-      height: 30, // Adjust size as needed
+      width: 4,
+      height: 30,
       backgroundColor: Colors.primary, // Color of the pin stem
     },
 
@@ -41,18 +35,18 @@ const getStyles = (Colors: any) => {
       justifyContent: 'space-between',
       paddingHorizontal: 10,
       paddingVertical: 5,
-      backgroundColor: Colors.lightGray, // Background color of the search container
+      backgroundColor: Colors.lightGray,
       borderRadius: 5,
     },
     searchInput: {
       flex: 1,
-      backgroundColor: 'white', // Background color of the search input
+      backgroundColor: 'white',
       borderRadius: 5,
       marginHorizontal: 15,
       paddingLeft: 10,
     },
     searchButton: {
-      backgroundColor: Colors.primary, // Background color of the search button
+      backgroundColor: Colors.primary,
       paddingHorizontal: 25,
       paddingVertical: 10,
       borderRadius: 5,

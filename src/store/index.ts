@@ -13,11 +13,11 @@ import {
   Storage,
 } from 'redux-persist';
 import theme from './theme';
-import startup from './startup';
-import dashboard from './dashboard';
-import shift from './shift';
-import workload from './workload';
-import signature from './signature';
+import startup from './Startup';
+import dashboard from './Dashboard';
+import shift from './Shift';
+import workload from './Workload';
+import signature from './Signature';
 import barcodeScanner from './barcodeScanner';
 import auth from './auth';
 import tour from './tour';

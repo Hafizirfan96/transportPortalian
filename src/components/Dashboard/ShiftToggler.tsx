@@ -2,8 +2,8 @@ import React from 'react';
 import { Text, ActivityIndicator, TouchableOpacity, View } from 'react-native';
 import { useTheme, useAppDispatch } from '@/hooks';
 import StorageService from '@/services/StorageService';
-import { Config } from '@/config';
-import { setShiftInfo } from '@/store/shift';
+import { Config } from '@/Config';
+import { setShiftInfo } from '@/store/Shift';
 import {
   endShift,
   startShift,

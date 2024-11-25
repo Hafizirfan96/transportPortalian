@@ -26,3 +26,4 @@ export { default as Shipment } from './Shipment/index';
 export { default as MapboxScreen } from './Map/index';
 export { default as ExternalLinks } from './ExternalLinks/Index';
 export { default as DamageGallery } from './DamageGallery';
+export { default as RouteOptimize } from './RouteOptimize/Index';

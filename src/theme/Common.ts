@@ -7,7 +7,7 @@ import { StyleSheet } from 'react-native';
 import buttonStyles from './components/Buttons';
 import { CommonParams } from '../../@types/theme';
 import { hp, wp } from '@/utils/layout-scaling';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 
 export default function <C>({
   Colors,

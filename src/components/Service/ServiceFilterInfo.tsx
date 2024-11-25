@@ -1,4 +1,4 @@
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import React from 'react';
 import { View } from 'react-native';
 import ToggleButton from '../ToggleButton';

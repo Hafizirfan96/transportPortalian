@@ -1,13 +1,13 @@
 import { useAppDispatch, useAppSelector, useTheme } from '@/hooks';
-import { dashboardSelector } from '@/store/dashboard';
-import { dashboardScheduleInfo } from '@/store/dashboard/scheduleInfo';
-import { shiftSelector } from '@/store/shift';
+import { dashboardSelector } from '@/store/Dashboard';
+import { dashboardScheduleInfo } from '@/store/Dashboard/scheduleInfo';
+import { shiftSelector } from '@/store/Shift';
 import { useCallback, useEffect, useState } from 'react';
 import {
   endShift,
   myStartedShifts,
   startShift,
-} from '@/store/shift/shiftThunk';
+} from '@/store/Shift/shiftThunk';
 import useGeolocation from './useGeolocation';
 import { locationSelector } from '@/store/location';
 

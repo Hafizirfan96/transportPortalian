@@ -1822,7 +1822,6 @@
     <string name="mapbox_attributionsDialogTitle">Powered by Mapbox Maps</string>
     <string name="mapbox_compassContentDescription">Map compass. Activate to reset the map rotation to North.</string>
     <string name="mapbox_myLocationViewContentDescription">Location View. This shows your location on the map.</string>
-    <string name="mapbox_privacy_policy">Mapbox Privacy Policy</string>
     <string name="mapbox_telemetryImproveMap">Improve This Map</string>
     <string name="mapbox_telemetryLink" translatable="false">https://www.mapbox.com/telemetry/</string>
     <string name="mapbox_telemetrySettings">Telemetry Settings</string>
@@ -11827,6 +11826,8 @@
             <enum name="unique" value="0"/>
             
             <enum name="shared" value="1"/>
+            
+            <enum name="tile" value="2"/>
         </attr><attr format="enum" name="mapbox_mapConstrainMode">
             
             <enum name="none" value="0"/>

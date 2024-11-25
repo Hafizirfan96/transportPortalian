@@ -1,6 +1,6 @@
 import getStyles from './styles';
 import React, { FC } from 'react';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import { useTheme } from '@/hooks';
 import FastImage from 'react-native-fast-image';
 import ImageView from 'react-native-image-viewing';

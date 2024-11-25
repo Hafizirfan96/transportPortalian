@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { FabAction } from '@/components';
 import useWorkload from '@/hooks/useWorkload';
 import { useAppSelector, useTheme } from '@/hooks';
-import { workloadSelector } from '@/store/workload';
+import { workloadSelector } from '@/store/Workload';
 import CustomSafeArea from '@/components/Shared/CustomSafeArea';
 import FabActionList from '@/components/Workload/FabActionList';
 import SortMenu from '@/components/Workload/WorkloadInfo/SortMenu';
@@ -64,6 +64,7 @@ function WorkloadScreen() {
             handleTypeToggle={handleTypeToggle}
             openFilter={openFilter}
             onRefresh={onRefresh}
+            isRouteOptimize={true}
           />
         </View>
       </View>

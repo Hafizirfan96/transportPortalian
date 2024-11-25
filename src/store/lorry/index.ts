@@ -107,6 +107,7 @@ const lorriInfoSlice = createSlice({
         return {
           ...state,
           status: 'succeeded',
+          isUpdatingLorry: false,
           isError: false,
         };
       })
@@ -134,6 +135,7 @@ const lorriInfoSlice = createSlice({
         return {
           ...state,
           status: 'succeeded',
+          isUpdatingLorry: false,
           error: null,
           isError: false,
         };

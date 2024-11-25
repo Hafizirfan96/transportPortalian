@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ShiftTimer from './ShiftTimer';
 import ShiftToggler from './ShiftToggler';
-import { shiftSelector } from '@/store/shift';
-import { Image, Text, View } from 'react-native';
+import { shiftSelector } from '@/store/Shift';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import getStyles from '@/screens/Dashboard/style';
 import { useAppSelector, useTheme } from '@/hooks';
 import { DashboardInfoModel, ShiftStartModel } from '@/interfaces';
@@ -25,19 +25,46 @@ const ScheduleInfoComponent = ({
 
   const styles = getStyles(Colors, Fonts);
   const { myStartShiftData, isLoading } = useAppSelector(shiftSelector);
+  const [showText, setshowText] = useState(false);
+  const handleShowText = () => {
+    setshowText(!showText);
+  };
 
   return (
     <View style={[Common.contentWrapperDashboard]}>
-      <View style={[Gutters.regularPadding, Common.card, Gutters.smallTMargin, {minHeight: 108}]}>
-        <View style={[Layout.row]}>
+      <View
+        style={[
+          Gutters.regularPadding,
+          Common.card,
+          Gutters.smallTMargin,
+          { minHeight: 108 },
+        ]}
+      >
+        <View style={[Layout.row, Layout.fill]}>
           <Image source={Images.avatar} style={[styles.avtar]} />
-          <View style={[Gutters.regularLMargin]}>
-            <Text style={[Common.button.buttonText]}>
+          <View style={[Gutters.regularLMargin, Layout.fill]}>
+            <Text
+              style={[Common.button.buttonText]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {scheduleInfo?.EmployeeName}
             </Text>
-            <Text style={[styles.scheduleText]}>Scheduled to work at DHL</Text>
+            <TouchableOpacity onPress={handleShowText}>
+              <Text
+                style={[styles.scheduleText]}
+                numberOfLines={showText ? 2 : 1}
+                ellipsizeMode="tail"
+              >
+                Scheduled to work at DHL
+              </Text>
+            </TouchableOpacity>
             {!isShiftStarted && (
-              <Text style={[Fonts.textSmallBold]}>
+              <Text
+                style={[Fonts.textSmallBold]}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
                 {scheduleInfo?.StartTime} - {scheduleInfo?.EndTime}
               </Text>
             )}

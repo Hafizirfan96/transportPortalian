@@ -101,10 +101,10 @@ android {
             keyPassword 'android'
         }
          release {
-         storeFile file("release/my-release-key.keystore") // Make sure this path is correct
-        storePassword "tpp123"
-        keyAlias "key0"
-        keyPassword "tpp123"
+          storeFile file('release/key-tpp.jks') // Ensure the correct path
+            storePassword 'tpp123'
+            keyAlias 'key-tpp'
+            keyPassword 'tpp123'
     }
     }
     buildTypes {
@@ -127,9 +127,12 @@ project.ext.react = [
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation project(':react-native-signature-capture')
+    implementation project(':react-native-exception-handler')
     implementation project(':react-native-vector-icons')
     implementation 'com.mapbox.maps:android:10.15.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:6.11.0'
+    implementation "androidx.work:work-runtime-ktx:2.8.0"
 
 
     if (hermesEnabled.toBoolean()) {
@@ -138,3 +141,19 @@ dependencies {
         implementation jscFlavor
     }
 }
+configurations.all {
+    resolutionStrategy {
+        force 'com.mapbox.maps:android:10.15.0'
+        force 'com.mapbox.mapboxsdk:mapbox-android-core:6.1.0'
+        force 'com.mapbox.mapboxsdk:mapbox-sdk-turf:6.11.0'
+        force "com.mapbox.navigationcore:navigation:3.5.1"
+        force "com.mapbox.navigationcore:copilot:3.5.1"
+        force "com.mapbox.navigationcore:ui-maps:3.5.1"
+        force "com.mapbox.navigationcore:voice:3.5.1"
+        force "com.mapbox.navigationcore:tripdata:3.5.1"
+        force "com.mapbox.navigationcore:android:3.5.1"
+        force "com.mapbox.navigationcore:ui-components:3.5.1"
+
+    }
+}
+

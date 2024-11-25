@@ -36,7 +36,7 @@ function NotificationScreen({ route }: IProps) {
   const title = appState?.title || 'No Title';
   const body = appState?.body || 'No Body';
 
-  // console.log('appSta------', title);
+  console.log('appSta------', title);
 
   const sampleNotifications = [
     {

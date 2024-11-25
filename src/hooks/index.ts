@@ -16,3 +16,4 @@ export { default as useLogin } from './useLogin';
 export { default as useWorkload } from './useWorkload';
 export { default as useNewWorkload } from './useNewWorkload';
 export { default as useShipment } from './useShipment';
+export { default as useRouteOptimize } from './useRouteOptimize';

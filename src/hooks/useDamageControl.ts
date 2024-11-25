@@ -4,7 +4,7 @@ import { FileEntityType } from '@/enums';
 import { useAppSelector } from '@/hooks';
 import { navigate } from '@/navigators/Root';
 import { getSelectedVehicleId } from '@/store/vehicle';
-import { vehicleInspectionService } from '@/services/vehicleInspection';
+import { vehicleInspectionService } from '@/services/VehicleInspection';
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
 const useDamageControl = ()=> {

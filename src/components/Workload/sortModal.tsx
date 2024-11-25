@@ -7,9 +7,9 @@ import React, {
 import { View } from 'react-native';
 import { useAppSelector, useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import RadioButtonWithText from '../RadioButtonWithText';
-import { workloadSelector } from '@/store/workload';
+import { workloadSelector } from '@/store/Workload';
 
 function SortModal(props: any, ref: any) {
   const { Layout, Gutters } = useTheme();

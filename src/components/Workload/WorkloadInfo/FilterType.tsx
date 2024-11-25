@@ -6,7 +6,7 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import { useTheme } from '@/hooks';
 import getStyles from '@/screens/Workload/style';
 

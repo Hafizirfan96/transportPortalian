@@ -15,6 +15,8 @@ import {
   MapboxScreen,
   EndTourScreen,
   ResetPassword,
+  DamageGallery,
+  RouteOptimize,
   ExternalLinks,
   ForgotPassword,
   SignatureScreen,
@@ -28,7 +30,6 @@ import {
   CaptureSignatureScreen,
   EndworkloadProductHistory,
   EndTourAndWorkloadHistory,
-  DamageGallery
 } from '@/screens';
 
 const Stack = createStackNavigator();
@@ -96,6 +97,7 @@ const ApplicationNavigator = () => {
           <Stack.Screen name="NewWorkload" component={NewWorkload} />
           <Stack.Screen name="MapboxScreen" component={MapboxScreen} />
           <Stack.Screen name="ExternalLinks" component={ExternalLinks} />
+          <Stack.Screen name="RouteOptimize" component={RouteOptimize} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

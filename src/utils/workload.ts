@@ -1,4 +1,4 @@
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import { WorkloadState } from '@/interfaces';
 import { WorkloadFilter } from '@/interfaces/stateModels/workloadStateModel';
 import _ from 'lodash';

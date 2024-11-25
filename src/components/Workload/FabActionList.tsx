@@ -9,7 +9,7 @@ import React, {
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAppSelector, useTheme } from '@/hooks';
 import { Modalize } from 'react-native-modalize';
-import { Config } from '@/config';
+import { Config } from '@/Config';
 import RadioButtonWithText from '../RadioButtonWithText';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -18,7 +18,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { wp } from '@/utils/layout-scaling';
 import { ThemeColors } from '@/Theme/theme.type';
 import { navigate } from '@/navigators/Root';
-import { workloadSelector } from '@/store/workload';
+import { workloadSelector } from '@/store/Workload';
 import { useFocusEffect } from '@react-navigation/native';
 import { SvgXml } from 'react-native-svg';
 
@@ -82,6 +82,10 @@ function FabActionList(props: any, ref: any) {
   const navigateToMapScreen = (item: any) => {
     navigate('MapboxScreen', props);
   };
+  const _handleRouteOptimize = () => {
+    navigate('RouteOptimize');
+    modalizeRef.current?.close();
+  };
   return (
     <Modalize
       ref={modalizeRef}
@@ -118,7 +122,7 @@ function FabActionList(props: any, ref: any) {
                 <Text style={[Fonts.textTiny, styles.text]}>Product List</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                // disabled={true}
+                onPress={_handleRouteOptimize}
                 style={[Layout.center, Layout.fill]}
               >
                 <SvgXml xml={Images.routes} height={wp(20)} width={wp(20)} />
